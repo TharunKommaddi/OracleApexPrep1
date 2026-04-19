@@ -8,7 +8,6 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,500;12..96,600;12..96,700;12..96,800&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,300&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='0.9em' font-size='90'>💻</text></svg>">
 <style>
 
 :root {
@@ -181,55 +180,182 @@ a{text-decoration:none;color:inherit;}
 .footer-bottom{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:8px;}
 .footer-copy{color:var(--text-faint);font-size:12px;}
 
-.quiz-wrap{max-width:700px;margin:0 auto;padding:32px 48px 72px;}
-@media(max-width:768px){.quiz-wrap{padding:24px 20px 48px;}}
-.quiz-header{background:var(--bg-card);border:1px solid var(--border-soft);border-radius:var(--r-xl);padding:28px;margin-bottom:24px;box-shadow:var(--shadow-sm);}
-.quiz-progress-bar{width:100%;height:6px;background:var(--bg-surface);border-radius:3px;margin-bottom:12px;overflow:hidden;}
-.quiz-progress-fill{height:100%;background:var(--accent);border-radius:3px;transition:width 0.4s ease;}
-.quiz-counter{font-size:13px;color:var(--text-muted);font-weight:500;}
-.quiz-score-pill{font-family:'DM Mono',monospace;font-size:13px;font-weight:700;color:var(--accent);background:var(--accent-pale);border:1px solid var(--accent-border);padding:4px 14px;border-radius:var(--r-pill);}
-.quiz-card{background:var(--bg-card);border:1px solid var(--border-soft);border-radius:var(--r-xl);padding:32px;box-shadow:var(--shadow-sm);}
-.quiz-q-num{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:1.5px;color:var(--accent);margin-bottom:10px;}
-.quiz-q-text{font-family:'Bricolage Grotesque',sans-serif;font-size:18px;font-weight:700;color:var(--text-primary);line-height:1.5;letter-spacing:-0.3px;margin-bottom:24px;}
-.quiz-options{display:flex;flex-direction:column;gap:10px;}
-.quiz-opt{background:var(--bg-surface);border:2px solid var(--border-soft);border-radius:var(--r-lg);padding:14px 18px;cursor:pointer;display:flex;align-items:center;gap:12px;transition:all 0.18s ease;font-size:14px;color:var(--text-secondary);font-family:'DM Sans',sans-serif;text-align:left;}
-.quiz-opt:hover{border-color:var(--accent-border);background:var(--accent-pale);color:var(--text-primary);}
-.quiz-opt.correct{background:#d1fae5;border-color:#6ee7b7;color:#065f46;font-weight:600;}
-.quiz-opt.wrong{background:#fee2e2;border-color:#fca5a5;color:#991b1b;}
-.quiz-opt.disabled{cursor:not-allowed;opacity:0.7;}
-.quiz-opt-letter{width:28px;height:28px;border-radius:50%;background:rgba(0,0,0,0.07);display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:800;flex-shrink:0;font-family:'DM Mono',monospace;}
-.quiz-opt.correct .quiz-opt-letter{background:#6ee7b7;color:#065f46;}
-.quiz-opt.wrong .quiz-opt-letter{background:#fca5a5;color:#991b1b;}
-.quiz-explanation{margin-top:16px;padding:14px 18px;background:var(--accent-pale);border:1px solid var(--accent-border);border-radius:var(--r-md);font-size:13px;color:var(--text-secondary);line-height:1.7;display:none;}
-.quiz-explanation.show{display:block;}
-.quiz-explanation strong{color:var(--accent);}
-.quiz-nav{display:flex;justify-content:flex-end;margin-top:20px;}
-.quiz-btn{background:var(--accent);color:#fff;border:none;padding:10px 24px;border-radius:var(--r-pill);font-size:14px;font-weight:600;cursor:pointer;font-family:'DM Sans',sans-serif;transition:all 0.2s;display:none;align-items:center;gap:8px;}
-.quiz-btn:hover{background:var(--accent-light);transform:translateY(-1px);}
-.quiz-btn.show{display:flex;}
-.quiz-result{background:var(--bg-card);border:1px solid var(--border-soft);border-radius:var(--r-xl);padding:48px 32px;text-align:center;box-shadow:var(--shadow-sm);display:none;}
-.quiz-result.show{display:block;}
-.quiz-result-score{font-family:'Bricolage Grotesque',sans-serif;font-size:72px;font-weight:800;letter-spacing:-3px;color:var(--accent);line-height:1;}
-.quiz-result-label{font-size:16px;color:var(--text-muted);margin:8px 0 24px;font-weight:300;}
-.quiz-result-msg{font-size:18px;font-weight:600;color:var(--text-primary);margin-bottom:8px;}
-.quiz-result-sub{font-size:14px;color:var(--text-muted);margin-bottom:32px;}
-.quiz-restart{background:var(--accent);color:#fff;border:none;padding:12px 32px;border-radius:var(--r-pill);font-size:15px;font-weight:600;cursor:pointer;font-family:'DM Sans',sans-serif;transition:all 0.2s;}
-.quiz-restart:hover{background:var(--accent-light);transform:translateY(-2px);}
+
+/* QUIZ SPECIFIC */
+
+/* ══════════════════════════════════════════
+   QUIZ DESIGN — Creamy + Navigation Style
+══════════════════════════════════════════ */
+:root {
+  --primary:#2d6446; --primary-light:#3a7d57; --success:#276749;
+  --warning:#b7791f; --danger:#c0392b;
+  --bg-primary:#f5f0e8; --bg-secondary:#ede7da; --bg-tertiary:#e4ddd0;
+  --bg-card:#faf7f2; --bg-card-hover:#fff9f3;
+  --text-primary:#1c1208; --text-secondary:#5a4a35;
+  --text-muted:#9a856a; --text-faint:#c4ad92; --text-white:#ffffff;
+  --border-soft:rgba(160,130,100,0.13); --border-mid:rgba(160,130,100,0.22);
+  --accent-pale:#f0f7f3; --accent-border:rgba(45,100,70,0.2);
+  --shadow-sm:0 1px 4px rgba(100,70,40,0.06);
+  --shadow-md:0 4px 20px rgba(100,70,40,0.09);
+  --shadow-lg:0 12px 40px rgba(100,70,40,0.13);
+  --shadow-xl:0 20px 60px rgba(100,70,40,0.15);
+  --r-sm:8px; --r-md:12px; --r-lg:16px; --r-xl:20px; --r-pill:100px;
+  --t:0.2s ease;
+}
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{font-family:'DM Sans',sans-serif;background:var(--bg-primary);color:var(--text-primary);line-height:1.6;-webkit-font-smoothing:antialiased;}
+
+/* ── WRAP ── */
+.quiz-wrap{max-width:820px;margin:0 auto;padding:40px 24px 80px;}
+@media(max-width:600px){.quiz-wrap{padding:24px 16px 60px;}}
+
+/* ══════════════════════════════════════════
+   START SCREEN
+══════════════════════════════════════════ */
+.start-screen{}
+.start-card{background:var(--bg-card);border:1px solid var(--border-soft);border-radius:var(--r-xl);padding:40px;text-align:center;box-shadow:var(--shadow-md);margin-bottom:20px;}
+.start-icon{font-size:56px;margin-bottom:16px;display:block;}
+.start-title{font-family:'Bricolage Grotesque',sans-serif;font-size:clamp(26px,4vw,36px);font-weight:800;letter-spacing:-1.5px;color:var(--text-primary);margin-bottom:8px;}
+.start-sub{color:var(--text-muted);font-size:15px;font-weight:300;margin-bottom:32px;}
+.start-chips{display:flex;justify-content:center;gap:14px;margin-bottom:32px;flex-wrap:wrap;}
+.start-chip{background:var(--bg-secondary);border:1px solid var(--border-soft);border-radius:var(--r-lg);padding:14px 24px;min-width:90px;text-align:center;}
+.chip-num{font-family:'Bricolage Grotesque',sans-serif;font-size:28px;font-weight:800;color:var(--primary);letter-spacing:-1px;line-height:1;}
+.chip-lbl{font-size:11px;color:var(--text-muted);font-weight:600;text-transform:uppercase;letter-spacing:0.5px;margin-top:3px;}
+.start-cats{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-bottom:28px;}
+@media(max-width:500px){.start-cats{grid-template-columns:1fr;}}
+.cat-card{background:var(--bg-secondary);border:1px solid var(--border-soft);border-radius:var(--r-lg);padding:18px;text-align:center;}
+.cat-emoji{font-size:24px;display:block;margin-bottom:8px;}
+.cat-name{font-family:'Bricolage Grotesque',sans-serif;font-size:14px;font-weight:700;color:var(--text-primary);margin-bottom:4px;}
+.cat-desc{font-size:12px;color:var(--text-muted);font-weight:300;line-height:1.5;}
+.start-btn{background:var(--primary);color:#fff;border:none;padding:15px 40px;border-radius:var(--r-pill);font-size:16px;font-weight:700;cursor:pointer;font-family:'DM Sans',sans-serif;display:inline-flex;align-items:center;gap:10px;transition:all 0.25s;box-shadow:var(--shadow-md);}
+.start-btn:hover{background:var(--primary-light);transform:translateY(-2px);box-shadow:0 14px 32px rgba(45,100,70,0.25);}
+.start-note{margin-top:14px;font-size:13px;color:var(--text-muted);}
+
+/* ══════════════════════════════════════════
+   QUIZ SCREEN
+══════════════════════════════════════════ */
+.quiz-screen{display:none;}
+
+/* top bar */
+.quiz-topbar{display:flex;gap:12px;align-items:stretch;margin-bottom:16px;flex-wrap:wrap;}
+.quiz-progress-wrap{flex:1;min-width:200px;background:var(--bg-card);border:1px solid var(--border-soft);border-radius:var(--r-lg);padding:14px 18px;box-shadow:var(--shadow-sm);}
+.prog-top{display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;}
+.prog-label{font-size:12px;font-weight:600;color:var(--text-secondary);}
+.prog-count{font-size:12px;font-weight:700;color:var(--primary);font-family:'DM Mono',monospace;}
+.prog-bar{height:7px;background:var(--bg-secondary);border-radius:var(--r-pill);overflow:hidden;}
+.prog-fill{height:100%;background:linear-gradient(90deg,var(--primary),var(--primary-light));border-radius:var(--r-pill);transition:width 0.5s ease;width:0%;}
+
+.quiz-timer{display:flex;align-items:center;gap:8px;background:var(--bg-card);border:1px solid var(--border-soft);border-radius:var(--r-lg);padding:14px 18px;font-family:'DM Mono',monospace;font-size:16px;font-weight:500;color:var(--text-secondary);box-shadow:var(--shadow-sm);white-space:nowrap;}
+.quiz-timer i{color:var(--primary);}
+.quiz-timer.warn{color:var(--danger);border-color:rgba(192,57,43,0.25);background:rgba(192,57,43,0.04);}
+.quiz-timer.warn i{color:var(--danger);}
+
+/* dots */
+.q-dots-wrap{background:var(--bg-card);border:1px solid var(--border-soft);border-radius:var(--r-lg);padding:14px 18px;margin-bottom:16px;box-shadow:var(--shadow-sm);}
+.q-dots-label{font-size:11px;font-weight:700;color:var(--text-faint);text-transform:uppercase;letter-spacing:1.5px;margin-bottom:10px;}
+.q-dots{display:flex;flex-wrap:wrap;gap:6px;}
+.dot{width:30px;height:30px;border-radius:50%;border:1.5px solid var(--border-mid);background:var(--bg-secondary);display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:700;color:var(--text-muted);cursor:pointer;transition:all var(--t);font-family:'DM Mono',monospace;}
+.dot:hover{border-color:rgba(45,100,70,0.35);color:var(--primary);}
+.dot.current{background:var(--primary);border-color:var(--primary);color:#fff;transform:scale(1.1);}
+.dot.ok{background:rgba(39,103,73,0.12);border-color:#276749;color:#276749;}
+.dot.wrong{background:rgba(192,57,43,0.1);border-color:var(--danger);color:var(--danger);}
+.dot.skipped{background:#fef3c7;border-color:var(--warning);color:var(--warning);}
+
+/* question card */
+.q-card{background:var(--bg-card);border:1px solid var(--border-soft);border-radius:var(--r-xl);padding:28px 30px;box-shadow:var(--shadow-md);transition:border-color var(--t);}
+.q-card.answered{border-color:var(--accent-border);}
+@media(max-width:600px){.q-card{padding:20px 18px;}}
+.q-meta{display:flex;align-items:center;gap:10px;margin-bottom:14px;}
+.q-num-badge{font-family:'DM Mono',monospace;font-size:11px;font-weight:600;color:var(--text-faint);background:var(--bg-secondary);border:1px solid var(--border-soft);padding:3px 10px;border-radius:var(--r-sm);}
+.q-level-badge{font-size:11px;font-weight:700;padding:3px 10px;border-radius:var(--r-pill);text-transform:capitalize;}
+.q-level-badge.basic{background:#fef3c7;color:#92400e;}
+.q-level-badge.intermediate{background:#dbeafe;color:#1e40af;}
+.q-level-badge.advanced{background:var(--accent-pale);color:var(--primary);border:1px solid var(--accent-border);}
+
+.q-text{font-family:'Bricolage Grotesque',sans-serif;font-size:clamp(16px,2.5vw,19px);font-weight:700;color:var(--text-primary);line-height:1.45;letter-spacing:-0.3px;margin-bottom:22px;}
+
+/* options */
+.q-options{display:flex;flex-direction:column;gap:10px;}
+.q-opt{display:flex;align-items:center;gap:14px;padding:13px 16px;background:var(--bg-secondary);border:1.5px solid var(--border-soft);border-radius:var(--r-lg);cursor:pointer;transition:all var(--t);font-family:'DM Sans',sans-serif;text-align:left;width:100%;}
+.q-opt:hover:not(.disabled){border-color:rgba(45,100,70,0.3);background:rgba(45,100,70,0.04);color:var(--text-primary);}
+.q-opt.correct{border-color:#276749;background:rgba(39,103,73,0.08);}
+.q-opt.incorrect{border-color:var(--danger);background:rgba(192,57,43,0.06);}
+.q-opt.disabled{cursor:not-allowed;}
+.opt-circle{width:30px;height:30px;border-radius:50%;background:var(--bg-card);border:1.5px solid var(--border-mid);display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;color:var(--text-muted);flex-shrink:0;transition:all var(--t);font-family:'DM Mono',monospace;}
+.q-opt.correct .opt-circle{background:#276749;border-color:#276749;color:#fff;}
+.q-opt.incorrect .opt-circle{background:var(--danger);border-color:var(--danger);color:#fff;}
+.opt-text{font-size:14px;color:var(--text-secondary);line-height:1.5;flex:1;}
+.q-opt.correct .opt-text{color:#276749;font-weight:500;}
+.q-opt.incorrect .opt-text{color:var(--danger);}
+.opt-icon{margin-left:auto;font-size:14px;display:none;flex-shrink:0;}
+.q-opt.correct .opt-icon,.q-opt.incorrect .opt-icon{display:block;}
+
+/* explanation */
+.q-exp{display:none;margin-top:16px;padding:14px 16px;background:var(--accent-pale);border:1px solid var(--accent-border);border-radius:var(--r-lg);font-size:13px;color:var(--text-secondary);line-height:1.7;font-weight:300;}
+.q-exp.show{display:block;}
+.q-exp strong{color:var(--primary);font-weight:700;}
+
+/* nav */
+.q-nav{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-top:18px;flex-wrap:wrap;}
+.nav-btn{padding:10px 22px;border-radius:var(--r-pill);font-size:14px;font-weight:600;cursor:pointer;font-family:'DM Sans',sans-serif;display:flex;align-items:center;gap:8px;transition:all var(--t);border:1.5px solid var(--border-mid);background:var(--bg-card);color:var(--text-secondary);}
+.nav-btn:hover:not(:disabled){color:var(--text-primary);border-color:var(--border-mid);background:var(--bg-card-hover);}
+.nav-btn:disabled{opacity:0.35;cursor:not-allowed;}
+.nav-btn.primary{background:var(--primary);color:#fff;border-color:var(--primary);}
+.nav-btn.primary:hover:not(:disabled){background:var(--primary-light);box-shadow:0 8px 20px rgba(45,100,70,0.22);}
+.nav-btn.skip{color:var(--warning);border-color:rgba(183,121,31,0.3);background:rgba(183,121,31,0.04);}
+.nav-btn.skip:hover:not(:disabled){background:rgba(183,121,31,0.08);border-color:rgba(183,121,31,0.5);}
+.submit-btn-wrap{text-align:center;margin-top:20px;display:none;}
+.submit-btn{background:var(--primary);color:#fff;border:none;padding:14px 40px;border-radius:var(--r-pill);font-size:16px;font-weight:700;cursor:pointer;font-family:'DM Sans',sans-serif;display:inline-flex;align-items:center;gap:10px;transition:all 0.25s;box-shadow:var(--shadow-md);}
+.submit-btn:hover{background:var(--primary-light);transform:translateY(-2px);box-shadow:0 14px 32px rgba(45,100,70,0.25);}
+
+/* ══════════════════════════════════════════
+   RESULTS SCREEN
+══════════════════════════════════════════ */
+.results-screen{display:none;}
+.results-card{background:var(--bg-card);border:1px solid var(--border-soft);border-radius:var(--r-xl);padding:44px 36px;text-align:center;box-shadow:var(--shadow-xl);}
+@media(max-width:600px){.results-card{padding:32px 20px;}}
+.results-emoji{font-size:64px;display:block;margin-bottom:16px;}
+.results-title{font-family:'Bricolage Grotesque',sans-serif;font-size:clamp(24px,4vw,34px);font-weight:800;letter-spacing:-1.5px;color:var(--text-primary);margin-bottom:6px;}
+.results-sub{color:var(--text-muted);font-size:15px;font-weight:300;margin-bottom:28px;}
+
+/* circular ring */
+.score-ring-wrap{display:flex;justify-content:center;margin-bottom:28px;}
+.score-ring{width:150px;height:150px;border-radius:50%;display:flex;align-items:center;justify-content:center;position:relative;}
+.score-ring-inner{width:116px;height:116px;border-radius:50%;background:var(--bg-card);display:flex;flex-direction:column;align-items:center;justify-content:center;box-shadow:var(--shadow-sm);}
+.score-pct{font-family:'Bricolage Grotesque',sans-serif;font-size:38px;font-weight:800;letter-spacing:-2px;color:var(--primary);line-height:1;}
+.score-lbl{font-size:12px;color:var(--text-muted);font-weight:600;text-transform:uppercase;letter-spacing:0.5px;}
+
+.results-stats{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-bottom:24px;}
+.r-stat{background:var(--bg-secondary);border:1px solid var(--border-soft);border-radius:var(--r-lg);padding:16px 12px;text-align:center;}
+.r-stat-num{font-family:'Bricolage Grotesque',sans-serif;font-size:28px;font-weight:800;letter-spacing:-1px;line-height:1;margin-bottom:4px;}
+.r-stat-num.c{color:#276749;} .r-stat-num.w{color:var(--danger);} .r-stat-num.s{color:var(--warning);}
+.r-stat-lbl{font-size:11px;color:var(--text-muted);font-weight:600;text-transform:uppercase;letter-spacing:0.5px;}
+
+.results-msg{background:var(--accent-pale);border:1px solid var(--accent-border);border-radius:var(--r-lg);padding:14px 18px;color:var(--primary);font-size:14px;font-weight:500;margin-bottom:24px;line-height:1.65;}
+.results-actions{display:flex;gap:12px;justify-content:center;flex-wrap:wrap;}
+.res-btn{padding:12px 26px;border-radius:var(--r-pill);font-size:14px;font-weight:600;cursor:pointer;font-family:'DM Sans',sans-serif;display:inline-flex;align-items:center;gap:8px;transition:all var(--t);text-decoration:none;}
+.res-btn.primary{background:var(--primary);color:#fff;border:none;box-shadow:var(--shadow-md);}
+.res-btn.primary:hover{background:var(--primary-light);transform:translateY(-2px);}
+.res-btn.secondary{background:var(--bg-secondary);color:var(--text-secondary);border:1.5px solid var(--border-mid);}
+.res-btn.secondary:hover{color:var(--text-primary);border-color:var(--border-mid);}
+
 </style>
 </head>
 <body>
-<nav class="nav">
-  <a href="index.html" class="nav-logo">
+
+<nav class="nav" id="mainNav">
+  <div class="nav-logo" onclick="navigate('home')">
     <div class="nav-logo-mark">A</div>
     <span class="nav-logo-text">APEX Mastery</span>
-  </a>
-  <ul class="nav-links">
-    <li><a href="index.html"><i class="fas fa-home"></i> Home</a></li>
+  </div>
+  <ul class="nav-links" id="navLinks">
+    <li><a onclick="navigate('home')" data-page="home"><i class="fas fa-home"></i> Home</a></li>
     <li><a href="oracle-sql.html"><i class="fas fa-database"></i> Oracle SQL</a></li>
     <li><a href="plsql.html"><i class="fas fa-code"></i> PL/SQL</a></li>
     <li><a href="oracle-apex.html"><i class="fas fa-layer-group"></i> APEX</a></li>
     <li class="nav-dropdown">
-      <a><i class="fas fa-paint-brush"></i> Frontend <i class="fas fa-chevron-down" style="font-size:10px;margin-left:2px"></i></a>
+      <a><i class="fas fa-paint-brush"></i> Frontend <i class="fas fa-chevron-down" style="font-size:11px;margin-left:2px"></i></a>
       <ul class="nav-dropdown-menu">
         <li><a href="html-questions.html"><i class="fab fa-html5"></i> HTML</a></li>
         <li><a href="css-questions.html"><i class="fab fa-css3-alt"></i> CSS</a></li>
@@ -239,176 +365,480 @@ a{text-decoration:none;color:inherit;}
     </li>
     <li><a href="oracle-apex-quiz.html" class="active"><i class="fas fa-circle-question"></i> Quiz</a></li>
     <li><a href="pdf-resources.html"><i class="fas fa-file-pdf"></i> PDFs</a></li>
+    <li><a onclick="navigate('about')" data-page="about"><i class="fas fa-info-circle"></i> About</a></li>
+    <li><a onclick="navigate('contact')" data-page="contact"><i class="fas fa-envelope"></i> Contact</a></li>
   </ul>
+  <div class="nav-actions" id="navActions">
+    <!-- Injected by JS based on auth state -->
+  </div>
 </nav>
+
 <div class="page-header">
-  <div style="max-width:700px;margin:0 auto">
+  <div style="max-width:1000px;margin:0 auto">
     <div class="page-eyebrow">Interactive</div>
-    <h1 class="page-title">Oracle APEX Practice Quiz</h1>
-    <p class="page-subtitle">20 questions · Test your APEX knowledge · Instant feedback</p>
+    <h1 class="page-title">Oracle APEX Quiz</h1>
+    <p class="page-subtitle">95 questions &middot; Navigate freely &middot; Instant feedback &middot; Circular score ring</p>
   </div>
 </div>
+
 <div class="quiz-wrap">
-  <!-- Progress -->
-  <div class="quiz-header">
-    <div class="quiz-progress-bar"><div class="quiz-progress-fill" id="progressFill" style="width:0%"></div></div>
-    <div style="display:flex;justify-content:space-between;align-items:center">
-      <span class="quiz-counter" id="quizCounter">Question 1 of 20</span>
-      <span class="quiz-score-pill" id="quizScore">Score: 0</span>
-    </div>
-  </div>
 
-  <!-- Question card -->
-  <div class="quiz-card" id="quizCard">
-    <div class="quiz-q-num" id="qNum">Question 1</div>
-    <div class="quiz-q-text" id="qText"></div>
-    <div class="quiz-options" id="qOpts"></div>
-    <div class="quiz-explanation" id="qExp"></div>
-    <div class="quiz-nav">
-      <button class="quiz-btn" id="nextBtn" onclick="nextQuestion()">
-        Next <i class="fas fa-arrow-right"></i>
-      </button>
-    </div>
-  </div>
-
-  <!-- Result -->
-  <div class="quiz-result" id="quizResult">
-    <div class="quiz-result-score" id="resultScore"></div>
-    <div class="quiz-result-label">out of 20 correct</div>
-    <div class="quiz-result-msg" id="resultMsg"></div>
-    <div class="quiz-result-sub" id="resultSub"></div>
-    <button class="quiz-restart" onclick="restartQuiz()">
-      <i class="fas fa-rotate-right"></i> Try Again
-    </button>
-  </div>
-</div>
-<footer class="footer">
-  <div class="footer-top">
-    <div>
-      <div class="footer-logo">
-        <div class="footer-logo-mark"><i class="fas fa-code"></i></div>
-        <span class="footer-logo-text">APEX Mastery</span>
+  <!-- ══ START ══ -->
+  <div class="start-screen" id="startScreen">
+    <div class="start-card">
+      <span class="start-icon">🧠</span>
+      <h1 class="start-title">APEX Knowledge Quiz</h1>
+      <p class="start-sub">95 questions across Basic, Intermediate & Advanced levels. Navigate freely, skip questions, and review your score at the end.</p>
+      <div class="start-chips">
+        <div class="start-chip"><div class="chip-num">95</div><div class="chip-lbl">Questions</div></div>
+        <div class="start-chip"><div class="chip-num">45</div><div class="chip-lbl">Minutes</div></div>
+        <div class="start-chip"><div class="chip-num">3</div><div class="chip-lbl">Levels</div></div>
       </div>
-      <p class="footer-brand-desc">The most comprehensive Oracle APEX interview preparation platform.</p>
+      <div class="start-cats">
+        <div class="cat-card"><span class="cat-emoji">🟢</span><div class="cat-name">Basic</div><div class="cat-desc">APEX fundamentals, components, workspaces, LOVs</div></div>
+        <div class="cat-card"><span class="cat-emoji">🔵</span><div class="cat-name">Intermediate</div><div class="cat-desc">Dynamic actions, security, forms, reports, sessions</div></div>
+        <div class="cat-card"><span class="cat-emoji">🔴</span><div class="cat-name">Advanced</div><div class="cat-desc">REST, performance, plugins, architecture, deployment</div></div>
+      </div>
+      <button class="start-btn" onclick="startQuiz()"><i class="fas fa-play"></i> Start Quiz</button>
+      <p class="start-note"><i class="fas fa-info-circle"></i> Instant answer feedback after each question. You can navigate between questions freely.</p>
     </div>
-    <div class="footer-col"><h4>Practice</h4><ul>
-      <li><a href="oracle-sql.html">Oracle SQL</a></li>
-      <li><a href="plsql.html">PL/SQL</a></li>
-      <li><a href="oracle-apex.html">Oracle APEX</a></li>
-      <li><a href="oracle-apex-quiz.html">Quiz</a></li>
-    </ul></div>
-    <div class="footer-col"><h4>Frontend</h4><ul>
-      <li><a href="html-questions.html">HTML</a></li>
-      <li><a href="css-questions.html">CSS</a></li>
-      <li><a href="javascript-questions.html">JavaScript</a></li>
-      <li><a href="jquery-questions.html">jQuery</a></li>
-    </ul></div>
-    <div class="footer-col"><h4>Resources</h4><ul>
-      <li><a href="pdf-resources.html">PDF Downloads</a></li>
-      <li><a href="index.html">Home</a></li>
-    </ul></div>
   </div>
-  <div class="footer-bottom">
-    <span class="footer-copy">&copy; 2025 Oracle APEX Interview Mastery</span>
-    <span class="footer-copy">Built for developers by developers</span>
+
+  <!-- ══ QUIZ ══ -->
+  <div class="quiz-screen" id="quizScreen">
+
+    <!-- Top bar -->
+    <div class="quiz-topbar">
+      <div class="quiz-progress-wrap">
+        <div class="prog-top">
+          <span class="prog-label">Progress</span>
+          <span class="prog-count" id="progCount">0 / 95</span>
+        </div>
+        <div class="prog-bar"><div class="prog-fill" id="progFill"></div></div>
+      </div>
+      <div class="quiz-timer" id="timerEl"><i class="fas fa-clock"></i><span id="timerTxt">45:00</span></div>
+    </div>
+
+    <!-- Dots -->
+    <div class="q-dots-wrap">
+      <div class="q-dots-label">Question Navigator — click any dot to jump</div>
+      <div class="q-dots" id="dotsWrap"></div>
+    </div>
+
+    <!-- Question -->
+    <div class="q-card" id="qCard">
+      <div class="q-meta">
+        <span class="q-num-badge" id="qNumBadge">Q 01 / 95</span>
+        <span class="q-level-badge basic" id="qLevelBadge">Basic</span>
+      </div>
+      <div class="q-text" id="qText">Loading...</div>
+      <div class="q-options" id="qOpts"></div>
+      <div class="q-exp" id="qExp"></div>
+
+      <!-- Nav buttons -->
+      <div class="q-nav">
+        <button class="nav-btn" id="prevBtn" onclick="go(cur-1)" disabled><i class="fas fa-arrow-left"></i> Prev</button>
+        <button class="nav-btn skip" id="skipBtn" onclick="skip()"><i class="fas fa-forward"></i> Skip</button>
+        <button class="nav-btn primary" id="nextBtn" onclick="go(cur+1)">Next <i class="fas fa-arrow-right"></i></button>
+      </div>
+    </div>
+
+    <!-- Submit -->
+    <div class="submit-btn-wrap" id="submitWrap">
+      <button class="submit-btn" onclick="submitQuiz()"><i class="fas fa-flag-checkered"></i> Submit Quiz & See Results</button>
+    </div>
+
+  </div>
+
+  <!-- ══ RESULTS ══ -->
+  <div class="results-screen" id="resultsScreen">
+    <div class="results-card">
+      <span class="results-emoji" id="rEmoji">🎉</span>
+      <h2 class="results-title" id="rTitle">Great Job!</h2>
+      <p class="results-sub" id="rSub">Here's your score</p>
+
+      <div class="score-ring-wrap">
+        <div class="score-ring" id="scoreRing">
+          <div class="score-ring-inner">
+            <div class="score-pct" id="scorePct">0%</div>
+            <div class="score-lbl">Score</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="results-stats">
+        <div class="r-stat"><div class="r-stat-num c" id="rCorrect">0</div><div class="r-stat-lbl">Correct</div></div>
+        <div class="r-stat"><div class="r-stat-num w" id="rWrong">0</div><div class="r-stat-lbl">Wrong</div></div>
+        <div class="r-stat"><div class="r-stat-num s" id="rSkipped">0</div><div class="r-stat-lbl">Skipped</div></div>
+      </div>
+
+      <div class="results-msg" id="rMsg"></div>
+
+      <div class="results-actions">
+        <button class="res-btn primary" onclick="restart()"><i class="fas fa-redo"></i> Try Again</button>
+        <a href="oracle-apex.html" class="res-btn secondary"><i class="fas fa-book-open"></i> Study APEX</a>
+        <a href="index.html" class="res-btn secondary"><i class="fas fa-home"></i> Home</a>
+      </div>
+    </div>
+  </div>
+
+</div><!-- /quiz-wrap -->
+
+<!-- FOOTER -->
+<footer class="footer">
+  <div class="footer-content">
+    <div class="footer-links">
+      <a href="index.html">Home</a>
+      <a href="oracle-apex.html">APEX Questions</a>
+      <a href="oracle-sql.html">SQL Questions</a>
+      <a href="plsql.html">PL/SQL</a>
+      <a href="pdf-resources.html">PDF Resources</a>
+    </div>
+    <div class="footer-bottom"><p>© 2025 APEX Interview Mastery. Built for developers by developers.</p></div>
   </div>
 </footer>
+
+<script src="assets/js/script.js"></script>
+
+<footer class="footer">
+    <div class="footer-top">
+      <div class="footer-brand">
+        <div class="footer-logo"><div class="footer-logo-mark">A</div><span class="footer-logo-text">APEX Interview Mastery</span></div>
+        <p class="footer-brand-desc">The most comprehensive preparation platform for Oracle APEX developers. Built with care, for developers who want to land the job.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Topics</h4>
+        <ul>
+          <li><a href="oracle-sql.html">Oracle SQL</a></li>
+          <li><a href="plsql.html">PL/SQL</a></li>
+          <li><a href="oracle-apex.html">Oracle APEX</a></li>
+          <li><a href="oracle-apex-quiz.html">APEX Quiz</a></li>
+          <li><a href="pdf-resources.html">PDF Resources</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Frontend</h4>
+        <ul>
+          <li><a href="html-questions.html">HTML</a></li>
+          <li><a href="css-questions.html">CSS</a></li>
+          <li><a href="javascript-questions.html">JavaScript</a></li>
+          <li><a href="jquery-questions.html">jQuery</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Platform</h4>
+        <ul>
+          <li><a onclick="navigate('about')" style="cursor:pointer">About</a></li>
+          <li><a onclick="navigate('contact')" style="cursor:pointer">Contact</a></li>
+          <li><a onclick="navigateToRequest()" style="cursor:pointer">Request Access</a></li>
+          <li><a onclick="navigate('admin')" style="cursor:pointer">Admin</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span class="footer-copy">© 2025 APEX Interview Mastery. All rights reserved.</span>
+      <span class="footer-made">Made with <i class="fas fa-heart"></i> for Oracle developers</span>
+    </div>
+  </footer>
+
 <script>
-var QUESTIONS = [{"q": "What does APEX stand for?", "opts": ["Application Programming Express", "Application Express", "Advanced Programming Extension", "Apex Platform EXpression"], "ans": 1, "exp": "APEX stands for Application Express \u2014 Oracle's low-code web application development platform built on Oracle Database."}, {"q": "Which package is used to add errors on APEX page items?", "opts": ["APEX_UTIL", "APEX_ERROR", "APEX_DEBUG", "APEX_PAGE"], "ans": 1, "exp": "APEX_ERROR.ADD_ERROR() is used to add validation errors linked to specific page items or displayed in the notification area."}, {"q": "What is the APEX substitution string for the logged-in user?", "opts": ["&APP_ID.", "&SESSION.", "&APP_USER.", "&USER_NAME."], "ans": 2, "exp": "&APP_USER. (or V('APP_USER') in PL/SQL) contains the username of the currently authenticated user."}, {"q": "Which SQL clause is NOT valid in an Interactive Report query?", "opts": ["WHERE", "GROUP BY", "ORDER BY", "COMMIT"], "ans": 3, "exp": "COMMIT is a DML transaction statement, not a SELECT clause. IR queries must be pure SELECT statements."}, {"q": "What does the V() function do in APEX?", "opts": ["Validates an item", "Returns session state value as VARCHAR2", "Creates a view", "Runs a validation process"], "ans": 1, "exp": "V('ITEM_NAME') returns the session state value of a page item as VARCHAR2. NV() returns it as NUMBER."}, {"q": "Which APEX process type automatically handles INSERT/UPDATE/DELETE for a form?", "opts": ["Execute Code", "Close Dialog", "Form - Automatic Row Processing (DML)", "Refresh Region"], "ans": 2, "exp": "'Form - Automatic Row Processing (DML)' is the built-in process that handles INSERT/UPDATE/DELETE based on the primary key value."}, {"q": "What is the correct f?p URL position for setting page items?", "opts": ["Position 4 and 5", "Position 5 and 6", "Position 7 and 8", "Position 3 and 4"], "ans": 2, "exp": "f?p=APP:PAGE:SESSION:REQUEST:DEBUG:CLEAR_CACHE:ITEMS:VALUES \u2014 ITEMS is position 7, VALUES is position 8."}, {"q": "Which collection view is used to query APEX collections?", "opts": ["APEX_COLLECTION_DATA", "APEX_COLLECTIONS", "USER_COLLECTIONS", "APEX_SESSION_COLLECTIONS"], "ans": 1, "exp": "APEX_COLLECTIONS is the view that stores collection data \u2014 query it with WHERE collection_name = 'YOUR_COLLECTION'."}, {"q": "What does apex_error.c_inline_with_field mean?", "opts": ["Error shown on error page", "Error shown in notification area", "Error shown next to the specific item", "Error written to debug log"], "ans": 2, "exp": "c_inline_with_field displays the error message directly next to the page item that caused the error, providing clear visual feedback."}, {"q": "Which APEX package is used to call external REST APIs?", "opts": ["APEX_REST", "APEX_WEB_SERVICE", "APEX_HTTP", "APEX_JSON_CLIENT"], "ans": 1, "exp": "APEX_WEB_SERVICE.MAKE_REST_REQUEST() is used to call external REST APIs, returning the response as CLOB."}, {"q": "What triggers a Dynamic Action by default?", "opts": ["Page Load only", "Any DOM event like Click, Change, Keyup", "Only button clicks", "Only AJAX callbacks"], "ans": 1, "exp": "Dynamic Actions can be triggered by any DOM event (Click, Change, Keyup, Focus, Blur, etc.) as well as APEX-specific events like After Refresh."}, {"q": "What is the purpose of APEX_DEBUG.MESSAGE()?", "opts": ["Send email notifications", "Write messages to debug log", "Display alert dialogs", "Log to Oracle Database alert log"], "ans": 1, "exp": "APEX_DEBUG.MESSAGE() writes messages to the APEX debug log, visible when debug mode is enabled (?p_debug=YES)."}, {"q": "Which is the correct way to read an APEX item value in SQL?", "opts": ["GET('P1_ITEM')", "#P1_ITEM", "V('P1_ITEM') or :P1_ITEM", "ITEM('P1_ITEM')"], "ans": 2, "exp": "Use :P1_ITEM as bind variable in SQL queries, or V('P1_ITEM') in PL/SQL expressions. Both read from session state."}, {"q": "What is a Shared Component in APEX?", "opts": ["A page that is shared between apps", "Reusable elements like LOVs, templates, and nav menus", "A database table shared by multiple users", "A plugin installed globally"], "ans": 1, "exp": "Shared Components are reusable elements defined once and used across all pages in an application \u2014 LOVs, templates, navigation menus, authentication schemes, etc."}, {"q": "How do you reset an Interactive Report programmatically?", "opts": ["apex_ir.clear_report()", "apex_ir.reset_report()", "apex_report.reset()", "DBMS_APEX.RESET_IR()"], "ans": 1, "exp": "APEX_IR.RESET_REPORT() resets all user customisations (filters, sorts, highlights) on an Interactive Report back to its default state."}, {"q": "What does ORDS stand for?", "opts": ["Oracle REST Data Services", "Oracle Report Data Service", "Oracle Relational Data System", "Oracle REST Development Studio"], "ans": 0, "exp": "ORDS stands for Oracle REST Data Services \u2014 it enables exposing Oracle Database objects and APEX applications as RESTful web services."}, {"q": "Which CSS class system does APEX Universal Theme use?", "opts": ["Bootstrap", "Tailwind CSS", "Oracle CSS Framework", "Universal Theme CSS with custom properties"], "ans": 3, "exp": "APEX Universal Theme uses its own CSS framework built with CSS custom properties (variables), not Bootstrap or Tailwind."}, {"q": "What happens if an APEX Validation fails?", "opts": ["The page redirects to an error page", "Processing stops and errors are shown to the user", "The process still runs but logs the error", "The session is terminated"], "ans": 1, "exp": "If any validation fails, APEX stops all further processing (no processes or branches execute) and displays the error message(s) to the user."}, {"q": "What is the purpose of APEX Collections?", "opts": ["Store files permanently in the database", "Temporarily store multi-row data for the session duration", "Cache SQL query results for performance", "Store application configuration settings"], "ans": 1, "exp": "APEX Collections are session-level temporary stores for multi-row data \u2014 perfect for wizards, shopping carts, and data that hasn't been committed yet."}, {"q": "Which JavaScript namespace should you use in APEX to avoid conflicts?", "opts": ["jQuery", "$", "apex.jQuery or apex.util", "window.oracle"], "ans": 2, "exp": "Use apex.jQuery (not bare $) to safely use jQuery in APEX, and apex.util for APEX utility functions, avoiding conflicts with other libraries."}];
-var current = 0, score = 0, answered = false;
+'use strict';
 
-function renderQuestion() {
-  var q    = QUESTIONS[current];
-  var pct  = ((current) / QUESTIONS.length * 100).toFixed(0);
+/* ════════════════════════════════════════════
+   95 QUESTIONS DATA
+════════════════════════════════════════════ */
+const Q = [
+  {id:1,level:'basic',q:"What is Oracle Application Express (APEX)?",opts:["A high-code development platform for complex enterprise applications","A low-code development platform that allows developers to build scalable web applications quickly using SQL and PL/SQL","A database management system for Oracle databases","A reporting tool exclusively for Oracle databases"],ans:1,exp:"Oracle APEX is a low-code development platform enabling developers to build scalable, secure enterprise apps rapidly using SQL and PL/SQL."},
+  {id:2,level:'basic',q:"What are the key components of Oracle APEX?",opts:["Oracle APEX Builder, Oracle APEX Listener, Oracle APEX Runtime","Only Oracle Database and Web Server","SQL Workshop and Application Builder only","Workspace and Theme components only"],ans:0,exp:"Oracle APEX consists of the APEX Builder (development environment), APEX Listener/ORDS (web server integration), and APEX Runtime (execution engine)."},
+  {id:3,level:'basic',q:"What are the advantages of using Oracle APEX?",opts:["Only rapid development","Rapid application development, easy deployment, scalability, security features, seamless Oracle Database integration","Only cost-effectiveness","Only responsive design"],ans:1,exp:"Oracle APEX offers rapid development, easy deployment, scalability, built-in security, seamless Oracle Database integration, low-code approach, responsive design, and cost-effectiveness."},
+  {id:4,level:'basic',q:"What are APEX pages and regions?",opts:["Only database tables","APEX pages are building blocks representing web pages; Regions define content areas on a page","Only user interfaces","Only templates"],ans:1,exp:"APEX pages are the building blocks of an application representing individual web pages. Regions are containers within pages that hold content like reports, charts, and forms."},
+  {id:5,level:'basic',q:"What is a theme in Oracle APEX?",opts:["Only color settings","A predefined set of templates and styles that determine the look and feel of an APEX application","Only font settings","Only layout settings"],ans:1,exp:"A theme is a predefined set of templates and styles determining the look and feel of an APEX application, ensuring consistent design across all pages."},
+  {id:6,level:'basic',q:"What is a Workspace in Oracle APEX?",opts:["A single user environment","A shared work area within an Oracle APEX instance that allows multiple users to work on applications and database objects","Only for database administrators","A temporary storage area"],ans:1,exp:"A Workspace is a shared work area in Oracle APEX allowing multiple users to work on applications and database objects, with its own schemas and logical separation."},
+  {id:7,level:'basic',q:"What is a Page in Oracle APEX?",opts:["Only a database table","A web page that is part of an application with a unique identifier and UI components","Only a form component","A server configuration file"],ans:1,exp:"A Page in Oracle APEX is a web page containing various regions, items, buttons, and other components, serving as the basic building block for user interfaces."},
+  {id:8,level:'basic',q:"What is a Region in Oracle APEX?",opts:["A database schema","A container within a page that holds content such as reports, charts, forms, and other components","A user account","A server location"],ans:1,exp:"A Region is a container within a page holding content such as reports, charts, forms, and other components, organizing the layout and structure of a page."},
+  {id:9,level:'basic',q:"What are the different types of pages in Oracle APEX?",opts:["Only Form Pages","Form Pages, Report Pages, Chart Pages, Dashboard Pages, Calendar Pages, and Wizard Pages","Only Report Pages","Only Dashboard Pages"],ans:1,exp:"Oracle APEX supports Form Pages, Report Pages, Chart Pages, Dashboard Pages, Calendar Pages, and Wizard Pages for multi-step processes."},
+  {id:10,level:'basic',q:"What is the difference between an APEX page and a component?",opts:["They are the same thing","APEX pages are containers for components; Components are individual elements like buttons, items, reports","Components contain pages","Pages are smaller than components"],ans:1,exp:"APEX pages are containers for components. Components are individual elements like buttons, items, reports, and charts residing within pages."},
+  {id:11,level:'basic',q:"What are the main features of Oracle APEX?",opts:["Only SQL Workshop","Low-code development, Responsive design, Built-in security, Interactive Reports, RESTful Web Services, Themes and Templates","Only Application Builder","Only Theme management"],ans:1,exp:"Main features include Low-code development, Responsive design, Built-in security, Interactive Reports, RESTful Web Services, Themes and Templates, Dynamic Actions, and Oracle Database integration."},
+  {id:12,level:'basic',q:"Does APEX work with non-Oracle databases?",opts:["Yes, it works with all databases","No, Oracle APEX will work only with Oracle database","Yes, but only with MySQL","Yes, but only with PostgreSQL"],ans:1,exp:"No. Oracle APEX works only with Oracle Database. It is tightly integrated and cannot be used with other database systems."},
+  {id:13,level:'basic',q:"What are the skills required for APEX Developers?",opts:["Only Java programming","SQL and PL/SQL are essential; HTML, CSS, and JavaScript are good to have skills","Only database administration","Only web design"],ans:1,exp:"SQL and PL/SQL are essential. HTML, CSS, and JavaScript are good-to-have skills for customizing look and feel."},
+  {id:14,level:'basic',q:"What are the different types of APEX items?",opts:["Only text fields","Text fields, select lists, radio groups, checkboxes, date pickers, file upload items, number fields, password fields","Only select lists","Only checkboxes"],ans:1,exp:"APEX items include text fields, select lists, radio groups, checkboxes, date pickers, file upload items, number fields, password fields, textarea, and hidden items."},
+  {id:15,level:'basic',q:"What is a LOV (List of Values) in Oracle APEX?",opts:["A database table","A predefined list of options used to populate select lists, radio groups, and other form elements","A user permission","A page template"],ans:1,exp:"A LOV is a predefined list of options used to populate select lists, radio groups, and other form elements. LOVs can be static or dynamic (SQL-based)."},
+  {id:16,level:'basic',q:"What are Page Items and how do you use them in Oracle APEX?",opts:["Only database columns","Form elements such as text fields, select lists, and checkboxes that capture user input","Only display elements","Only validation rules"],ans:1,exp:"Page Items are form elements such as text fields, select lists, and checkboxes that capture user input and interact with data."},
+  {id:17,level:'basic',q:"What are the different types of Reports available in Oracle APEX?",opts:["Only Interactive Reports","Interactive Reports, Classic Reports, Interactive Grid, Cards, Faceted Search, and Calendar Reports","Only Classic Reports","Only Cards"],ans:1,exp:"Oracle APEX supports Interactive Reports, Classic Reports, Interactive Grid, Cards, Faceted Search, and Calendar Reports."},
+  {id:18,level:'basic',q:"Which report type allows end users to add, modify, and refresh data directly on the report?",opts:["Interactive Report","Interactive Grid","Classic Report","All of the above"],ans:1,exp:"Interactive Grid is the report type allowing end users to add, modify, and refresh data directly on the report."},
+  {id:19,level:'basic',q:"What is the difference between shared and local workspaces in Oracle APEX?",opts:["There is no difference","Shared workspaces are accessible to all users; local workspaces are only accessible to the creator","Local workspaces are for administrators only","Shared workspaces are temporary"],ans:1,exp:"Shared workspaces are accessible to all users with the same privileges. Local workspaces are only accessible to the creator who has full control over access."},
+  {id:20,level:'basic',q:"Who uses APEX?",opts:["Only database administrators","Developers running on Oracle database who want to build rich web applications with limited Java experience","Only web designers","Only system administrators"],ans:1,exp:"Developers running on Oracle database who want to build rich web applications with reports, forms, charts, dashboards, with limited Java experience."},
+  {id:21,level:'basic',q:"Who created Oracle APEX?",opts:["Mike Robbin","Lord Thomas","Mike Uchida","Andrew Flow"],ans:2,exp:"Oracle APEX was created by Mike Uchida and his team at Oracle Corporation."},
+  {id:22,level:'basic',q:"Among the third-party libraries with which APEX comes standard — which is NOT included?",opts:["JQuery System","CKEditor","JQuery Mobile","AnuChart"],ans:3,exp:"Oracle APEX comes standard with jQuery System, CKEditor, and jQuery Mobile — but NOT AnuChart."},
+  {id:23,level:'basic',q:"Oracle APEX 5.1.0 was released in:",opts:["March 2017","June 2017","April 2017","May 2017"],ans:0,exp:"Oracle APEX 5.1.0 was released in March 2017."},
+  {id:24,level:'basic',q:"Oracle APEX was previously called:",opts:["HTML DB","Oracle DB","Oracle APEX","Oracle Tool"],ans:0,exp:"Oracle APEX was previously called HTML DB (HTML Database) before evolving to its current name."},
+  {id:25,level:'basic',q:"Oracle APEX supports all the operating systems except:",opts:["Linux","IBM AIX","Chrome OS","Windows"],ans:2,exp:"Oracle APEX supports Linux, IBM AIX, and Windows operating systems — but not Chrome OS."},
+  {id:26,level:'basic',q:"Which of these is the designer of Oracle APEX?",opts:["Oracle Company","Oracle Inc","Oracle Corporation","Oracle Team"],ans:2,exp:"Oracle Corporation is the designer and developer of Oracle APEX."},
+  {id:27,level:'basic',q:"Regarding Oracle APEX historical names, which of these is odd?",opts:["Oracle Platform","Project Marvel","Flows","APEX Tool"],ans:3,exp:"Oracle Platform, Project Marvel, and Flows are all historical names associated with Oracle APEX. 'APEX Tool' is not a recognized name variant."},
+  {id:28,level:'basic',q:"Which is NOT a class of vulnerability that impacts APEX applications?",opts:["Cross-site scripting","SQL Injection","Automated Control","Access Control"],ans:2,exp:"Cross-site scripting, SQL Injection, and Access Control are real APEX vulnerability classes. 'Automated Control' is not a recognized vulnerability class."},
+  {id:29,level:'basic',q:"Which of the below is NOT a valid source type for a report?",opts:["SQL Query","View/Table","Database Procedure","Function body returning the SQL Query"],ans:2,exp:"SQL Query, View/Table, and Function body returning SQL Query are valid source types. 'Database Procedure' is not a standard APEX report source type."},
+  {id:30,level:'basic',q:"For one Region, you can stretch a maximum of how many columns?",opts:["15","10","20","12"],ans:3,exp:"For one Region in Oracle APEX, you can stretch a maximum of 12 columns in the grid layout system."},
+  {id:31,level:'basic',q:"In which source property of the Static Content Region can you insert custom HTML?",opts:["Custom Attributes","HTML Expression","Column","Text"],ans:3,exp:"In the Static Content Region, you can insert custom HTML in the 'Text' source property."},
+  {id:32,level:'basic',q:"Can we submit a page using a dynamic action?",opts:["False","True","Only with JavaScript","Only with PL/SQL"],ans:1,exp:"Yes, we can submit a page using dynamic actions in Oracle APEX without requiring custom JavaScript."},
+  {id:33,level:'basic',q:"Which Page type in Oracle APEX is NOT correct?",opts:["Normal","Non-Modal Dialog","Normal Form","Modal Dialog"],ans:2,exp:"Normal, Non-Modal Dialog, and Modal Dialog are valid page types. 'Normal Form' is not a standard APEX page type."},
+  {id:34,level:'basic',q:"Which is the correct PL/SQL expression for checking if the salary item is greater than 1000?",opts:["P1_SALARY >: 1000","$V('P1_SALARY')>1000",":P1_SALARY>1000","P1_SALARY>1000"],ans:2,exp:"The correct PL/SQL expression is ':P1_SALARY>1000' using the bind variable syntax with a colon prefix."},
+  {id:35,level:'basic',q:"Which JavaScript command for setting an item value is NOT correct?",opts:["apex.item('P1_Name').setValue('Vinish')","$s('P1_Name', 'VINISH')","apex.item.setValue('P1_Name', 'VINISH')","All of the above"],ans:2,exp:"Correct commands are apex.item('P1_Name').setValue('Vinish') and $s('P1_Name','VINISH'). The syntax apex.item.setValue() is incorrect."},
+  {id:36,level:'basic',q:"In the Master-Detail form, for linking details to Master, what do you specify?",opts:["Master Region","Master Block","Master Table","Master Form Process"],ans:0,exp:"In the Master-Detail form, for linking details to Master, you specify the Master Region."},
+  {id:37,level:'basic',q:"Which command gives a 'Hello World!' alert box?",opts:["apex.message.text('Hello World!');","apex.alert.message('Hello World!');","apex.message.dialog('Hello World!');","apex.message.alert('Hello World!');"],ans:3,exp:"The correct syntax to show a 'Hello World!' message in an alert box is apex.message.alert('Hello World!');"},
+  {id:38,level:'basic',q:"In which version of Oracle APEX was the Data Workshop feature introduced?",opts:["Oracle APEX 5.1","Oracle APEX 3.0","Oracle APEX 4.0","Oracle APEX 4.1"],ans:3,exp:"The Data Workshop feature was introduced in Oracle APEX 4.1."},
+  {id:39,level:'basic',q:"How can you find which version of Oracle APEX is installed?",opts:["Check database logs","Query apex_release view or check About Application Express","Check web server config","Run APEX installer"],ans:1,exp:"You can find the APEX version by querying the apex_release view or checking About Application Express in the Administration menu."},
+  {id:40,level:'basic',q:"What is the purpose of Application Builder in Oracle APEX?",opts:["Database management only","To create, edit, and manage web applications declaratively","User administration only","Server configuration"],ans:1,exp:"Application Builder is the primary tool for creating, editing, and managing Oracle APEX web applications through a declarative development approach."},
+  {id:41,level:'intermediate',q:"Can you explain the architecture of Oracle APEX?",opts:["Single-tier architecture","Three-tier architecture: client tier, application server tier, and database tier","Two-tier architecture","Four-tier architecture"],ans:1,exp:"Oracle APEX follows a three-tier architecture: client tier (web browsers), application server tier (APEX runtime/ORDS), and database tier (Oracle Database where the APEX Engine resides)."},
+  {id:42,level:'intermediate',q:"How does Oracle APEX handle security?",opts:["No security features","Through authentication schemes, authorization schemes, session state protection, and data validation","Only password protection","Only SSL/TLS"],ans:1,exp:"Oracle APEX provides authentication schemes, authorization schemes, session state protection, SQL injection prevention, and secure session management."},
+  {id:43,level:'intermediate',q:"How can you create a report in Oracle APEX?",opts:["Only using SQL*Plus","Using the Report Wizard, SQL queries, or the Interactive Grid component in Application Builder","Only manually coding HTML","Only using Crystal Reports"],ans:1,exp:"Reports can be created using the Report Wizard, SQL queries, or Interactive Grid by navigating to Application Builder and choosing the report type."},
+  {id:44,level:'intermediate',q:"How can you handle validations in Oracle APEX?",opts:["Only client-side JavaScript","Using built-in validations, PL/SQL code, or custom JavaScript validation functions","Only server-side","Not possible in APEX"],ans:1,exp:"Validations can be implemented using built-in validations, PL/SQL code, or custom JavaScript validation functions including required fields, data type, pattern, and custom PL/SQL validations."},
+  {id:45,level:'intermediate',q:"How do you perform data manipulation in Oracle APEX?",opts:["Only using SQL Workshop","Using SQL statements, interactive grids, or PL/SQL processes including automatic DML processes","Only manual database queries","Only through forms"],ans:1,exp:"Data manipulation is done using SQL statements, interactive grids for Excel-like editing, or PL/SQL processes for complex operations."},
+  {id:46,level:'intermediate',q:"What are shared components in Oracle APEX?",opts:["Only page templates","Reusable objects like LOVs, themes, templates, navigation menus, and dynamic actions shared across pages","Only navigation menus","Only themes"],ans:1,exp:"Shared components are reusable objects like LOVs, Themes, Templates, Navigation Menus, and Dynamic Actions used across multiple pages in an application."},
+  {id:47,level:'intermediate',q:"How can you schedule jobs in Oracle APEX?",opts:["Not possible in APEX","Using APEX Scheduler functionality or Oracle Database Scheduler features","Only using external tools","Only through cron jobs"],ans:1,exp:"Jobs can be scheduled using Oracle APEX's built-in Scheduler or Oracle Database Scheduler features, defining frequency, timing, and PL/SQL code to execute."},
+  {id:48,level:'intermediate',q:"How does Oracle APEX handle internationalization and localization?",opts:["No i18n support","Provides features for translating applications to different languages and supporting localized date, number, currency formats","English only","Only through custom code"],ans:1,exp:"Oracle APEX provides built-in support for translating applications to different languages and supporting localized date, number, and currency formats."},
+  {id:49,level:'intermediate',q:"How can you customize the appearance of an APEX application?",opts:["Cannot be customized","Using themes, templates, CSS styling, and JavaScript for enhanced user interactions","Only changing color scheme","Only using Oracle's default themes"],ans:1,exp:"Appearance can be customized using themes, templates, CSS styling, and JavaScript. You can modify theme templates, add custom CSS, use template options, and apply JavaScript."},
+  {id:50,level:'intermediate',q:"How do you debug an Oracle APEX application?",opts:["Cannot debug APEX apps","Using debug mode, Debug Messages window, logging, and PL/SQL breakpoints","Only using browser console","Only using SQL*Plus"],ans:1,exp:"Debugging uses debug mode (append ?p_debug=YES to URL), the Debug Messages window, apex_debug in PL/SQL code, and browser developer tools."},
+  {id:51,level:'intermediate',q:"How can you create a LOV in Oracle APEX?",opts:["Only manually in SQL","Navigate to Shared Components > List of Values, create from scratch, choose Static or Dynamic type","Only using PL/SQL","LOVs cannot be created by developers"],ans:1,exp:"Navigate to Shared Components > List of Values, click Create > From Scratch, choose Static or Dynamic LOV type, define entries or SQL query, configure and save."},
+  {id:52,level:'intermediate',q:"How do you create a Form in Oracle APEX?",opts:["Only manually coding HTML","Navigate to Application Builder, click Create > Form, choose type, select data source, configure settings","Only using SQL Workshop","Forms cannot be created in APEX"],ans:1,exp:"Navigate to Application Builder, click Create > Form, choose the form type, select the data source, configure settings and click Create."},
+  {id:53,level:'intermediate',q:"What is the usage of the apex_util package in Oracle APEX?",opts:["Only for authentication","For retrieving session info, generating HTML, creating emails, managing collections, and utility functions","Only for reporting","Only for database administration"],ans:1,exp:"The apex_util package provides utility functions including retrieving session information, generating HTML, creating email messages, managing collections, and performing various utility operations."},
+  {id:54,level:'intermediate',q:"How do you design a responsive page using Oracle Application Express?",opts:["Not possible","Using the fluid grid layout that allows pages to resize based on device size","Only for desktop","Only using CSS media queries manually"],ans:1,exp:"Responsive pages are designed using the fluid grid layout in Oracle APEX, which automatically resizes based on the device being used."},
+  {id:55,level:'intermediate',q:"Is it possible to migrate code from one workspace to another?",opts:["No, not possible","Yes, using the Export/Import feature within Oracle Application Express","Only with DBA access","Only same workspace"],ans:1,exp:"Yes, you can migrate code using the Export/Import feature. Export the application from the source workspace and import it into the target workspace."},
+  {id:56,level:'intermediate',q:"What is the difference between a static and dynamic action in Oracle APEX?",opts:["No difference","Static action defined at design time; dynamic action defined at runtime based on conditions or interactions","Only dynamic actions work","Only static actions are reliable"],ans:1,exp:"A static action is defined at design time and executes when a specific event occurs. A dynamic action is defined at runtime triggered based on conditions and user interactions."},
+  {id:57,level:'intermediate',q:"How can you pass values between pages in Oracle APEX?",opts:["Not possible","Using URL parameters, global variables, session state, or the apex_util.set_session_state function","Only using JavaScript cookies","Only using database tables"],ans:1,exp:"Oracle APEX provides several methods: URL parameters, global variables, session state, and the apex_util.set_session_state function."},
+  {id:58,level:'intermediate',q:"How can you handle exception handling in Oracle APEX?",opts:["Cannot handle exceptions","Using built-in error handling features and exceptions in PL/SQL code using BEGIN-EXCEPTION-END blocks","Only using JavaScript","Only client-side handling"],ans:1,exp:"Exception handling uses built-in error handling features and PL/SQL exception blocks with BEGIN-EXCEPTION-END structure."},
+  {id:59,level:'intermediate',q:"What is the difference between a report and a chart in Oracle APEX?",opts:["They are the same","Report displays data in tabular format; chart visualizes data graphically to show trends and patterns","Charts are more accurate","Reports are outdated"],ans:1,exp:"A report displays data in tabular format for viewing and interaction. A chart visualizes data graphically, making it easier to understand trends and patterns."},
+  {id:60,level:'intermediate',q:"How can you implement pagination in Oracle APEX?",opts:["Not possible","Using built-in pagination features displaying limited rows per page with navigation controls","Only manually coding","Using separate navigation pages"],ans:1,exp:"Oracle APEX provides built-in pagination features displaying a limited number of rows per page with navigation controls to move between pages."},
+  {id:61,level:'intermediate',q:"What is the difference between session state and an application item?",opts:["They are the same","Session state stores user-specific session data; application item is a global variable accessible by all sessions","Application items expire faster","Session state is permanent"],ans:1,exp:"Session state stores values specific to a user session across pages. Application items are global variables accessible by all user sessions."},
+  {id:62,level:'intermediate',q:"How can you implement cascading LOVs in Oracle APEX?",opts:["Not possible in APEX","Using cascading LOV item type with parent-child relationships filtering child values based on parent selection","Only using JavaScript","Only manually with database triggers"],ans:1,exp:"Oracle APEX provides cascading LOV functionality through the cascading LOV item type, where parent selection filters available values in the child LOV."},
+  {id:63,level:'intermediate',q:"How can you implement a multi-step wizard in Oracle APEX?",opts:["Not supported","Using the built-in wizard component defining each step as a separate page with navigation buttons","Only using JavaScript frameworks","Only using custom HTML"],ans:1,exp:"Oracle APEX provides a built-in wizard component where each step is a separate page with navigation buttons for movement between steps."},
+  {id:64,level:'intermediate',q:"How can you implement master-detail relationships in Oracle APEX?",opts:["Only through custom SQL","Using the built-in master-detail form wizard or by linking regions","It is not supported","Only through JavaScript"],ans:1,exp:"Master-detail relationships are implemented using the built-in master-detail form wizard or by creating a parent-child relationship between two regions using page items as link parameters."},
+  {id:65,level:'intermediate',q:"How can you implement client-side validations in Oracle APEX?",opts:["Not possible","Using JavaScript to define custom validation functions and display error messages without server round trips","Only using PL/SQL","Only using APEX built-in validations"],ans:1,exp:"Oracle APEX supports client-side validations using JavaScript. Developers define custom JavaScript functions to validate user input and display error messages without server round trips."},
+  {id:66,level:'intermediate',q:"How can you implement conditional display of items in Oracle APEX?",opts:["Not possible","Using conditional rendering options that show or hide items based on specific conditions or user input","Only using JavaScript","Only using PL/SQL"],ans:1,exp:"Oracle APEX provides conditional rendering options that show or hide items based on specific conditions or user input, defined through conditional display attributes."},
+  {id:67,level:'intermediate',q:"How can you handle file uploads in Oracle APEX?",opts:["Not possible","Through the File Browse item type, configuring file size, file type, and storage location","Only using third-party components","Only using PL/SQL"],ans:1,exp:"Oracle APEX provides file upload functionality through the File Browse item type. Developers configure file size, file type, and storage location settings."},
+  {id:68,level:'intermediate',q:"How can you customize the navigation menu in Oracle APEX?",opts:["Cannot be customized","Using the navigation menu component, defining menu entries, hierarchical structures, and styling options","Only using custom JavaScript","Only using templates"],ans:1,exp:"Oracle APEX provides a navigation menu component that can be customized by defining menu entries, hierarchical structures, and applying styling options."},
+  {id:69,level:'intermediate',q:"What is a break field in context of reporting in Oracle APEX?",opts:["An error in the report","A field used to break up data in a report into logical groups (e.g., by year)","A sort order field","A mandatory field"],ans:1,exp:"A break field is used to break up data in a report into logical groups. For example, breaking data by year allows users to see data for each year separately."},
+  {id:70,level:'intermediate',q:"How can you implement data validation in Oracle APEX?",opts:["Not possible","Using built-in validations (required fields, data type, pattern) or custom PL/SQL validations","Only client-side","Only using database constraints"],ans:1,exp:"Oracle APEX provides built-in validations (required fields, data type, pattern) and allows custom PL/SQL validations to enforce specific business rules."},
+  {id:71,level:'advanced',q:"Are there performance issues when thousands of users access a single Oracle instance?",opts:["Yes, major performance issues","No, Oracle is designed to handle large numbers of users and transactions — it is scalable by default","Only with APEX","Yes, above 100 users"],ans:1,exp:"There are no known performance issues when thousands of users access a single Oracle instance. Oracle is designed to handle large numbers of users and transactions as it is scalable by default."},
+  {id:72,level:'advanced',q:"What are some best practices for developing web apps using Oracle APEX?",opts:["No specific practices","Using built-in security features, bind variables to avoid SQL injection, error handling, naming conventions","Only using HTML","Only following Oracle guidelines"],ans:1,exp:"Best practices include using built-in security features, bind variables to avoid SQL injection, built-in report generation, naming conventions, and implementing proper error handling."},
+  {id:73,level:'advanced',q:"How does APEX Architecture work?",opts:["Standalone application server","APEX is installed on Oracle Database, comprising metadata in tables and PL/SQL code; URL requests translated to APEX PL/SQL calls by ORDS","Separate application servers","Client-side only"],ans:1,exp:"APEX is installed on Oracle Database (pre-installed from 11g), comprising metadata and PL/SQL code. URL requests from browsers are translated into APEX PL/SQL calls by ORDS."},
+  {id:74,level:'advanced',q:"How can you secure data in an APEX application?",opts:["Only password protection","Implementing proper authentication, authorization, encryption, and secure coding practices","Only HTTPS","Only database-level security"],ans:1,exp:"Data is secured by implementing authentication, authorization, encryption, escaping user input, validating data, and implementing proper session management."},
+  {id:75,level:'advanced',q:"Explain the process of deploying an APEX application.",opts:["Cannot deploy APEX apps","Using the built-in export/import feature, generating installation scripts, or deploying to Oracle Cloud","Only manual installation","Only through Oracle DBA"],ans:1,exp:"APEX applications can be deployed using the built-in export/import feature, installation scripts, or deploying to Oracle Cloud. Export as SQL file and import into the target environment."},
+  {id:76,level:'advanced',q:"How can you call PL/SQL code from an APEX application?",opts:["Not possible","Using processes, computations, validations, PL/SQL regions, AJAX callbacks, or dynamic actions","Only through database triggers","Only using SQL Workshop"],ans:1,exp:"PL/SQL code can be called using page processes, computations, validations, PL/SQL regions, AJAX callbacks, and dynamic actions."},
+  {id:77,level:'advanced',q:"How does Oracle APEX handle version control and team development?",opts:["No version control","Using Team Development, collaboration tools, application versioning, and export/import capabilities","Only manual file management","Only external git tools"],ans:1,exp:"Oracle APEX provides Team Development features, collaboration tools, application versioning, and export/import capabilities for team development."},
+  {id:78,level:'advanced',q:"How can you implement error handling in Oracle APEX?",opts:["No built-in error handling","Using PL/SQL exception handling, the apex_error package, and error logging to custom tables","Only client-side","Only using database constraints"],ans:1,exp:"Error handling uses PL/SQL exception handling, apex_error for custom error handling, user-friendly error messages, and error logging to custom tables for debugging."},
+  {id:79,level:'advanced',q:"How can you import data into an APEX application from external sources?",opts:["Cannot import data","Using SQL*Loader, External Tables, CSV files, RESTful Web Services, Data Loading wizard, or APEX_DATA_PARSER","Only manually entering data","Only from Oracle databases"],ans:1,exp:"Data can be imported using SQL*Loader, External Tables, CSV files, RESTful Web Services, Data Loading wizard, and APEX_DATA_PARSER package."},
+  {id:80,level:'advanced',q:"How can you integrate Oracle APEX with other systems?",opts:["Cannot integrate","Using Web Services, RESTful Services, JavaScript APIs, and database links for external system integration","Only Oracle-to-Oracle","Only email integration"],ans:1,exp:"Oracle APEX integrates with other systems using Web Services, RESTful Services, JavaScript APIs, and database links, supporting REST APIs and external authentication systems."},
+  {id:81,level:'advanced',q:"What are the best practices for performance tuning in Oracle APEX?",opts:["No performance tuning needed","Optimizing SQL queries, minimizing database round trips, caching, using bind variables, and proper indexing","Only hardware upgrades","Only adding more servers"],ans:1,exp:"Performance tuning includes optimizing SQL queries, minimizing database round trips, caching frequently accessed data, using bind variables, leveraging browser caching, and proper indexing."},
+  {id:82,level:'advanced',q:"How can you package and deploy Oracle APEX applications?",opts:["Cannot package APEX apps","Using the export feature to create a single SQL file importable into another environment, or using ORDS","Only manual installation","Only Oracle Cloud"],ans:1,exp:"Oracle APEX allows packaging an application into a single export SQL file that can be imported into another environment. Deployment options include ORDS or Oracle APEX Listener."},
+  {id:83,level:'advanced',q:"What are the limitations of Oracle APEX?",opts:["No limitations","Limited support for complex business rules, limited offline capabilities, potential performance issues with large datasets, Oracle DB dependency","Cannot create reports","Cannot create forms"],ans:1,exp:"Limitations include limited support for complex business rules, limited offline capabilities, potential performance issues with very large datasets, and dependency on Oracle Database."},
+  {id:84,level:'advanced',q:"How can you extend Oracle APEX functionality using custom plugins?",opts:["Cannot extend APEX","Using custom plugins — reusable components developers can create and share to enhance application functionality","Only Oracle plugins","Only JavaScript libraries"],ans:1,exp:"Oracle APEX supports custom plugins, which are reusable components that can be created and shared to enhance APEX platform functionality beyond built-in capabilities."},
+  {id:85,level:'advanced',q:"How can you implement dynamic actions based on AJAX callbacks in Oracle APEX?",opts:["Not possible","Creating dynamic actions triggered by AJAX callbacks to refresh regions or execute PL/SQL without page reload","Only using JavaScript","Only full page submits"],ans:1,exp:"Oracle APEX allows dynamic actions triggered by AJAX callbacks, performing actions like refreshing regions or executing PL/SQL code without refreshing the entire page."},
+  {id:86,level:'advanced',q:"How can you implement RESTful web services in Oracle APEX?",opts:["Not supported","Defining RESTful web services using PL/SQL code or exposing SQL queries as RESTful services through SQL Workshop > RESTful Services","Only consuming external services","Only SOAP services"],ans:1,exp:"Oracle APEX allows creating and consuming RESTful web services by defining them using PL/SQL code or exposing SQL queries as RESTful services via SQL Workshop."},
+  {id:87,level:'advanced',q:"How can you implement email notifications in Oracle APEX?",opts:["Not possible","Using the APEX_MAIL package to send emails for account activation, password resets, and notification alerts","Only using external SMTP","Only HTML emails"],ans:1,exp:"Oracle APEX provides the apex_mail package for sending email notifications for account activation, password resets, and notification alerts."},
+  {id:88,level:'advanced',q:"How can you implement user authentication and authorization in Oracle APEX?",opts:["Not possible","Using authentication schemes (database, LDAP, SSO) and authorization schemes to control access based on roles","Only basic authentication","Only Oracle user accounts"],ans:1,exp:"Oracle APEX supports database authentication, LDAP authentication, and SSO. Authorization schemes control access to specific pages or components based on user roles."},
+  {id:89,level:'advanced',q:"How can you implement data encryption in Oracle APEX?",opts:["Not possible in APEX","Using DBMS_CRYPTO package and built-in functions for encrypting sensitive data stored in the database","Only at database level","Only SSL/TLS"],ans:1,exp:"Oracle APEX provides data encryption through the DBMS_CRYPTO package and built-in functions for encrypting sensitive data stored in the database."},
+  {id:90,level:'advanced',q:"What is a Plug-in in Oracle APEX?",opts:["An external database tool","A reusable component extending APEX functionality — custom items, regions, processes, and dynamic actions","A JavaScript library only","A database extension"],ans:1,exp:"A Plug-in is a reusable component extending APEX functionality with custom items, regions, processes, and dynamic actions. They allow complex functionality to be encapsulated and shared across applications."},
+  {id:91,level:'advanced',q:"What are the 4 essential security pillars every Oracle APEX application should implement?",opts:["Login, Password, Role, Audit","Authentication, Authorization, Session State Protection, SQL Injection Prevention","HTTPS, Firewall, VPN, Encryption","Users, Groups, Roles, Permissions"],ans:1,exp:"The 4 security pillars: 1) Authentication (verify identity), 2) Authorization (control access), 3) Session State Protection (prevent URL tampering), 4) SQL Injection Prevention (always use bind variables)."},
+  {id:92,level:'advanced',q:"What is an APEX Collection and when would you use them?",opts:["A report grouping feature","In-memory session-specific data structures for storing and manipulating data without database commits","A database table collection","A theme component collection"],ans:1,exp:"APEX Collections are in-memory session-specific data structures for storing data without database commits. Used for bulk operations, temporary storage, caching, and passing data between application parts."},
+  {id:93,level:'advanced',q:"How would you implement a custom authentication scheme in Oracle APEX?",opts:["Not possible","Navigate to Shared Components > Authentication Schemes, create Custom scheme, define authentication function returning TRUE for valid users","Only using Oracle LDAP","Only database authentication"],ans:1,exp:"Navigate to Shared Components > Authentication Schemes, create a new scheme, choose 'Custom' type, define authentication function returning TRUE for valid users, configure login processing and session verification."},
+  {id:94,level:'advanced',q:"How would you optimize a slow-running report in an Oracle APEX application?",opts:["No optimization possible","Analyze SQL execution plan, add indexes, use bind variables, implement pagination, use caching, optimize joins","Only add more hardware","Only reduce report columns"],ans:1,exp:"Optimization includes analyzing the execution plan, adding appropriate indexes, using bind variables, implementing pagination, caching frequently accessed data, and optimizing joins and subqueries."},
+  {id:95,level:'advanced',q:"How do you stay updated with the latest Oracle APEX features and enhancements?",opts:["No updates needed","Following official Oracle APEX documentation, online forums, conferences, and continuous learning through tutorials and blogs","Only Oracle support","Only Oracle training courses"],ans:1,exp:"Stay updated by following official Oracle APEX documentation, participating in online forums and communities, attending conferences, and engaging in continuous learning through tutorials and blogs."}
+];
 
-  document.getElementById('progressFill').style.width = pct + '%';
-  document.getElementById('quizCounter').textContent  = 'Question ' + (current+1) + ' of ' + QUESTIONS.length;
-  document.getElementById('quizScore').textContent    = 'Score: ' + score;
-  document.getElementById('qNum').textContent         = 'Question ' + (current+1);
-  document.getElementById('qText').textContent        = q.q;
-  document.getElementById('qExp').className           = 'quiz-explanation';
-  document.getElementById('qExp').innerHTML           = '';
-  document.getElementById('nextBtn').className        = 'quiz-btn';
-  answered = false;
+/* ════════════════════════════════════════════
+   ENGINE
+════════════════════════════════════════════ */
+let cur = 0;
+let answers = {}; // idx → option index | 'skipped'
+let timerInt = null;
+let secs = 45 * 60;
 
-  var optsEl = document.getElementById('qOpts');
-  optsEl.innerHTML = '';
-  var letters = ['A','B','C','D'];
-  q.opts.forEach(function(opt, i) {
-    var btn = document.createElement('button');
-    btn.className = 'quiz-opt';
-    btn.innerHTML = '<span class="quiz-opt-letter">' + letters[i] + '</span>' + opt;
-    btn.onclick   = function() { selectAnswer(i, btn); };
-    optsEl.appendChild(btn);
+/* ── START ── */
+function startQuiz() {
+  document.getElementById('startScreen').style.display = 'none';
+  document.getElementById('quizScreen').style.display = 'block';
+  buildDots();
+  render(0);
+  startTimer();
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+/* ── TIMER ── */
+function startTimer() {
+  timerInt = setInterval(() => {
+    secs--;
+    const m = Math.floor(secs / 60), s = secs % 60;
+    document.getElementById('timerTxt').textContent = `${String(m).padStart(2,'0')}:${String(s).padStart(2,'0')}`;
+    document.getElementById('timerEl').classList.toggle('warn', secs <= 180);
+    if (secs <= 0) { clearInterval(timerInt); submitQuiz(); }
+  }, 1000);
+}
+
+/* ── DOTS ── */
+function buildDots() {
+  document.getElementById('dotsWrap').innerHTML = Q.map((_,i) =>
+    `<div class="dot" id="dot${i}" onclick="go(${i})">${i+1}</div>`
+  ).join('');
+}
+function refreshDot(i) {
+  const d = document.getElementById(`dot${i}`);
+  if (!d) return;
+  d.className = 'dot';
+  if (i === cur) d.classList.add('current');
+  else if (answers[i] === 'skipped') d.classList.add('skipped');
+  else if (answers[i] !== undefined) {
+    d.classList.add(answers[i] === Q[i].ans ? 'ok' : 'wrong');
+  }
+}
+function refreshAllDots() { Q.forEach((_,i) => refreshDot(i)); }
+
+/* ── RENDER ── */
+function render(idx) {
+  cur = idx;
+  const q = Q[idx];
+  const answered = answers[idx] !== undefined && answers[idx] !== 'skipped';
+  const skipped  = answers[idx] === 'skipped';
+  const total = Q.length;
+  const doneCount = Object.keys(answers).filter(k => answers[k] !== 'skipped').length;
+
+  // progress
+  document.getElementById('progCount').textContent = `${doneCount} / ${total}`;
+  document.getElementById('progFill').style.width = `${(doneCount/total)*100}%`;
+
+  // meta
+  document.getElementById('qNumBadge').textContent = `Q ${String(idx+1).padStart(2,'0')} / ${total}`;
+  const lb = document.getElementById('qLevelBadge');
+  lb.textContent = q.level.charAt(0).toUpperCase() + q.level.slice(1);
+  lb.className = `q-level-badge ${q.level}`;
+
+  // question
+  document.getElementById('qText').textContent = q.q;
+
+  // options
+  const letters = ['A','B','C','D'];
+  document.getElementById('qOpts').innerHTML = q.opts.map((opt,i) => {
+    let cls = 'q-opt';
+    let icon = '';
+    if (answered) {
+      cls += ' disabled';
+      if (i === q.ans)      { cls += ' correct';  icon = '<i class="fas fa-check opt-icon" style="color:#276749"></i>'; }
+      else if (i === answers[idx]) { cls += ' incorrect'; icon = '<i class="fas fa-times opt-icon" style="color:var(--danger)"></i>'; }
+    }
+    return `<button class="${cls}" onclick="pick(${i})" ${answered?'disabled':''}>
+      <span class="opt-circle">${letters[i]}</span>
+      <span class="opt-text">${opt}</span>
+      ${icon}
+    </button>`;
+  }).join('');
+
+  // explanation
+  const expEl = document.getElementById('qExp');
+  if (answered && q.exp) {
+    expEl.innerHTML = `<strong><i class="fas fa-lightbulb"></i> Explanation:</strong> ${q.exp}`;
+    expEl.classList.add('show');
+  } else {
+    expEl.classList.remove('show');
+    expEl.textContent = '';
+  }
+
+  // answered card style
+  document.getElementById('qCard').classList.toggle('answered', answered);
+
+  // nav buttons
+  document.getElementById('prevBtn').disabled = idx === 0;
+  document.getElementById('nextBtn').style.display = idx === total-1 ? 'none' : 'flex';
+  document.getElementById('skipBtn').style.display = answered ? 'none' : 'flex';
+
+  // submit button
+  const allDone = Object.keys(answers).length === total;
+  document.getElementById('submitWrap').style.display = (idx === total-1 || allDone) ? 'block' : 'none';
+
+  refreshAllDots();
+}
+
+/* ── PICK ANSWER ── */
+function pick(optIdx) {
+  if (answers[cur] !== undefined) return;
+  answers[cur] = optIdx;
+  render(cur);
+  // auto advance after 1.4s if not last question
+  if (cur < Q.length - 1) {
+    setTimeout(() => go(cur + 1), 1400);
+  }
+}
+
+/* ── SKIP ── */
+function skip() {
+  if (answers[cur] !== undefined) return;
+  answers[cur] = 'skipped';
+  refreshDot(cur);
+  if (cur < Q.length - 1) go(cur + 1);
+}
+
+/* ── GO TO ── */
+function go(idx) {
+  if (idx < 0 || idx >= Q.length) return;
+  render(idx);
+  document.getElementById('qCard').scrollIntoView({ behavior: 'smooth', block: 'start' });
+}
+
+/* ── SUBMIT ── */
+function submitQuiz() {
+  clearInterval(timerInt);
+  document.getElementById('quizScreen').style.display = 'none';
+
+  let correct = 0, wrong = 0, skipped = 0;
+  Q.forEach((q,i) => {
+    const a = answers[i];
+    if (a === undefined || a === 'skipped') skipped++;
+    else if (a === q.ans) correct++;
+    else wrong++;
   });
+
+  const total = Q.length;
+  const pct = Math.round((correct / total) * 100);
+
+  // score ring
+  const deg = Math.round((correct / total) * 360);
+  document.getElementById('scoreRing').style.background =
+    `conic-gradient(var(--primary) ${deg}deg, var(--bg-secondary) ${deg}deg)`;
+  document.getElementById('scorePct').textContent = pct + '%';
+
+  document.getElementById('rCorrect').textContent  = correct;
+  document.getElementById('rWrong').textContent    = wrong;
+  document.getElementById('rSkipped').textContent  = skipped;
+
+  let emoji, title, sub, msg;
+  if      (pct >= 90) { emoji='🏆'; title='Outstanding!';    sub='Expert-level performance!'; msg=`You scored ${pct}% — You have exceptional Oracle APEX knowledge and are fully interview-ready!`; }
+  else if (pct >= 75) { emoji='🎉'; title='Great Job!';      sub='Strong performance!'; msg=`You scored ${pct}% — Solid understanding of Oracle APEX. Review the questions you missed and you will be fully ready.`; }
+  else if (pct >= 60) { emoji='👍'; title='Good Effort!';    sub='Decent performance.'; msg=`You scored ${pct}% — Good foundation. Focus on the intermediate and advanced topics where you made mistakes.`; }
+  else if (pct >= 40) { emoji='📚'; title='Keep Studying!';  sub='More practice needed.'; msg=`You scored ${pct}% — Review the APEX Questions section thoroughly. Focus on fundamentals first.`; }
+  else                { emoji='💪'; title="Don't Give Up!";  sub='Keep practicing.'; msg=`You scored ${pct}% — Start with the basic APEX concepts and work your way up. Use the study materials.`; }
+
+  document.getElementById('rEmoji').textContent = emoji;
+  document.getElementById('rTitle').textContent = title;
+  document.getElementById('rSub').textContent   = sub;
+  document.getElementById('rMsg').textContent   = msg;
+
+  const rs = document.getElementById('resultsScreen');
+  rs.style.display = 'block';
+  rs.scrollIntoView({ behavior: 'smooth', block: 'start' });
 }
 
-function selectAnswer(idx, btn) {
-  if (answered) return;
-  answered = true;
-  var q    = QUESTIONS[current];
-  var opts = document.querySelectorAll('.quiz-opt');
-
-  opts.forEach(function(b) { b.classList.add('disabled'); });
-
-  if (idx === q.ans) {
-    btn.classList.add('correct');
-    score++;
-    document.getElementById('quizScore').textContent = 'Score: ' + score;
-  } else {
-    btn.classList.add('wrong');
-    opts[q.ans].classList.add('correct');
-  }
-
-  var expEl = document.getElementById('qExp');
-  expEl.innerHTML = '<strong><i class="fas fa-lightbulb"></i> Explanation:</strong> ' + q.exp;
-  expEl.classList.add('show');
-
-  var nextBtn = document.getElementById('nextBtn');
-  nextBtn.classList.add('show');
-  nextBtn.textContent = (current + 1 < QUESTIONS.length) ? '' : '';
-  nextBtn.innerHTML   = (current + 1 < QUESTIONS.length)
-    ? 'Next <i class="fas fa-arrow-right"></i>'
-    : 'See Results <i class="fas fa-trophy"></i>';
+/* ── RESTART ── */
+function restart() {
+  answers = {}; cur = 0; secs = 45*60;
+  clearInterval(timerInt);
+  document.getElementById('timerTxt').textContent = '45:00';
+  document.getElementById('timerEl').classList.remove('warn');
+  document.getElementById('resultsScreen').style.display = 'none';
+  document.getElementById('quizScreen').style.display = 'block';
+  document.getElementById('submitWrap').style.display = 'none';
+  buildDots();
+  render(0);
+  startTimer();
+  window.scrollTo({ top:0, behavior:'smooth' });
 }
-
-function nextQuestion() {
-  current++;
-  if (current < QUESTIONS.length) {
-    renderQuestion();
-  } else {
-    showResult();
-  }
-}
-
-function showResult() {
-  document.getElementById('quizCard').style.display   = 'none';
-  document.getElementById('quizResult').classList.add('show');
-  document.getElementById('progressFill').style.width = '100%';
-  document.getElementById('quizCounter').textContent  = 'Quiz Complete!';
-  document.getElementById('resultScore').textContent  = score;
-
-  var pct = Math.round(score / QUESTIONS.length * 100);
-  var msg, sub;
-  if      (pct >= 90) { msg = '🏆 Excellent!'; sub = 'You are an APEX expert!'; }
-  else if (pct >= 70) { msg = '👍 Great job!'; sub = 'Strong APEX knowledge — keep it up!'; }
-  else if (pct >= 50) { msg = '📚 Good effort!'; sub = 'Review the questions and try again!'; }
-  else                { msg = '💪 Keep learning!'; sub = 'Study the APEX questions section and retry!'; }
-
-  document.getElementById('resultMsg').textContent = msg;
-  document.getElementById('resultSub').textContent = sub + ' (' + pct + '%)';
-}
-
-function restartQuiz() {
-  current  = 0;
-  score    = 0;
-  answered = false;
-  document.getElementById('quizCard').style.display = 'block';
-  document.getElementById('quizResult').classList.remove('show');
-  renderQuestion();
-}
-
-renderQuestion();
 </script>
 </body>
 </html>
