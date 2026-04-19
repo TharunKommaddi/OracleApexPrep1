@@ -1,0 +1,1779 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Oracle APEX Interview Questions — APEX Interview Mastery</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,500;12..96,600;12..96,700;12..96,800&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,300&family=DM+Mono:wght@400;500&display=block" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-okaidia.min.css">
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='0.9em' font-size='90'>💻</text></svg>">
+<style>
+:root {
+  --bg-base:#f5f0e8;--bg-surface:#ede7da;--bg-card:#faf7f2;--bg-card-hover:#fff9f3;
+  --bg-nav:rgba(245,240,232,0.94);--border-soft:rgba(160,130,100,0.13);
+  --border-mid:rgba(160,130,100,0.22);--border-accent:rgba(45,100,70,0.22);
+  --text-primary:#1c1208;--text-secondary:#5a4a35;--text-muted:#9a856a;--text-faint:#c4ad92;
+  --accent:#2d6446;--accent-light:#3a7d57;--accent-pale:#f0f7f3;--accent-border:rgba(45,100,70,0.2);
+  --shadow-sm:0 1px 4px rgba(100,70,40,0.06);--shadow-md:0 4px 20px rgba(100,70,40,0.09);
+  --shadow-lg:0 12px 40px rgba(100,70,40,0.12);
+  --r-sm:8px;--r-md:12px;--r-lg:16px;--r-xl:20px;--r-pill:100px;--transition:0.2s ease;
+}
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{background:var(--bg-base);color:var(--text-primary);font-family:'DM Sans',sans-serif;font-size:16px;line-height:1.6;-webkit-font-smoothing:antialiased;}
+a{text-decoration:none;color:inherit;}
+
+/* NAV */
+.nav{position:sticky;top:0;z-index:500;background:var(--bg-nav);backdrop-filter:blur(20px);border-bottom:1px solid var(--border-soft);height:64px;display:flex;align-items:center;padding:0 48px;}
+.nav-logo{display:flex;align-items:center;gap:10px;margin-right:36px;flex-shrink:0;}
+.nav-logo-mark{width:32px;height:32px;border-radius:9px;background:var(--accent);display:flex;align-items:center;justify-content:center;color:#fff;font-size:13px;font-weight:700;font-family:'Bricolage Grotesque',sans-serif;}
+.nav-logo-text{font-family:'Bricolage Grotesque',sans-serif;font-size:17px;font-weight:700;color:var(--text-primary);letter-spacing:-0.4px;}
+.nav-links{display:flex;gap:2px;flex:1;list-style:none;}
+.nav-links a{color:var(--text-secondary);font-size:14px;font-weight:500;padding:7px 12px;border-radius:var(--r-sm);transition:all var(--transition);display:flex;align-items:center;gap:6px;white-space:nowrap;}
+.nav-links a:hover{color:var(--text-primary);background:var(--border-soft);}
+.nav-links a.active{color:var(--accent);font-weight:600;}
+.nav-dropdown{position:relative;}
+.nav-dropdown-menu{position:absolute;top:calc(100% + 8px);left:0;background:var(--bg-card);border:1px solid var(--border-soft);border-radius:var(--r-lg);box-shadow:var(--shadow-lg);min-width:180px;padding:8px;list-style:none;opacity:0;visibility:hidden;transform:translateY(-8px);transition:all 0.18s ease;z-index:600;}
+.nav-dropdown:hover .nav-dropdown-menu{opacity:1;visibility:visible;transform:translateY(0);}
+.nav-dropdown-menu a{display:flex;align-items:center;gap:10px;padding:9px 12px;border-radius:var(--r-sm);color:var(--text-secondary);font-size:14px;}
+.nav-dropdown-menu a:hover{background:var(--bg-surface);color:var(--accent);}
+@media(max-width:768px){.nav{padding:0 20px;}.nav-links{display:none;}}
+
+/* PAGE HEADER */
+.page-header{background:var(--bg-surface);border-bottom:1px solid var(--border-soft);padding:48px 48px 40px;}
+@media(max-width:768px){.page-header{padding:32px 20px;}}
+.page-eyebrow{display:inline-flex;align-items:center;gap:8px;color:var(--accent);font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:2px;margin-bottom:12px;}
+.page-eyebrow::before{content:'';width:20px;height:2px;background:var(--accent);border-radius:1px;}
+.page-title{font-family:'Bricolage Grotesque',sans-serif;font-size:clamp(28px,4vw,44px);font-weight:800;letter-spacing:-1.5px;color:var(--text-primary);margin-bottom:8px;}
+.page-subtitle{color:var(--text-muted);font-size:16px;font-weight:300;}
+
+/* CONTAINER */
+.container{max-width:1000px;margin:0 auto;padding:32px 48px 72px;}
+@media(max-width:768px){.container{padding:24px 20px 48px;}}
+
+/* FILTER */
+.filter-section{background:var(--bg-card);border:1px solid var(--border-soft);border-radius:var(--r-xl);padding:24px;margin-bottom:24px;box-shadow:var(--shadow-sm);}
+.filter-title{font-family:'Bricolage Grotesque',sans-serif;font-size:14px;font-weight:700;color:var(--text-primary);margin-bottom:14px;display:flex;align-items:center;gap:8px;}
+.filter-title i{color:var(--accent);}
+.filter-tabs{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:14px;}
+.filter-tab{padding:7px 18px;border-radius:var(--r-pill);font-size:12px;font-weight:600;cursor:pointer;border:1.5px solid var(--border-soft);background:var(--bg-surface);color:var(--text-muted);transition:all var(--transition);font-family:'DM Sans',sans-serif;}
+.filter-tab:hover{border-color:var(--accent-border);color:var(--accent);}
+.filter-tab.active{background:var(--accent);color:#fff;border-color:var(--accent);}
+.search-wrap{position:relative;}
+.search-icon{position:absolute;left:14px;top:50%;transform:translateY(-50%);color:var(--text-faint);font-size:13px;}
+.search-input{width:100%;padding:10px 14px 10px 38px;border-radius:var(--r-sm);border:1px solid var(--border-mid);background:var(--bg-surface);font-size:13px;font-family:'DM Sans',sans-serif;color:var(--text-primary);outline:none;transition:all var(--transition);}
+.search-input:focus{border-color:var(--accent);box-shadow:0 0 0 3px rgba(45,100,70,0.1);background:var(--bg-card);}
+
+/* QUESTION CARD */
+.question-container{background:var(--bg-card);border:1px solid var(--border-soft);border-radius:var(--r-lg);margin-bottom:8px;box-shadow:var(--shadow-sm);overflow:hidden;transition:border-color var(--transition);}
+.question-container:hover{border-color:var(--accent-border);}
+.question-header{display:flex;align-items:center;justify-content:space-between;padding:18px 22px;cursor:pointer;user-select:none;gap:12px;}
+.question-header:hover{background:var(--accent-pale);}
+.question-text{font-family:'Bricolage Grotesque',sans-serif;font-size:15px;font-weight:700;color:var(--text-primary);line-height:1.4;flex:1;letter-spacing:-0.2px;}
+.question-details{display:flex;align-items:center;gap:10px;flex-shrink:0;}
+.difficulty-badge{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:0.5px;padding:3px 10px;border-radius:var(--r-pill);white-space:nowrap;}
+.question-toggle{width:28px;height:28px;border-radius:50%;background:var(--bg-surface);border:1px solid var(--border-soft);display:flex;align-items:center;justify-content:center;font-size:11px;color:var(--text-muted);transition:transform .25s ease;flex-shrink:0;}
+.question-toggle.rotated{transform:rotate(180deg);}
+.question-content{display:none;padding:4px 16px 16px;}
+
+/* RICH SECTIONS */
+.rich-section{background:var(--bg-card);border:1px solid var(--border-soft);border-radius:var(--r-md);margin:6px 0;overflow:hidden;}
+.rich-s-hdr{display:flex;align-items:center;gap:10px;padding:10px 18px;border-bottom:1px solid var(--border-soft);background:var(--bg-surface);}
+.rich-icon{width:26px;height:26px;border-radius:7px;display:flex;align-items:center;justify-content:center;font-size:11px;flex-shrink:0;}
+.rich-icon.ans{background:var(--accent-pale);color:var(--accent);}
+.rich-icon.tbl{background:rgba(30,64,175,0.08);color:#1e40af;}
+.rich-icon.code{background:rgba(0,0,0,0.06);color:#555;}
+.rich-icon.before-ic{background:rgba(183,121,31,0.1);color:#b7791f;}
+.rich-icon.res{background:var(--accent-pale);color:var(--accent);}
+.rich-lbl{font-family:'Bricolage Grotesque',sans-serif;font-size:12px;font-weight:700;color:var(--text-primary);}
+.rich-sub{font-size:11px;color:var(--text-muted);margin-left:auto;font-family:'DM Mono',monospace;}
+.rich-s-body{padding:16px 18px;}
+.ans-txt{font-size:14px;color:var(--text-secondary);line-height:1.85;font-weight:300;}
+
+/* TABLES */
+.rich-two-tbl{display:grid;grid-template-columns:1fr 1fr;gap:12px;}
+@media(max-width:580px){.rich-two-tbl{grid-template-columns:1fr;}}
+.rich-tbl-lbl{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:0.8px;color:var(--text-muted);margin-bottom:6px;display:flex;align-items:center;gap:5px;}
+.rich-tbl-wrap{overflow-x:auto;border-radius:var(--r-sm);border:1px solid var(--border-soft);}
+.rich-tbl{width:100%;border-collapse:collapse;font-size:12px;font-family:'DM Mono',monospace;}
+.rich-tbl thead tr{background:var(--bg-surface);}
+.rich-tbl th{padding:8px 12px;text-align:left;font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:0.5px;color:var(--text-muted);border-bottom:1px solid var(--border-soft);white-space:nowrap;}
+.rich-tbl td{padding:8px 12px;border-bottom:1px solid var(--border-soft);color:var(--text-secondary);}
+.rich-tbl .td-null{color:var(--text-faint);font-style:italic;}
+.rich-tbl tbody tr:last-child td{border-bottom:none;}
+.rich-tbl tbody tr:hover{background:rgba(245,240,232,0.6);}
+
+/* CODE */
+.rich-code-blk{background:#1a1612;border-radius:0;overflow:hidden;}
+.rich-code-bar{display:flex;align-items:center;justify-content:space-between;padding:9px 14px;background:rgba(0,0,0,0.25);border-bottom:1px solid rgba(255,255,255,0.06);}
+.rich-lang-tag{font-family:'DM Mono',monospace;font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:1px;color:#e6a050;}
+.rich-cp-btn{background:rgba(255,255,255,0.07);border:1px solid rgba(255,255,255,0.1);color:rgba(255,255,255,0.4);padding:3px 10px;border-radius:5px;cursor:pointer;font-size:11px;font-family:'DM Sans',sans-serif;display:flex;align-items:center;gap:4px;transition:all .2s;}
+.rich-cp-btn:hover{background:rgba(255,255,255,0.13);color:#fff;}
+.rich-code-blk pre{margin:0!important;padding:16px 20px!important;background:transparent!important;font-size:12.5px!important;line-height:1.75!important;font-family:'DM Mono',monospace!important;text-shadow:none!important;overflow-x:auto;}
+.rich-code-blk code{font-family:'DM Mono',monospace!important;background:transparent!important;text-shadow:none!important;}
+.token.comment{color:#6b5a3e!important;font-style:italic;}
+.token.keyword{color:#e6a050!important;font-weight:600;}
+.token.string{color:#a8d080!important;}
+.token.number{color:#c5a3ff!important;}
+.token.function{color:#7ec8e3!important;}
+.token.operator{color:#e6a050!important;}
+.token.punctuation{color:#c4a882!important;}
+
+/* STATE PILLS */
+.state-pill{display:inline-flex;align-items:center;gap:5px;font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:0.8px;padding:3px 12px;border-radius:var(--r-pill);margin-bottom:10px;}
+.state-pill.before{background:rgba(183,121,31,0.1);color:#92400e;border:1px solid rgba(183,121,31,0.25);}
+.state-pill.after{background:var(--accent-pale);color:var(--accent);border:1px solid var(--accent-border);}
+.rich-note{margin-top:8px;font-size:12px;color:var(--text-muted);font-style:italic;}
+
+/* OUTPUT */
+.rich-out-blk{background:#0f1117;border-radius:var(--r-sm);overflow:hidden;border:1px solid rgba(255,255,255,0.05);font-family:'DM Mono',monospace;}
+.rich-out-bar{display:flex;align-items:center;gap:6px;padding:8px 12px;background:rgba(0,0,0,0.3);border-bottom:1px solid rgba(255,255,255,0.06);}
+.d-r{width:9px;height:9px;border-radius:50%;background:#ff5f57;}
+.d-y{width:9px;height:9px;border-radius:50%;background:#febc2e;}
+.d-g{width:9px;height:9px;border-radius:50%;background:#28c840;}
+.out-t{font-size:10px;color:rgba(255,255,255,0.25);margin-left:4px;}
+.out-body{padding:12px 16px;font-size:12px;line-height:1.85;color:#c9bfa8;}
+.out-body .l{display:block;}
+.out-body .ok{color:#a8d080;}
+.out-body .info{color:#7ec8e3;}
+.out-body .dim{color:rgba(255,255,255,0.25);font-style:italic;}
+
+/* TAKEAWAY */
+.rich-takeaway{display:flex;gap:12px;align-items:flex-start;background:var(--accent-pale);border:1px solid var(--accent-border);border-radius:var(--r-md);padding:14px 18px;margin:6px 0 2px;}
+.rich-tk-icon{width:30px;height:30px;background:var(--accent);color:#fff;border-radius:var(--r-sm);display:flex;align-items:center;justify-content:center;font-size:12px;flex-shrink:0;}
+.rich-tk-body h4{font-family:'Bricolage Grotesque',sans-serif;font-size:11px;font-weight:800;color:var(--accent);margin-bottom:3px;text-transform:uppercase;letter-spacing:0.5px;}
+.rich-tk-body p{font-size:13px;color:var(--text-secondary);line-height:1.65;font-weight:300;}
+
+/* INNER DETAILS TOGGLE */
+.details-toggle-btn{display:inline-flex;align-items:center;gap:8px;margin-top:12px;padding:7px 16px;border-radius:var(--r-pill);border:1.5px solid var(--accent-border);background:var(--accent-pale);color:var(--accent);font-size:12px;font-weight:700;cursor:pointer;font-family:'DM Sans',sans-serif;transition:all 0.2s;user-select:none;}
+.details-toggle-btn:hover{background:var(--accent);color:#fff;}
+.details-toggle-btn .toggle-icon{width:18px;height:18px;border-radius:50%;background:var(--accent);color:#fff;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:800;flex-shrink:0;transition:background 0.2s;}
+.details-toggle-btn:hover .toggle-icon{background:#fff;color:var(--accent);}
+.details-body{display:none;margin-top:4px;}
+.details-body.open{display:block;}
+
+/* JOIN BADGES */
+.join-type-header{display:flex;align-items:center;gap:10px;padding:12px 0 4px;margin-top:8px;}
+.join-badge{font-family:'Bricolage Grotesque',sans-serif;font-size:13px;font-weight:800;padding:4px 14px;border-radius:var(--r-pill);}
+.join-badge.inner{background:#dbeafe;color:#1e40af;border:1px solid #bfdbfe;}
+.join-badge.left{background:var(--accent-pale);color:var(--accent);border:1px solid var(--accent-border);}
+.join-badge.right{background:rgba(124,58,237,0.08);color:#7c3aed;border:1px solid rgba(124,58,237,0.2);}
+.join-badge.full{background:rgba(183,121,31,0.08);color:#b7791f;border:1px solid rgba(183,121,31,0.2);}
+.join-badge-desc{font-size:12px;color:var(--text-muted);font-weight:300;}
+
+/* FOOTER */
+.footer{background:var(--bg-surface);border-top:1px solid var(--border-soft);padding:48px 48px 28px;}
+@media(max-width:768px){.footer{padding:40px 20px 24px;}}
+.footer-top{display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:48px;margin-bottom:36px;padding-bottom:36px;border-bottom:1px solid var(--border-soft);}
+@media(max-width:900px){.footer-top{grid-template-columns:1fr 1fr;gap:32px;}}
+@media(max-width:560px){.footer-top{grid-template-columns:1fr;gap:24px;}}
+.footer-logo{display:flex;align-items:center;gap:10px;margin-bottom:12px;}
+.footer-logo-mark{width:28px;height:28px;border-radius:7px;background:var(--accent);display:flex;align-items:center;justify-content:center;color:#fff;font-size:12px;}
+.footer-logo-text{font-family:'Bricolage Grotesque',sans-serif;font-size:15px;font-weight:700;color:var(--text-primary);}
+.footer-brand-desc{color:var(--text-muted);font-size:13px;line-height:1.7;font-weight:300;}
+.footer-col h4{font-size:13px;font-weight:700;color:var(--text-primary);margin-bottom:14px;}
+.footer-col ul{list-style:none;display:flex;flex-direction:column;gap:9px;}
+.footer-col ul a{color:var(--text-muted);font-size:13px;transition:color var(--transition);}
+.footer-col ul a:hover{color:var(--accent);}
+.footer-bottom{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:8px;}
+.footer-copy{color:var(--text-faint);font-size:12px;}
+
+/* Force Bricolage Grotesque load */
+.question-text,
+.page-title,
+.section-title,
+.nav-logo-text,
+.rich-lbl,
+.filter-title,
+.rich-tk-body h4 {
+  font-family: 'Bricolage Grotesque', 'Georgia', serif;
+}
+
+</style>
+</head>
+<body>
+
+<nav class="nav">
+  <a href="index.html" class="nav-logo">
+    <div class="nav-logo-mark">A</div>
+    <span class="nav-logo-text">APEX Mastery</span>
+  </a>
+  <ul class="nav-links">
+    <li><a href="index.html"><i class="fas fa-home"></i> Home</a></li>
+    <li><a href="oracle-sql.html"><i class="fas fa-database"></i> Oracle SQL</a></li>
+    <li><a href="plsql.html"><i class="fas fa-code"></i> PL/SQL</a></li>
+    <li><a href="oracle-apex.html" class="active"><i class="fas fa-layer-group"></i> APEX</a></li>
+    <li class="nav-dropdown">
+      <a><i class="fas fa-paint-brush"></i> Frontend <i class="fas fa-chevron-down" style="font-size:10px;margin-left:2px"></i></a>
+      <ul class="nav-dropdown-menu">
+        <li><a href="html-questions.html"><i class="fab fa-html5"></i> HTML</a></li>
+        <li><a href="css-questions.html"><i class="fab fa-css3-alt"></i> CSS</a></li>
+        <li><a href="javascript-questions.html"><i class="fab fa-js"></i> JavaScript</a></li>
+        <li><a href="jquery-questions.html"><i class="fas fa-dollar-sign"></i> jQuery</a></li>
+      </ul>
+    </li>
+    <li><a href="oracle-apex-quiz.html"><i class="fas fa-circle-question"></i> Quiz</a></li>
+    <li><a href="pdf-resources.html"><i class="fas fa-file-pdf"></i> PDFs</a></li>
+  </ul>
+</nav>
+
+<div class="page-header">
+  <div style="max-width:1000px;margin:0 auto">
+    <div class="page-eyebrow">Oracle APEX</div>
+    <h1 class="page-title">Oracle APEX Interview Questions</h1>
+    <p class="page-subtitle">37 questions — Basic to Advanced · Click to expand · + for code &amp; details</p>
+  </div>
+</div>
+
+<div class="container">
+  <div class="filter-section">
+    <div class="filter-title"><i class="fas fa-layer-group"></i> Filter Questions</div>
+    <div class="filter-tabs">
+      <button class="filter-tab active" data-filter="all">All (37)</button>
+      <button class="filter-tab" data-filter="basic">Basic (12)</button>
+      <button class="filter-tab" data-filter="intermediate">Intermediate (15)</button>
+      <button class="filter-tab" data-filter="advanced">Advanced (10)</button>
+    </div>
+    <div class="search-wrap">
+      <i class="fas fa-search search-icon"></i>
+      <input type="text" class="search-input" id="searchInput" placeholder="Search APEX questions...">
+    </div>
+  </div>
+
+  <div id="questionsContainer">
+<div class="question-container" data-difficulty="basic">
+  <div class="question-header" role="button" tabindex="0" aria-expanded="false">
+    <div class="question-text">Q1. What is Oracle APEX and what is it used for?</div>
+    <div class="question-details">
+      <span class="difficulty-badge" style="background:#d1fae5;color:#065f46;border:1px solid #6ee7b7">basic</span>
+      <div class="question-toggle"><i class="fas fa-chevron-down"></i></div>
+    </div>
+  </div>
+  <div class="question-content" style="display:none;" aria-hidden="true">
+    <div class="rich-section"><div class="rich-s-hdr"><div class="rich-icon ans"><i class="fas fa-lightbulb"></i></div><span class="rich-lbl">Answer</span></div><div class="rich-s-body" style="padding:16px 18px"><p class="ans-txt">Oracle APEX (Application Express) is a low-code web application development platform built on Oracle Database. It allows developers to build scalable, secure enterprise web applications using only a web browser. APEX provides built-in features like authentication, authorization, UI components, and direct database integration, making it ideal for rapidly building data-driven applications without needing deep front-end expertise.</p></div></div>
+    <button class="details-toggle-btn" onclick="toggleDetails(this)">
+      <span class="toggle-icon">+</span>&nbsp;Show Code &amp; Details
+    </button>
+    <div class="details-body">
+      <div class="rich-section"><div class="rich-s-hdr"><div class="rich-icon code"><i class="fas fa-code"></i></div><span class="rich-lbl">Code</span><span class="rich-sub">APEX / PL/SQL</span></div><div class="rich-s-body" style="padding:0"><div class="rich-code-blk"><div class="rich-code-bar"><span class="rich-lang-tag">APEX/PL/SQL</span><button class="rich-cp-btn" onclick="copyCode(this)"><i class="fas fa-copy"></i> Copy</button></div><pre><code class="language-sql">-- APEX runs entirely inside Oracle Database
+-- No separate app server needed
+-- Access via browser: https://apex.oracle.com
+
+-- Check APEX version
+SELECT version_no, api_compatibility
+FROM   apex_release;
+
+-- Check your workspace
+SELECT workspace, workspace_id
+FROM   apex_workspaces
+WHERE  workspace = 'MY_WORKSPACE';</code></pre></div></div></div><div class="rich-section"><div class="rich-s-hdr"><div class="rich-icon res"><i class="fas fa-circle-check"></i></div><span class="rich-lbl">Output / Result</span><span class="rich-sub">expected output</span></div><div class="rich-s-body" style="padding:16px 18px"><div class="state-pill after"><i class="fas fa-circle-check"></i> Result</div><div class="rich-out-blk"><div class="rich-out-bar"><div class="d-r"></div><div class="d-y"></div><div class="d-g"></div><span class="out-t">Output</span></div><div class="out-body"><span class="l ok">VERSION_NO  API_COMPATIBILITY</span><span class="l info">22.2.0      2022.2</span><span class="l info">APEX is browser-based — no Java EE server required</span></div></div></div></div><div class="rich-takeaway"><div class="rich-tk-icon"><i class="fas fa-bolt"></i></div><div class="rich-tk-body"><h4>Key Takeaway</h4><p>Oracle APEX (Application Express) is a low-code web application development platform built on Oracle Database.</p></div></div>
+    </div>
+  </div>
+</div>
+
+<div class="question-container" data-difficulty="basic">
+  <div class="question-header" role="button" tabindex="0" aria-expanded="false">
+    <div class="question-text">Q2. What are the main components of an Oracle APEX application?</div>
+    <div class="question-details">
+      <span class="difficulty-badge" style="background:#d1fae5;color:#065f46;border:1px solid #6ee7b7">basic</span>
+      <div class="question-toggle"><i class="fas fa-chevron-down"></i></div>
+    </div>
+  </div>
+  <div class="question-content" style="display:none;" aria-hidden="true">
+    <div class="rich-section"><div class="rich-s-hdr"><div class="rich-icon ans"><i class="fas fa-lightbulb"></i></div><span class="rich-lbl">Answer</span></div><div class="rich-s-body" style="padding:16px 18px"><p class="ans-txt">An Oracle APEX application consists of Pages (UI screens), Shared Components (reusable elements like navigation menus, lists of values, templates), Application Processes and Computations (server-side logic), Authentication Schemes (who can log in), Authorization Schemes (what they can access), and Substitution Strings (global variables). Each page has regions, items, buttons, and processes that define its layout and behaviour.</p></div></div>
+    <button class="details-toggle-btn" onclick="toggleDetails(this)">
+      <span class="toggle-icon">+</span>&nbsp;Show Code &amp; Details
+    </button>
+    <div class="details-body">
+      <div class="rich-section"><div class="rich-s-hdr"><div class="rich-icon code"><i class="fas fa-code"></i></div><span class="rich-lbl">Code</span><span class="rich-sub">APEX / PL/SQL</span></div><div class="rich-s-body" style="padding:0"><div class="rich-code-blk"><div class="rich-code-bar"><span class="rich-lang-tag">APEX/PL/SQL</span><button class="rich-cp-btn" onclick="copyCode(this)"><i class="fas fa-copy"></i> Copy</button></div><pre><code class="language-sql">-- Query your APEX application pages
+SELECT page_id, page_name, page_mode, authentication_scheme
+FROM   apex_application_pages
+WHERE  application_id = :APP_ID
+ORDER  BY page_id;
+
+-- Query shared components - LOVs
+SELECT list_of_values_name, lov_query
+FROM   apex_application_lovs
+WHERE  application_id = :APP_ID;</code></pre></div></div></div><div class="rich-section"><div class="rich-s-hdr"><div class="rich-icon res"><i class="fas fa-circle-check"></i></div><span class="rich-lbl">Output / Result</span><span class="rich-sub">expected output</span></div><div class="rich-s-body" style="padding:16px 18px"><div class="state-pill after"><i class="fas fa-circle-check"></i> Result</div><div class="rich-out-blk"><div class="rich-out-bar"><div class="d-r"></div><div class="d-y"></div><div class="d-g"></div><span class="out-t">Output</span></div><div class="out-body"><span class="l ok">PAGE_ID  PAGE_NAME        PAGE_MODE</span><span class="l info">1        Home             Normal</span><span class="l info">2        Employees        Normal</span><span class="l info">101      Login            Modal Dialog</span><span class="l info">Shared components visible in APEX App Builder</span></div></div></div></div><div class="rich-takeaway"><div class="rich-tk-icon"><i class="fas fa-bolt"></i></div><div class="rich-tk-body"><h4>Key Takeaway</h4><p>An Oracle APEX application consists of Pages (UI screens), Shared Components (reusable elements like navigation menus, lists of values, templates), Application Processes and Computations (server-side logic), Authentication Schemes (who can log in), Authorization Schemes (what they can access), and Substitution Strings (global variables).</p></div></div>
+    </div>
+  </div>
+</div>
+
+<div class="question-container" data-difficulty="basic">
+  <div class="question-header" role="button" tabindex="0" aria-expanded="false">
+    <div class="question-text">Q3. What is an APEX workspace and how does it relate to a schema?</div>
+    <div class="question-details">
+      <span class="difficulty-badge" style="background:#d1fae5;color:#065f46;border:1px solid #6ee7b7">basic</span>
+      <div class="question-toggle"><i class="fas fa-chevron-down"></i></div>
+    </div>
+  </div>
+  <div class="question-content" style="display:none;" aria-hidden="true">
+    <div class="rich-section"><div class="rich-s-hdr"><div class="rich-icon ans"><i class="fas fa-lightbulb"></i></div><span class="rich-lbl">Answer</span></div><div class="rich-s-body" style="padding:16px 18px"><p class="ans-txt">An APEX workspace is a shared work area where developers build applications. Each workspace is mapped to one or more Oracle database schemas. The workspace controls which schemas developers can access, and all APEX metadata (pages, regions, items) is stored in the APEX internal schema (APEX_xxxxxx). A workspace can have multiple developers with different roles (Developer, Workspace Admin, End User).</p></div></div>
+    <button class="details-toggle-btn" onclick="toggleDetails(this)">
+      <span class="toggle-icon">+</span>&nbsp;Show Code &amp; Details
+    </button>
+    <div class="details-body">
+      <div class="rich-section"><div class="rich-s-hdr"><div class="rich-icon code"><i class="fas fa-code"></i></div><span class="rich-lbl">Code</span><span class="rich-sub">APEX / PL/SQL</span></div><div class="rich-s-body" style="padding:0"><div class="rich-code-blk"><div class="rich-code-bar"><span class="rich-lang-tag">APEX/PL/SQL</span><button class="rich-cp-btn" onclick="copyCode(this)"><i class="fas fa-copy"></i> Copy</button></div><pre><code class="language-sql">-- Check workspace-schema mapping (run as APEX admin)
+SELECT workspace, schema
+FROM   apex_workspace_schemas
+WHERE  workspace = 'MY_WORKSPACE';
+
+-- Create workspace (run as SYS or APEX admin)
+BEGIN
+  apex_instance_admin.add_workspace(
+    p_workspace    =&gt; 'MY_WORKSPACE',
+    p_primary_schema =&gt; 'HR'
+  );
+END;
+/</code></pre></div></div></div><div class="rich-section"><div class="rich-s-hdr"><div class="rich-icon res"><i class="fas fa-circle-check"></i></div><span class="rich-lbl">Output / Result</span><span class="rich-sub">expected output</span></div><div class="rich-s-body" style="padding:16px 18px"><div class="state-pill after"><i class="fas fa-circle-check"></i> Result</div><div class="rich-out-blk"><div class="rich-out-bar"><div class="d-r"></div><div class="d-y"></div><div class="d-g"></div><span class="out-t">Output</span></div><div class="out-body"><span class="l ok">WORKSPACE     SCHEMA</span><span class="l info">MY_WORKSPACE  HR</span><span class="l dim">Workspace created successfully.</span></div></div></div></div><div class="rich-takeaway"><div class="rich-tk-icon"><i class="fas fa-bolt"></i></div><div class="rich-tk-body"><h4>Key Takeaway</h4><p>An APEX workspace is a shared work area where developers build applications.</p></div></div>
+    </div>
+  </div>
+</div>
+
+<div class="question-container" data-difficulty="basic">
+  <div class="question-header" role="button" tabindex="0" aria-expanded="false">
+    <div class="question-text">Q4. What is the difference between APEX Page Mode types?</div>
+    <div class="question-details">
+      <span class="difficulty-badge" style="background:#d1fae5;color:#065f46;border:1px solid #6ee7b7">basic</span>
+      <div class="question-toggle"><i class="fas fa-chevron-down"></i></div>
+    </div>
+  </div>
+  <div class="question-content" style="display:none;" aria-hidden="true">
+    <div class="rich-section"><div class="rich-s-hdr"><div class="rich-icon ans"><i class="fas fa-lightbulb"></i></div><span class="rich-lbl">Answer</span></div><div class="rich-s-body" style="padding:16px 18px"><p class="ans-txt">APEX pages can be Normal (full page render), Modal Dialog (popup overlay on top of current page), Non-Modal Dialog (floating window), or Drawer (slide-in panel). Normal pages replace the current view. Modal dialogs are ideal for forms and confirmations as they keep context on the parent page. Drawers are used for secondary content without leaving the main view. The page mode affects how the page is rendered and how it closes.</p></div></div>
+    <button class="details-toggle-btn" onclick="toggleDetails(this)">
+      <span class="toggle-icon">+</span>&nbsp;Show Code &amp; Details
+    </button>
+    <div class="details-body">
+      <div class="rich-section"><div class="rich-s-hdr"><div class="rich-icon code"><i class="fas fa-code"></i></div><span class="rich-lbl">Code</span><span class="rich-sub">APEX / PL/SQL</span></div><div class="rich-s-body" style="padding:0"><div class="rich-code-blk"><div class="rich-code-bar"><span class="rich-lang-tag">APEX/PL/SQL</span><button class="rich-cp-btn" onclick="copyCode(this)"><i class="fas fa-copy"></i> Copy</button></div><pre><code class="language-sql">-- Normal page: navigates away from current page
+apex_util.redirect_url('f?p=&amp;APP_ID.:2:&amp;SESSION.');
+
+-- Open Modal Dialog via dynamic action
+-- Set Action = 'Open Page in Dialog'
+-- Target page mode must be: Modal Dialog
+
+-- Close modal and refresh parent from PL/SQL process
+apex_util.redirect_url(
+  apex_page.get_url(p_page =&gt; 0));
+-- OR use: Close Dialog action in dynamic action</code></pre></div></div></div><div class="rich-section"><div class="rich-s-hdr"><div class="rich-icon res"><i class="fas fa-circle-check"></i></div><span class="rich-lbl">Output / Result</span><span class="rich-sub">expected output</span></div><div class="rich-s-body" style="padding:16px 18px"><div class="state-pill after"><i class="fas fa-circle-check"></i> Result</div><div class="rich-out-blk"><div class="rich-out-bar"><div class="d-r"></div><div class="d-y"></div><div class="d-g"></div><span class="out-t">Output</span></div><div class="out-body"><span class="l ok">Normal     : Full page load</span><span class="l info">Modal      : Popup, parent stays</span><span class="l info">Drawer     : Slide-in panel</span><span class="l info">Non-Modal  : Floating window</span></div></div></div></div><div class="rich-takeaway"><div class="rich-tk-icon"><i class="fas fa-bolt"></i></div><div class="rich-tk-body"><h4>Key Takeaway</h4><p>APEX pages can be Normal (full page render), Modal Dialog (popup overlay on top of current page), Non-Modal Dialog (floating window), or Drawer (slide-in panel).</p></div></div>
+    </div>
+  </div>
+</div>
+
+<div class="question-container" data-difficulty="basic">
+  <div class="question-header" role="button" tabindex="0" aria-expanded="false">
+    <div class="question-text">Q5. What are APEX Items and what types are available?</div>
+    <div class="question-details">
+      <span class="difficulty-badge" style="background:#d1fae5;color:#065f46;border:1px solid #6ee7b7">basic</span>
+      <div class="question-toggle"><i class="fas fa-chevron-down"></i></div>
+    </div>
+  </div>
+  <div class="question-content" style="display:none;" aria-hidden="true">
+    <div class="rich-section"><div class="rich-s-hdr"><div class="rich-icon ans"><i class="fas fa-lightbulb"></i></div><span class="rich-lbl">Answer</span></div><div class="rich-s-body" style="padding:16px 18px"><p class="ans-txt">APEX Items are form fields on a page that hold values — they map to HTML input elements and store data in session state. Types include Text Field, Text Area, Select List, Radio Group, Checkbox, Date Picker, File Browse, Hidden, Display Only, Rich Text Editor, Shuttle, and more. Items are referenced in SQL queries and PL/SQL using bind syntax :P1_ITEM_NAME. Their values persist in session state between page submissions.</p></div></div>
+    <button class="details-toggle-btn" onclick="toggleDetails(this)">
+      <span class="toggle-icon">+</span>&nbsp;Show Code &amp; Details
+    </button>
+    <div class="details-body">
+      <div class="rich-section"><div class="rich-s-hdr"><div class="rich-icon code"><i class="fas fa-code"></i></div><span class="rich-lbl">Code</span><span class="rich-sub">APEX / PL/SQL</span></div><div class="rich-s-body" style="padding:0"><div class="rich-code-blk"><div class="rich-code-bar"><span class="rich-lang-tag">APEX/PL/SQL</span><button class="rich-cp-btn" onclick="copyCode(this)"><i class="fas fa-copy"></i> Copy</button></div><pre><code class="language-sql">-- Reference item value in SQL query
+SELECT employee_id, employee_name, salary
+FROM   employees
+WHERE  department_id = :P1_DEPT_ID       -- bind to page item
+  AND  salary       &gt;= :P1_MIN_SALARY;
+
+-- Set item value in PL/SQL process
+BEGIN
+  :P1_EMPLOYEE_NAME := 'Alice Johnson';
+  :P1_STATUS        := 'ACTIVE';
+END;
+
+-- Set via apex_util
+apex_util.set_session_state('P1_STATUS', 'ACTIVE');</code></pre></div></div></div><div class="rich-section"><div class="rich-s-hdr"><div class="rich-icon res"><i class="fas fa-circle-check"></i></div><span class="rich-lbl">Output / Result</span><span class="rich-sub">expected output</span></div><div class="rich-s-body" style="padding:16px 18px"><div class="state-pill after"><i class="fas fa-circle-check"></i> Result</div><div class="rich-out-blk"><div class="rich-out-bar"><div class="d-r"></div><div class="d-y"></div><div class="d-g"></div><span class="out-t">Output</span></div><div class="out-body"><span class="l ok">Employees filtered by dept: 10</span><span class="l info">Rows returned: 3</span><span class="l info">Session state updated: P1_STATUS = ACTIVE</span></div></div></div></div><div class="rich-takeaway"><div class="rich-tk-icon"><i class="fas fa-bolt"></i></div><div class="rich-tk-body"><h4>Key Takeaway</h4><p>APEX Items are form fields on a page that hold values — they map to HTML input elements and store data in session state.</p></div></div>
+    </div>
+  </div>
+</div>
+
+<div class="question-container" data-difficulty="basic">
+  <div class="question-header" role="button" tabindex="0" aria-expanded="false">
+    <div class="question-text">Q6. What is Session State in APEX and how does it work?</div>
+    <div class="question-details">
+      <span class="difficulty-badge" style="background:#d1fae5;color:#065f46;border:1px solid #6ee7b7">basic</span>
+      <div class="question-toggle"><i class="fas fa-chevron-down"></i></div>
+    </div>
+  </div>
+  <div class="question-content" style="display:none;" aria-hidden="true">
+    <div class="rich-section"><div class="rich-s-hdr"><div class="rich-icon ans"><i class="fas fa-lightbulb"></i></div><span class="rich-lbl">Answer</span></div><div class="rich-s-body" style="padding:16px 18px"><p class="ans-txt">Session State is APEX's mechanism for storing page item values on the server between page requests. When a user submits a page, all item values are saved in session state in the APEX schema. These values can be read using bind variables (:ITEM_NAME) in SQL and PL/SQL, or using the V() and NV() functions. Session state persists for the duration of the user's session and can be cleared programmatically.</p></div></div>
+    <button class="details-toggle-btn" onclick="toggleDetails(this)">
+      <span class="toggle-icon">+</span>&nbsp;Show Code &amp; Details
+    </button>
+    <div class="details-body">
+      <div class="rich-section"><div class="rich-s-hdr"><div class="rich-icon code"><i class="fas fa-code"></i></div><span class="rich-lbl">Code</span><span class="rich-sub">APEX / PL/SQL</span></div><div class="rich-s-body" style="padding:0"><div class="rich-code-blk"><div class="rich-code-bar"><span class="rich-lang-tag">APEX/PL/SQL</span><button class="rich-cp-btn" onclick="copyCode(this)"><i class="fas fa-copy"></i> Copy</button></div><pre><code class="language-sql">-- Read session state value
+SELECT V('P1_USERNAME')     AS username,   -- returns VARCHAR2
+       NV('P1_SALARY')      AS salary,      -- returns NUMBER
+       V('APP_USER')        AS app_user,
+       V('APP_SESSION')     AS session_id
+FROM   dual;
+
+-- Set session state in PL/SQL
+apex_util.set_session_state('P1_STATUS','APPROVED');
+
+-- Clear session state
+apex_util.clear_page_cache(p_page =&gt; 1);
+apex_util.clear_app_cache(p_app_id =&gt; :APP_ID);</code></pre></div></div></div><div class="rich-section"><div class="rich-s-hdr"><div class="rich-icon res"><i class="fas fa-circle-check"></i></div><span class="rich-lbl">Output / Result</span><span class="rich-sub">expected output</span></div><div class="rich-s-body" style="padding:16px 18px"><div class="state-pill after"><i class="fas fa-circle-check"></i> Result</div><div class="rich-out-blk"><div class="rich-out-bar"><div class="d-r"></div><div class="d-y"></div><div class="d-g"></div><span class="out-t">Output</span></div><div class="out-body"><span class="l ok">USERNAME  : tharun.k</span><span class="l info">APP_USER  : THARUN.K</span><span class="l info">SESSION   : 12345678901234</span><span class="l info">P1_STATUS set to APPROVED</span></div></div></div></div><div class="rich-takeaway"><div class="rich-tk-icon"><i class="fas fa-bolt"></i></div><div class="rich-tk-body"><h4>Key Takeaway</h4><p>Session State is APEX's mechanism for storing page item values on the server between page requests.</p></div></div>
+    </div>
+  </div>
+</div>
+
+<div class="question-container" data-difficulty="basic">
+  <div class="question-header" role="button" tabindex="0" aria-expanded="false">
+    <div class="question-text">Q7. What is a Region in Oracle APEX?</div>
+    <div class="question-details">
+      <span class="difficulty-badge" style="background:#d1fae5;color:#065f46;border:1px solid #6ee7b7">basic</span>
+      <div class="question-toggle"><i class="fas fa-chevron-down"></i></div>
+    </div>
+  </div>
+  <div class="question-content" style="display:none;" aria-hidden="true">
+    <div class="rich-section"><div class="rich-s-hdr"><div class="rich-icon ans"><i class="fas fa-lightbulb"></i></div><span class="rich-lbl">Answer</span></div><div class="rich-s-body" style="padding:16px 18px"><p class="ans-txt">A Region is a container on an APEX page that holds content. Regions can be of type Classic Report, Interactive Report, Interactive Grid, Form, Chart, Calendar, Tree, Map, PL/SQL Dynamic Content, Static Content, and more. Each region has a position (slot) on the page, a template controlling its visual style, and optional conditions that control when it renders. Regions are the primary building blocks for APEX page layouts.</p></div></div>
+    <button class="details-toggle-btn" onclick="toggleDetails(this)">
+      <span class="toggle-icon">+</span>&nbsp;Show Code &amp; Details
+    </button>
+    <div class="details-body">
+      <div class="rich-section"><div class="rich-s-hdr"><div class="rich-icon code"><i class="fas fa-code"></i></div><span class="rich-lbl">Code</span><span class="rich-sub">APEX / PL/SQL</span></div><div class="rich-s-body" style="padding:0"><div class="rich-code-blk"><div class="rich-code-bar"><span class="rich-lang-tag">APEX/PL/SQL</span><button class="rich-cp-btn" onclick="copyCode(this)"><i class="fas fa-copy"></i> Copy</button></div><pre><code class="language-sql">-- Query regions on a page
+SELECT region_name, region_type, display_position, condition_type
+FROM   apex_application_page_regions
+WHERE  application_id = :APP_ID
+  AND  page_id        = 1
+ORDER  BY display_sequence;
+
+-- PL/SQL Dynamic Content region example
+BEGIN
+  htp.p('&lt;div class="info-box"&gt;');
+  htp.p('Welcome, ' || V('APP_USER'));
+  htp.p('Last login: ' || TO_CHAR(SYSDATE,'DD-MON-YYYY'));
+  htp.p('&lt;/div&gt;');
+END;</code></pre></div></div></div><div class="rich-section"><div class="rich-s-hdr"><div class="rich-icon res"><i class="fas fa-circle-check"></i></div><span class="rich-lbl">Output / Result</span><span class="rich-sub">expected output</span></div><div class="rich-s-body" style="padding:16px 18px"><div class="state-pill after"><i class="fas fa-circle-check"></i> Result</div><div class="rich-out-blk"><div class="rich-out-bar"><div class="d-r"></div><div class="d-y"></div><div class="d-g"></div><span class="out-t">Output</span></div><div class="out-body"><span class="l ok">REGION_NAME          TYPE</span><span class="l info">Employee List        Interactive Report</span><span class="l info">Search Form          Form</span><span class="l info">Welcome Banner       PL/SQL Dynamic Content</span></div></div></div></div><div class="rich-takeaway"><div class="rich-tk-icon"><i class="fas fa-bolt"></i></div><div class="rich-tk-body"><h4>Key Takeaway</h4><p>A Region is a container on an APEX page that holds content.</p></div></div>
+    </div>
+  </div>
+</div>
+
+<div class="question-container" data-difficulty="basic">
+  <div class="question-header" role="button" tabindex="0" aria-expanded="false">
+    <div class="question-text">Q8. What is the difference between a Classic Report and an Interactive Report?</div>
+    <div class="question-details">
+      <span class="difficulty-badge" style="background:#d1fae5;color:#065f46;border:1px solid #6ee7b7">basic</span>
+      <div class="question-toggle"><i class="fas fa-chevron-down"></i></div>
+    </div>
+  </div>
+  <div class="question-content" style="display:none;" aria-hidden="true">
+    <div class="rich-section"><div class="rich-s-hdr"><div class="rich-icon ans"><i class="fas fa-lightbulb"></i></div><span class="rich-lbl">Answer</span></div><div class="rich-s-body" style="padding:16px 18px"><p class="ans-txt">A Classic Report renders a fixed SQL query result as an HTML table with limited user control — the layout is fully defined by the developer. An Interactive Report (IR) gives end users powerful self-service features: column search, filter, sort, highlight, aggregate, pivot, download (CSV/Excel), and saved report views. IRs store user customisations in the database per user. Use Classic Reports when you need precise control over layout; use Interactive Reports when users need to explore data.</p></div></div>
+    <button class="details-toggle-btn" onclick="toggleDetails(this)">
+      <span class="toggle-icon">+</span>&nbsp;Show Code &amp; Details
+    </button>
+    <div class="details-body">
+      <div class="rich-section"><div class="rich-s-hdr"><div class="rich-icon code"><i class="fas fa-code"></i></div><span class="rich-lbl">Code</span><span class="rich-sub">APEX / PL/SQL</span></div><div class="rich-s-body" style="padding:0"><div class="rich-code-blk"><div class="rich-code-bar"><span class="rich-lang-tag">APEX/PL/SQL</span><button class="rich-cp-btn" onclick="copyCode(this)"><i class="fas fa-copy"></i> Copy</button></div><pre><code class="language-sql">-- Classic Report: fixed output
+SELECT employee_id, employee_name, salary, department_id
+FROM   employees
+WHERE  department_id = :P1_DEPT_ID
+ORDER  BY employee_name;
+
+-- Interactive Report: same query but users can:
+-- ✓ Add filters    ✓ Sort any column
+-- ✓ Group by       ✓ Download CSV/Excel
+-- ✓ Save views     ✓ Create charts
+-- ✓ Highlight rows ✓ Control columns shown
+
+-- Reset IR programmatically
+apex_ir.reset_report(
+  p_page_id   =&gt; 2,
+  p_region_id =&gt; 1234567);</code></pre></div></div></div><div class="rich-section"><div class="rich-s-hdr"><div class="rich-icon res"><i class="fas fa-circle-check"></i></div><span class="rich-lbl">Output / Result</span><span class="rich-sub">expected output</span></div><div class="rich-s-body" style="padding:16px 18px"><div class="state-pill after"><i class="fas fa-circle-check"></i> Result</div><div class="rich-out-blk"><div class="rich-out-bar"><div class="d-r"></div><div class="d-y"></div><div class="d-g"></div><span class="out-t">Output</span></div><div class="out-body"><span class="l ok">Classic: fixed table, developer-controlled</span><span class="l info">Interactive: user can filter/sort/group/download</span><span class="l info">IR saves preferences per user in APEX tables</span></div></div></div></div><div class="rich-takeaway"><div class="rich-tk-icon"><i class="fas fa-bolt"></i></div><div class="rich-tk-body"><h4>Key Takeaway</h4><p>A Classic Report renders a fixed SQL query result as an HTML table with limited user control — the layout is fully defined by the developer.</p></div></div>
+    </div>
+  </div>
+</div>
+
+<div class="question-container" data-difficulty="basic">
+  <div class="question-header" role="button" tabindex="0" aria-expanded="false">
+    <div class="question-text">Q9. What is an Interactive Grid (IG) in APEX?</div>
+    <div class="question-details">
+      <span class="difficulty-badge" style="background:#d1fae5;color:#065f46;border:1px solid #6ee7b7">basic</span>
+      <div class="question-toggle"><i class="fas fa-chevron-down"></i></div>
+    </div>
+  </div>
+  <div class="question-content" style="display:none;" aria-hidden="true">
+    <div class="rich-section"><div class="rich-s-hdr"><div class="rich-icon ans"><i class="fas fa-lightbulb"></i></div><span class="rich-lbl">Answer</span></div><div class="rich-s-body" style="padding:16px 18px"><p class="ans-txt">An Interactive Grid is an APEX region type that displays data in an editable spreadsheet-like grid. Users can add, edit, and delete rows directly in the grid without navigating to separate forms. IGs support inline editing, row selection, bulk operations, and all the column manipulation features of Interactive Reports (filtering, sorting, grouping). IGs require a primary key column and use APEX's built-in DML processing or custom PL/SQL.</p></div></div>
+    <button class="details-toggle-btn" onclick="toggleDetails(this)">
+      <span class="toggle-icon">+</span>&nbsp;Show Code &amp; Details
+    </button>
+    <div class="details-body">
+      <div class="rich-section"><div class="rich-s-hdr"><div class="rich-icon code"><i class="fas fa-code"></i></div><span class="rich-lbl">Code</span><span class="rich-sub">APEX / PL/SQL</span></div><div class="rich-s-body" style="padding:0"><div class="rich-code-blk"><div class="rich-code-bar"><span class="rich-lang-tag">APEX/PL/SQL</span><button class="rich-cp-btn" onclick="copyCode(this)"><i class="fas fa-copy"></i> Copy</button></div><pre><code class="language-sql">-- Interactive Grid SQL (must include primary key)
+SELECT employee_id,        -- primary key
+       employee_name,
+       salary,
+       department_id,
+       hire_date
+FROM   employees
+WHERE  department_id = :P2_DEPT_FILTER;
+
+-- IG Lost Update Protection (optimistic locking)
+-- Add to IG attributes:
+-- Duplicate Submission: Prevent
+-- Lost Update: Row Version
+
+-- Refresh IG via JavaScript
+apex.region('employee-grid').refresh();</code></pre></div></div></div><div class="rich-section"><div class="rich-s-hdr"><div class="rich-icon res"><i class="fas fa-circle-check"></i></div><span class="rich-lbl">Output / Result</span><span class="rich-sub">expected output</span></div><div class="rich-s-body" style="padding:16px 18px"><div class="state-pill after"><i class="fas fa-circle-check"></i> Result</div><div class="rich-out-blk"><div class="rich-out-bar"><div class="d-r"></div><div class="d-y"></div><div class="d-g"></div><span class="out-t">Output</span></div><div class="out-body"><span class="l ok">Grid shows 4 editable rows</span><span class="l info">Inline edit: click cell to edit</span><span class="l info">Save button commits all changes</span><span class="l info">Row deleted with confirmation dialog</span></div></div></div></div><div class="rich-takeaway"><div class="rich-tk-icon"><i class="fas fa-bolt"></i></div><div class="rich-tk-body"><h4>Key Takeaway</h4><p>An Interactive Grid is an APEX region type that displays data in an editable spreadsheet-like grid.</p></div></div>
+    </div>
+  </div>
+</div>
+
+<div class="question-container" data-difficulty="basic">
+  <div class="question-header" role="button" tabindex="0" aria-expanded="false">
+    <div class="question-text">Q10. What are Dynamic Actions in APEX?</div>
+    <div class="question-details">
+      <span class="difficulty-badge" style="background:#d1fae5;color:#065f46;border:1px solid #6ee7b7">basic</span>
+      <div class="question-toggle"><i class="fas fa-chevron-down"></i></div>
+    </div>
+  </div>
+  <div class="question-content" style="display:none;" aria-hidden="true">
+    <div class="rich-section"><div class="rich-s-hdr"><div class="rich-icon ans"><i class="fas fa-lightbulb"></i></div><span class="rich-lbl">Answer</span></div><div class="rich-s-body" style="padding:16px 18px"><p class="ans-txt">Dynamic Actions are APEX's declarative event-driven framework for adding client-side interactivity without writing JavaScript. You define a When condition (which event on which element), optional True/False conditions, and True/False Actions (like Show, Hide, Set Value, Execute JavaScript, Refresh, Disable, Enable, etc.). Dynamic Actions fire in the browser and can also execute server-side AJAX callbacks to run PL/SQL. They are the primary way to add interactivity in APEX.</p></div></div>
+    <button class="details-toggle-btn" onclick="toggleDetails(this)">
+      <span class="toggle-icon">+</span>&nbsp;Show Code &amp; Details
+    </button>
+    <div class="details-body">
+      <div class="rich-section"><div class="rich-s-hdr"><div class="rich-icon code"><i class="fas fa-code"></i></div><span class="rich-lbl">Code</span><span class="rich-sub">APEX / PL/SQL</span></div><div class="rich-s-body" style="padding:0"><div class="rich-code-blk"><div class="rich-code-bar"><span class="rich-lang-tag">APEX/PL/SQL</span><button class="rich-cp-btn" onclick="copyCode(this)"><i class="fas fa-copy"></i> Copy</button></div><pre><code class="language-sql">-- Dynamic Action Setup (declarative):
+-- Event    : Change
+-- Selection: Item(s) → P1_DEPARTMENT
+-- Condition : Item = Value → 'SALES'
+-- TRUE Actions:
+--   1. Set Value (PL/SQL) → :P1_TARGET := 150000;
+--   2. Refresh → Region: Employees Report
+--   3. Show → Item: P1_BONUS_SECTION
+-- FALSE Actions:
+--   1. Hide → Item: P1_BONUS_SECTION
+
+-- Execute PL/SQL action (server-side AJAX)
+BEGIN
+  :P1_EMPLOYEE_COUNT := apex_util.count_rows(
+    p_query =&gt; 'SELECT COUNT(*) FROM employees WHERE dept_id = :P1_DEPT'
+  );
+END;</code></pre></div></div></div><div class="rich-section"><div class="rich-s-hdr"><div class="rich-icon res"><i class="fas fa-circle-check"></i></div><span class="rich-lbl">Output / Result</span><span class="rich-sub">expected output</span></div><div class="rich-s-body" style="padding:16px 18px"><div class="state-pill after"><i class="fas fa-circle-check"></i> Result</div><div class="rich-out-blk"><div class="rich-out-bar"><div class="d-r"></div><div class="d-y"></div><div class="d-g"></div><span class="out-t">Output</span></div><div class="out-body"><span class="l ok">User selects SALES department</span><span class="l info">TRUE branch fires:</span><span class="l info">  P1_TARGET set to 150000</span><span class="l info">  Employees Report refreshed</span><span class="l info">  P1_BONUS_SECTION shown</span></div></div></div></div><div class="rich-takeaway"><div class="rich-tk-icon"><i class="fas fa-bolt"></i></div><div class="rich-tk-body"><h4>Key Takeaway</h4><p>Dynamic Actions are APEX's declarative event-driven framework for adding client-side interactivity without writing JavaScript.</p></div></div>
+    </div>
+  </div>
+</div>
+
+<div class="question-container" data-difficulty="basic">
+  <div class="question-header" role="button" tabindex="0" aria-expanded="false">
+    <div class="question-text">Q11. What are APEX Substitution Strings?</div>
+    <div class="question-details">
+      <span class="difficulty-badge" style="background:#d1fae5;color:#065f46;border:1px solid #6ee7b7">basic</span>
+      <div class="question-toggle"><i class="fas fa-chevron-down"></i></div>
+    </div>
+  </div>
+  <div class="question-content" style="display:none;" aria-hidden="true">
+    <div class="rich-section"><div class="rich-s-hdr"><div class="rich-icon ans"><i class="fas fa-lightbulb"></i></div><span class="rich-lbl">Answer</span></div><div class="rich-s-body" style="padding:16px 18px"><p class="ans-txt">Substitution Strings are APEX built-in variables prefixed with &amp; and suffixed with . (e.g. &amp;APP_ID.) that get replaced with their values when pages render. Common ones include &amp;APP_ID. (application ID), &amp;APP_SESSION. (session ID), &amp;APP_USER. (logged-in username), &amp;APP_PAGE_ID. (current page), and &amp;ITEM_NAME. (page item value). They can be used in HTML, SQL, URLs, and text regions. Use V('ITEM_NAME') in PL/SQL contexts instead.</p></div></div>
+    <button class="details-toggle-btn" onclick="toggleDetails(this)">
+      <span class="toggle-icon">+</span>&nbsp;Show Code &amp; Details
+    </button>
+    <div class="details-body">
+      <div class="rich-section"><div class="rich-s-hdr"><div class="rich-icon code"><i class="fas fa-code"></i></div><span class="rich-lbl">Code</span><span class="rich-sub">APEX / PL/SQL</span></div><div class="rich-s-body" style="padding:0"><div class="rich-code-blk"><div class="rich-code-bar"><span class="rich-lang-tag">APEX/PL/SQL</span><button class="rich-cp-btn" onclick="copyCode(this)"><i class="fas fa-copy"></i> Copy</button></div><pre><code class="language-sql">-- In HTML/Static Text regions:
+&lt;p&gt;Welcome, &amp;APP_USER.!&lt;/p&gt;
+&lt;p&gt;App: &amp;APP_ID. | Page: &amp;APP_PAGE_ID.&lt;/p&gt;
+
+-- In URL targets:
+f?p=&amp;APP_ID.:2:&amp;APP_SESSION.::NO::P2_EMP_ID:&amp;P1_EMP_ID.
+
+-- In SQL (use bind variables instead of substitution):
+SELECT * FROM employees WHERE created_by = :APP_USER;
+
+-- Common substitution strings:
+-- &amp;APP_ID.       Application ID
+-- &amp;APP_SESSION.  Session ID  
+-- &amp;APP_USER.     Logged in user
+-- &amp;APP_PAGE_ID.  Current page number</code></pre></div></div></div><div class="rich-section"><div class="rich-s-hdr"><div class="rich-icon res"><i class="fas fa-circle-check"></i></div><span class="rich-lbl">Output / Result</span><span class="rich-sub">expected output</span></div><div class="rich-s-body" style="padding:16px 18px"><div class="state-pill after"><i class="fas fa-circle-check"></i> Result</div><div class="rich-out-blk"><div class="rich-out-bar"><div class="d-r"></div><div class="d-y"></div><div class="d-g"></div><span class="out-t">Output</span></div><div class="out-body"><span class="l ok">Welcome, THARUN.K!</span><span class="l info">App: 100 | Page: 1</span><span class="l info">URL built with session: f?p=100:2:98765...</span></div></div></div></div><div class="rich-takeaway"><div class="rich-tk-icon"><i class="fas fa-bolt"></i></div><div class="rich-tk-body"><h4>Key Takeaway</h4><p>Substitution Strings are APEX built-in variables prefixed with &amp; and suffixed with .</p></div></div>
+    </div>
+  </div>
+</div>
+
+<div class="question-container" data-difficulty="basic">
+  <div class="question-header" role="button" tabindex="0" aria-expanded="false">
+    <div class="question-text">Q12. What is an APEX LOV (List of Values)?</div>
+    <div class="question-details">
+      <span class="difficulty-badge" style="background:#d1fae5;color:#065f46;border:1px solid #6ee7b7">basic</span>
+      <div class="question-toggle"><i class="fas fa-chevron-down"></i></div>
+    </div>
+  </div>
+  <div class="question-content" style="display:none;" aria-hidden="true">
+    <div class="rich-section"><div class="rich-s-hdr"><div class="rich-icon ans"><i class="fas fa-lightbulb"></i></div><span class="rich-lbl">Answer</span></div><div class="rich-s-body" style="padding:16px 18px"><p class="ans-txt">A List of Values (LOV) is a shared component in APEX that defines the options available in select lists, radio groups, checkboxes, and popup LOVs. LOVs can be Static (hardcoded values like Yes/No), or Dynamic (based on a SQL query returning display/return value pairs). Shared LOVs are defined once and reused across multiple pages. LOVs can also be defined inline on a specific page item when not needed elsewhere.</p></div></div>
+    <button class="details-toggle-btn" onclick="toggleDetails(this)">
+      <span class="toggle-icon">+</span>&nbsp;Show Code &amp; Details
+    </button>
+    <div class="details-body">
+      <div class="rich-section"><div class="rich-s-hdr"><div class="rich-icon code"><i class="fas fa-code"></i></div><span class="rich-lbl">Code</span><span class="rich-sub">APEX / PL/SQL</span></div><div class="rich-s-body" style="padding:0"><div class="rich-code-blk"><div class="rich-code-bar"><span class="rich-lang-tag">APEX/PL/SQL</span><button class="rich-cp-btn" onclick="copyCode(this)"><i class="fas fa-copy"></i> Copy</button></div><pre><code class="language-sql">-- Dynamic LOV query (display value | return value)
+SELECT dept_name   AS display_value,
+       dept_id     AS return_value
+FROM   departments
+WHERE  active_flag = 'Y'
+ORDER  BY dept_name;
+
+-- Static LOV example (in LOV definition):
+-- STATIC2:Active;Y,Inactive;N,Pending;P
+
+-- Cascading LOV: filter by parent item
+SELECT job_title AS d, job_id AS r
+FROM   jobs
+WHERE  department_id = :P1_DEPT_ID  -- depends on parent item
+ORDER  BY job_title;</code></pre></div></div></div><div class="rich-section"><div class="rich-s-hdr"><div class="rich-icon res"><i class="fas fa-circle-check"></i></div><span class="rich-lbl">Output / Result</span><span class="rich-sub">expected output</span></div><div class="rich-s-body" style="padding:16px 18px"><div class="state-pill after"><i class="fas fa-circle-check"></i> Result</div><div class="rich-out-blk"><div class="rich-out-bar"><div class="d-r"></div><div class="d-y"></div><div class="d-g"></div><span class="out-t">Output</span></div><div class="out-body"><span class="l ok">Select List shows:</span><span class="l info">  Engineering (returns: 10)</span><span class="l info">  Marketing   (returns: 20)</span><span class="l info">  Finance     (returns: 30)</span></div></div></div></div><div class="rich-takeaway"><div class="rich-tk-icon"><i class="fas fa-bolt"></i></div><div class="rich-tk-body"><h4>Key Takeaway</h4><p>A List of Values (LOV) is a shared component in APEX that defines the options available in select lists, radio groups, checkboxes, and popup LOVs.</p></div></div>
+    </div>
+  </div>
+</div>
+
+<div class="question-container" data-difficulty="intermediate">
+  <div class="question-header" role="button" tabindex="0" aria-expanded="false">
+    <div class="question-text">Q13. What is an APEX Authentication Scheme?</div>
+    <div class="question-details">
+      <span class="difficulty-badge" style="background:#fef9c3;color:#713f12;border:1px solid #fde68a">intermediate</span>
+      <div class="question-toggle"><i class="fas fa-chevron-down"></i></div>
+    </div>
+  </div>
+  <div class="question-content" style="display:none;" aria-hidden="true">
+    <div class="rich-section"><div class="rich-s-hdr"><div class="rich-icon ans"><i class="fas fa-lightbulb"></i></div><span class="rich-lbl">Answer</span></div><div class="rich-s-body" style="padding:16px 18px"><p class="ans-txt">An Authentication Scheme defines how users prove their identity to access an APEX application. APEX supports several types: Application Express Accounts (users stored in APEX), Database Accounts (Oracle DB users), LDAP Directory, Social Sign-In (OAuth2 like Google), Custom (PL/SQL function returning true/false), and No Authentication (public access). Each application has exactly one active authentication scheme. You can switch schemes without changing application logic.</p></div></div>
+    <button class="details-toggle-btn" onclick="toggleDetails(this)">
+      <span class="toggle-icon">+</span>&nbsp;Show Code &amp; Details
+    </button>
+    <div class="details-body">
+      <div class="rich-section"><div class="rich-s-hdr"><div class="rich-icon code"><i class="fas fa-code"></i></div><span class="rich-lbl">Code</span><span class="rich-sub">APEX / PL/SQL</span></div><div class="rich-s-body" style="padding:0"><div class="rich-code-blk"><div class="rich-code-bar"><span class="rich-lang-tag">APEX/PL/SQL</span><button class="rich-cp-btn" onclick="copyCode(this)"><i class="fas fa-copy"></i> Copy</button></div><pre><code class="language-sql">-- Custom authentication function
+CREATE OR REPLACE FUNCTION fn_authenticate(
+  p_username IN VARCHAR2,
+  p_password IN VARCHAR2
+) RETURN BOOLEAN IS
+  v_count NUMBER;
+BEGIN
+  SELECT COUNT(*) INTO v_count
+  FROM   app_users
+  WHERE  UPPER(username) = UPPER(p_username)
+    AND  password_hash   = fn_hash(p_password)
+    AND  active_flag     = 'Y';
+  RETURN v_count &gt; 0;
+EXCEPTION
+  WHEN OTHERS THEN RETURN FALSE;
+END;
+/
+-- Configure in: App Builder → Shared Components → Authentication Schemes</code></pre></div></div></div><div class="rich-section"><div class="rich-s-hdr"><div class="rich-icon res"><i class="fas fa-circle-check"></i></div><span class="rich-lbl">Output / Result</span><span class="rich-sub">expected output</span></div><div class="rich-s-body" style="padding:16px 18px"><div class="state-pill after"><i class="fas fa-circle-check"></i> Result</div><div class="rich-out-blk"><div class="rich-out-bar"><div class="d-r"></div><div class="d-y"></div><div class="d-g"></div><span class="out-t">Output</span></div><div class="out-body"><span class="l ok">User: tharun / pass: ****</span><span class="l info">fn_authenticate called</span><span class="l info">Returns: TRUE</span><span class="l dim">Session created: 98765432101234</span></div></div></div></div><div class="rich-takeaway"><div class="rich-tk-icon"><i class="fas fa-bolt"></i></div><div class="rich-tk-body"><h4>Key Takeaway</h4><p>An Authentication Scheme defines how users prove their identity to access an APEX application.</p></div></div>
+    </div>
+  </div>
+</div>
+
+<div class="question-container" data-difficulty="intermediate">
+  <div class="question-header" role="button" tabindex="0" aria-expanded="false">
+    <div class="question-text">Q14. What is an APEX Authorization Scheme?</div>
+    <div class="question-details">
+      <span class="difficulty-badge" style="background:#fef9c3;color:#713f12;border:1px solid #fde68a">intermediate</span>
+      <div class="question-toggle"><i class="fas fa-chevron-down"></i></div>
+    </div>
+  </div>
+  <div class="question-content" style="display:none;" aria-hidden="true">
+    <div class="rich-section"><div class="rich-s-hdr"><div class="rich-icon ans"><i class="fas fa-lightbulb"></i></div><span class="rich-lbl">Answer</span></div><div class="rich-s-body" style="padding:16px 18px"><p class="ans-txt">An Authorization Scheme controls what authenticated users can do — it answers 'what are you allowed to access?' after authentication answers 'who are you?'. Authorization schemes can be PL/SQL functions, EXISTS SQL queries, or built-in types like 'Has Role'. They can be applied to pages, regions, items, buttons, and menu entries. If a user fails an authorization check, they see an unauthorized error or are redirected. Multiple schemes can be combined.</p></div></div>
+    <button class="details-toggle-btn" onclick="toggleDetails(this)">
+      <span class="toggle-icon">+</span>&nbsp;Show Code &amp; Details
+    </button>
+    <div class="details-body">
+      <div class="rich-section"><div class="rich-s-hdr"><div class="rich-icon code"><i class="fas fa-code"></i></div><span class="rich-lbl">Code</span><span class="rich-sub">APEX / PL/SQL</span></div><div class="rich-s-body" style="padding:0"><div class="rich-code-blk"><div class="rich-code-bar"><span class="rich-lang-tag">APEX/PL/SQL</span><button class="rich-cp-btn" onclick="copyCode(this)"><i class="fas fa-copy"></i> Copy</button></div><pre><code class="language-sql">-- Authorization scheme: PL/SQL returning Boolean
+CREATE OR REPLACE FUNCTION fn_is_manager RETURN BOOLEAN IS
+  v_count NUMBER;
+BEGIN
+  SELECT COUNT(*) INTO v_count
+  FROM   app_user_roles
+  WHERE  username  = V('APP_USER')
+    AND  role_code = 'MANAGER';
+  RETURN v_count &gt; 0;
+END;
+/
+
+-- SQL EXISTS type authorization
+SELECT 1 FROM app_user_roles
+WHERE  username  = :APP_USER
+  AND  role_code IN ('ADMIN','SUPER_USER')
+
+-- Apply to page: Page → Security → Authorization Scheme</code></pre></div></div></div><div class="rich-section"><div class="rich-s-hdr"><div class="rich-icon res"><i class="fas fa-circle-check"></i></div><span class="rich-lbl">Output / Result</span><span class="rich-sub">expected output</span></div><div class="rich-s-body" style="padding:16px 18px"><div class="state-pill after"><i class="fas fa-circle-check"></i> Result</div><div class="rich-out-blk"><div class="rich-out-bar"><div class="d-r"></div><div class="d-y"></div><div class="d-g"></div><span class="out-t">Output</span></div><div class="out-body"><span class="l ok">User THARUN.K checked against MANAGER role</span><span class="l info">Role found: TRUE</span><span class="l dim">Page 5 (Admin Panel) → Access GRANTED</span><span class="l info">Page 6 (Reports) → No auth required → Visible</span></div></div></div></div><div class="rich-takeaway"><div class="rich-tk-icon"><i class="fas fa-bolt"></i></div><div class="rich-tk-body"><h4>Key Takeaway</h4><p>An Authorization Scheme controls what authenticated users can do — it answers 'what are you allowed to access?' after authentication answers 'who are you?'.</p></div></div>
+    </div>
+  </div>
+</div>
+
+<div class="question-container" data-difficulty="intermediate">
+  <div class="question-header" role="button" tabindex="0" aria-expanded="false">
+    <div class="question-text">Q15. How do you pass values between APEX pages?</div>
+    <div class="question-details">
+      <span class="difficulty-badge" style="background:#fef9c3;color:#713f12;border:1px solid #fde68a">intermediate</span>
+      <div class="question-toggle"><i class="fas fa-chevron-down"></i></div>
+    </div>
+  </div>
+  <div class="question-content" style="display:none;" aria-hidden="true">
+    <div class="rich-section"><div class="rich-s-hdr"><div class="rich-icon ans"><i class="fas fa-lightbulb"></i></div><span class="rich-lbl">Answer</span></div><div class="rich-s-body" style="padding:16px 18px"><p class="ans-txt">Values can be passed between APEX pages in several ways: via URL parameters (f?p=APP:PAGE:SESSION:::ITEMS:VALUES), by setting session state in a process before branching, using the Request value, via hidden items on the target page, or using the APEX_PAGE.GET_URL function with item parameters. For modal dialogs, you can close the dialog and refresh the parent using apex_util.close_dialog or the Close Dialog dynamic action with return items.</p></div></div>
+    <button class="details-toggle-btn" onclick="toggleDetails(this)">
+      <span class="toggle-icon">+</span>&nbsp;Show Code &amp; Details
+    </button>
+    <div class="details-body">
+      <div class="rich-section"><div class="rich-s-hdr"><div class="rich-icon code"><i class="fas fa-code"></i></div><span class="rich-lbl">Code</span><span class="rich-sub">APEX / PL/SQL</span></div><div class="rich-s-body" style="padding:0"><div class="rich-code-blk"><div class="rich-code-bar"><span class="rich-lang-tag">APEX/PL/SQL</span><button class="rich-cp-btn" onclick="copyCode(this)"><i class="fas fa-copy"></i> Copy</button></div><pre><code class="language-sql">-- Method 1: URL with item values
+f?p=&amp;APP_ID.:3:&amp;APP_SESSION.::NO:P3_EMP_ID,P3_DEPT_ID:101,10
+
+-- Method 2: apex_page.get_url (PL/SQL)
+DECLARE v_url VARCHAR2(4000);
+BEGIN
+  v_url := apex_page.get_url(
+    p_page        =&gt; 3,
+    p_items       =&gt; 'P3_EMP_ID,P3_DEPT_ID',
+    p_values      =&gt; '101,10',
+    p_clear_cache =&gt; '3'
+  );
+  apex_util.redirect_url(v_url);
+END;
+
+-- Method 3: Close modal dialog with return value
+apex_util.close_dialog(
+  p_items  =&gt; 'P1_SELECTED_EMP',
+  p_values =&gt; :P3_EMP_ID);</code></pre></div></div></div><div class="rich-section"><div class="rich-s-hdr"><div class="rich-icon res"><i class="fas fa-circle-check"></i></div><span class="rich-lbl">Output / Result</span><span class="rich-sub">expected output</span></div><div class="rich-s-body" style="padding:16px 18px"><div class="state-pill after"><i class="fas fa-circle-check"></i> Result</div><div class="rich-out-blk"><div class="rich-out-bar"><div class="d-r"></div><div class="d-y"></div><div class="d-g"></div><span class="out-t">Output</span></div><div class="out-body"><span class="l ok">Navigated to page 3</span><span class="l info">P3_EMP_ID  = 101</span><span class="l info">P3_DEPT_ID = 10</span><span class="l info">Modal closed, parent refreshed with P1_SELECTED_EMP = 101</span></div></div></div></div><div class="rich-takeaway"><div class="rich-tk-icon"><i class="fas fa-bolt"></i></div><div class="rich-tk-body"><h4>Key Takeaway</h4><p>Values can be passed between APEX pages in several ways: via URL parameters (f?p=APP:PAGE:SESSION:::ITEMS:VALUES), by setting session state in a process before branching, using the Request value, via hidden items on the target page, or using the APEX_PAGE.</p></div></div>
+    </div>
+  </div>
+</div>
+
+<div class="question-container" data-difficulty="intermediate">
+  <div class="question-header" role="button" tabindex="0" aria-expanded="false">
+    <div class="question-text">Q16. What is the APEX URL syntax (f?p syntax)?</div>
+    <div class="question-details">
+      <span class="difficulty-badge" style="background:#fef9c3;color:#713f12;border:1px solid #fde68a">intermediate</span>
+      <div class="question-toggle"><i class="fas fa-chevron-down"></i></div>
+    </div>
+  </div>
+  <div class="question-content" style="display:none;" aria-hidden="true">
+    <div class="rich-section"><div class="rich-s-hdr"><div class="rich-icon ans"><i class="fas fa-lightbulb"></i></div><span class="rich-lbl">Answer</span></div><div class="rich-s-body" style="padding:16px 18px"><p class="ans-txt">The APEX f?p URL syntax is: f?p=APP_ID:PAGE_ID:SESSION:REQUEST:DEBUG:CLEAR_CACHE:ITEMS:VALUES:PRINTER_FRIENDLY. Each position is separated by colons. APP_ID is the application ID or alias, PAGE_ID is the target page, SESSION is the session ID, REQUEST triggers a page process, CLEAR_CACHE clears specific page caches, and ITEMS/VALUES are colon-separated lists of items to set. Positions can be left empty using consecutive colons.</p></div></div>
+    <button class="details-toggle-btn" onclick="toggleDetails(this)">
+      <span class="toggle-icon">+</span>&nbsp;Show Code &amp; Details
+    </button>
+    <div class="details-body">
+      <div class="rich-section"><div class="rich-s-hdr"><div class="rich-icon code"><i class="fas fa-code"></i></div><span class="rich-lbl">Code</span><span class="rich-sub">APEX / PL/SQL</span></div><div class="rich-s-body" style="padding:0"><div class="rich-code-blk"><div class="rich-code-bar"><span class="rich-lang-tag">APEX/PL/SQL</span><button class="rich-cp-btn" onclick="copyCode(this)"><i class="fas fa-copy"></i> Copy</button></div><pre><code class="language-sql">-- Full URL syntax:
+-- f?p=APP:PAGE:SESSION:REQUEST:DEBUG:CLEAR_CACHE:ITEMS:VALUES
+
+-- Examples:
+-- Navigate to page 2, clear its cache
+f?p=100:2:&amp;APP_SESSION.::NO:2::
+
+-- Navigate and set item values
+f?p=100:3:&amp;APP_SESSION.::NO::P3_EMP_ID,P3_DEPT:101,10
+
+-- Trigger REQUEST (branch condition)
+f?p=100:1:&amp;APP_SESSION.:APPROVE:::
+
+-- Using alias instead of ID
+f?p=MY_APP:home:&amp;APP_SESSION.
+
+-- apex_page.get_url (recommended)
+SELECT apex_page.get_url(
+  p_application =&gt; 100,
+  p_page        =&gt; 3
+) FROM dual;</code></pre></div></div></div><div class="rich-section"><div class="rich-s-hdr"><div class="rich-icon res"><i class="fas fa-circle-check"></i></div><span class="rich-lbl">Output / Result</span><span class="rich-sub">expected output</span></div><div class="rich-s-body" style="padding:16px 18px"><div class="state-pill after"><i class="fas fa-circle-check"></i> Result</div><div class="rich-out-blk"><div class="rich-out-bar"><div class="d-r"></div><div class="d-y"></div><div class="d-g"></div><span class="out-t">Output</span></div><div class="out-body"><span class="l ok">URL built: f?p=100:3:98765432:NO::P3_EMP_ID:101</span><span class="l info">Session validated</span><span class="l info">Page 3 rendered with P3_EMP_ID = 101</span></div></div></div></div><div class="rich-takeaway"><div class="rich-tk-icon"><i class="fas fa-bolt"></i></div><div class="rich-tk-body"><h4>Key Takeaway</h4><p>The APEX f?p URL syntax is: f?p=APP_ID:PAGE_ID:SESSION:REQUEST:DEBUG:CLEAR_CACHE:ITEMS:VALUES:PRINTER_FRIENDLY.</p></div></div>
+    </div>
+  </div>
+</div>
+
+<div class="question-container" data-difficulty="intermediate">
+  <div class="question-header" role="button" tabindex="0" aria-expanded="false">
+    <div class="question-text">Q17. What are APEX Processes and when do they run?</div>
+    <div class="question-details">
+      <span class="difficulty-badge" style="background:#fef9c3;color:#713f12;border:1px solid #fde68a">intermediate</span>
+      <div class="question-toggle"><i class="fas fa-chevron-down"></i></div>
+    </div>
+  </div>
+  <div class="question-content" style="display:none;" aria-hidden="true">
+    <div class="rich-section"><div class="rich-s-hdr"><div class="rich-icon ans"><i class="fas fa-lightbulb"></i></div><span class="rich-lbl">Answer</span></div><div class="rich-s-body" style="padding:16px 18px"><p class="ans-txt">Processes are server-side PL/SQL blocks or built-in actions that execute at specific points during page processing. They can run On Load (before rendering), On Submit (after a button is clicked), On Demand (AJAX callback), or as Background Jobs. Common built-in process types include Form - Automatic Row Processing (DML), Clear Session State, Close Dialog, and Execute Code. Processes can have conditions, error handling, and success messages. They run in sequence order.</p></div></div>
+    <button class="details-toggle-btn" onclick="toggleDetails(this)">
+      <span class="toggle-icon">+</span>&nbsp;Show Code &amp; Details
+    </button>
+    <div class="details-body">
+      <div class="rich-section"><div class="rich-s-hdr"><div class="rich-icon code"><i class="fas fa-code"></i></div><span class="rich-lbl">Code</span><span class="rich-sub">APEX / PL/SQL</span></div><div class="rich-s-body" style="padding:0"><div class="rich-code-blk"><div class="rich-code-bar"><span class="rich-lang-tag">APEX/PL/SQL</span><button class="rich-cp-btn" onclick="copyCode(this)"><i class="fas fa-copy"></i> Copy</button></div><pre><code class="language-sql">-- PL/SQL Process: After Submit
+BEGIN
+  -- Validate
+  IF :P1_SALARY &lt; 0 THEN
+    apex_error.add_error(
+      p_message          =&gt; 'Salary cannot be negative',
+      p_display_location =&gt; apex_error.c_inline_in_notification,
+      p_page_item_name   =&gt; 'P1_SALARY'
+    );
+  END IF;
+
+  -- DML
+  UPDATE employees
+  SET    salary        = :P1_SALARY,
+         employee_name = :P1_EMP_NAME,
+         updated_by    = V('APP_USER'),
+         updated_date  = SYSDATE
+  WHERE  employee_id   = :P1_EMP_ID;
+
+  IF SQL%ROWCOUNT = 0 THEN
+    RAISE_APPLICATION_ERROR(-20001,'Record not found');
+  END IF;
+END;</code></pre></div></div></div><div class="rich-section"><div class="rich-s-hdr"><div class="rich-icon res"><i class="fas fa-circle-check"></i></div><span class="rich-lbl">Output / Result</span><span class="rich-sub">expected output</span></div><div class="rich-s-body" style="padding:16px 18px"><div class="state-pill after"><i class="fas fa-circle-check"></i> Result</div><div class="rich-out-blk"><div class="rich-out-bar"><div class="d-r"></div><div class="d-y"></div><div class="d-g"></div><span class="out-t">Output</span></div><div class="out-body"><span class="l ok">Validation passed.</span><span class="l info">UPDATE executed: 1 row updated.</span><span class="l dim">Success: Employee record saved.</span><span class="l info">Redirecting to employee list...</span></div></div></div></div><div class="rich-takeaway"><div class="rich-tk-icon"><i class="fas fa-bolt"></i></div><div class="rich-tk-body"><h4>Key Takeaway</h4><p>Processes are server-side PL/SQL blocks or built-in actions that execute at specific points during page processing.</p></div></div>
+    </div>
+  </div>
+</div>
+
+<div class="question-container" data-difficulty="intermediate">
+  <div class="question-header" role="button" tabindex="0" aria-expanded="false">
+    <div class="question-text">Q18. What is APEX_ERROR package and how do you use it?</div>
+    <div class="question-details">
+      <span class="difficulty-badge" style="background:#fef9c3;color:#713f12;border:1px solid #fde68a">intermediate</span>
+      <div class="question-toggle"><i class="fas fa-chevron-down"></i></div>
+    </div>
+  </div>
+  <div class="question-content" style="display:none;" aria-hidden="true">
+    <div class="rich-section"><div class="rich-s-hdr"><div class="rich-icon ans"><i class="fas fa-lightbulb"></i></div><span class="rich-lbl">Answer</span></div><div class="rich-s-body" style="padding:16px 18px"><p class="ans-txt">The APEX_ERROR package provides APIs to add, manage, and display errors on APEX pages. The main procedure is APEX_ERROR.ADD_ERROR which lets you add errors programmatically during page processing. Errors can be displayed inline next to a specific item, in a notification at the top of the page, or in a separate error region. This is used in validation processes and after-submit processes to return meaningful errors to users without using RAISE_APPLICATION_ERROR.</p></div></div>
+    <button class="details-toggle-btn" onclick="toggleDetails(this)">
+      <span class="toggle-icon">+</span>&nbsp;Show Code &amp; Details
+    </button>
+    <div class="details-body">
+      <div class="rich-section"><div class="rich-s-hdr"><div class="rich-icon code"><i class="fas fa-code"></i></div><span class="rich-lbl">Code</span><span class="rich-sub">APEX / PL/SQL</span></div><div class="rich-s-body" style="padding:0"><div class="rich-code-blk"><div class="rich-code-bar"><span class="rich-lang-tag">APEX/PL/SQL</span><button class="rich-cp-btn" onclick="copyCode(this)"><i class="fas fa-copy"></i> Copy</button></div><pre><code class="language-sql">-- Add error linked to specific item
+apex_error.add_error(
+  p_message          =&gt; 'Email address is already registered.',
+  p_display_location =&gt; apex_error.c_inline_with_field,
+  p_page_item_name   =&gt; 'P1_EMAIL'
+);
+
+-- Add error in notification area
+apex_error.add_error(
+  p_message          =&gt; 'You do not have permission to delete this record.',
+  p_display_location =&gt; apex_error.c_inline_in_notification
+);
+
+-- Add error with additional info
+apex_error.add_error(
+  p_message           =&gt; 'Save failed.',
+  p_additional_info   =&gt; SQLERRM,
+  p_display_location  =&gt; apex_error.c_on_error_page
+);</code></pre></div></div></div><div class="rich-section"><div class="rich-s-hdr"><div class="rich-icon res"><i class="fas fa-circle-check"></i></div><span class="rich-lbl">Output / Result</span><span class="rich-sub">expected output</span></div><div class="rich-s-body" style="padding:16px 18px"><div class="state-pill after"><i class="fas fa-circle-check"></i> Result</div><div class="rich-out-blk"><div class="rich-out-bar"><div class="d-r"></div><div class="d-y"></div><div class="d-g"></div><span class="out-t">Output</span></div><div class="out-body"><span class="l ok">Error shown next to P1_EMAIL field:</span><span class="l info">  ⚠ Email address is already registered.</span><span class="l info">Notification area shows:</span><span class="l info">  ⚠ You do not have permission to delete this record.</span></div></div></div></div><div class="rich-takeaway"><div class="rich-tk-icon"><i class="fas fa-bolt"></i></div><div class="rich-tk-body"><h4>Key Takeaway</h4><p>The APEX_ERROR package provides APIs to add, manage, and display errors on APEX pages.</p></div></div>
+    </div>
+  </div>
+</div>
+
+<div class="question-container" data-difficulty="intermediate">
+  <div class="question-header" role="button" tabindex="0" aria-expanded="false">
+    <div class="question-text">Q19. What are APEX Validations?</div>
+    <div class="question-details">
+      <span class="difficulty-badge" style="background:#fef9c3;color:#713f12;border:1px solid #fde68a">intermediate</span>
+      <div class="question-toggle"><i class="fas fa-chevron-down"></i></div>
+    </div>
+  </div>
+  <div class="question-content" style="display:none;" aria-hidden="true">
+    <div class="rich-section"><div class="rich-s-hdr"><div class="rich-icon ans"><i class="fas fa-lightbulb"></i></div><span class="rich-lbl">Answer</span></div><div class="rich-s-body" style="padding:16px 18px"><p class="ans-txt">Validations are declarative or PL/SQL-based checks that run on page submission before processes execute. If a validation fails, it displays an error and stops processing. Types include: Item is NOT NULL, Item is Numeric, Item contains valid date, SQL query returns no rows (EXISTS check), PL/SQL function returns TRUE, and Regular Expression. Validations can be attached to specific items or the whole page, and can have conditions controlling when they fire.</p></div></div>
+    <button class="details-toggle-btn" onclick="toggleDetails(this)">
+      <span class="toggle-icon">+</span>&nbsp;Show Code &amp; Details
+    </button>
+    <div class="details-body">
+      <div class="rich-section"><div class="rich-s-hdr"><div class="rich-icon code"><i class="fas fa-code"></i></div><span class="rich-lbl">Code</span><span class="rich-sub">APEX / PL/SQL</span></div><div class="rich-s-body" style="padding:0"><div class="rich-code-blk"><div class="rich-code-bar"><span class="rich-lang-tag">APEX/PL/SQL</span><button class="rich-cp-btn" onclick="copyCode(this)"><i class="fas fa-copy"></i> Copy</button></div><pre><code class="language-sql">-- PL/SQL validation: Function returning error text
+-- Returns NULL = valid, Returns message = invalid
+BEGIN
+  IF :P1_END_DATE &lt; :P1_START_DATE THEN
+    RETURN 'End date must be after start date';
+  END IF;
+  IF :P1_SALARY &gt; 500000 THEN
+    RETURN 'Salary cannot exceed 500,000';
+  END IF;
+  RETURN NULL; -- valid
+END;
+
+-- SQL EXISTS validation: valid if query returns rows
+SELECT 1 FROM departments
+WHERE dept_id = :P1_DEPT_ID;
+-- If no rows returned → validation fails
+
+-- Condition: only validate when inserting
+-- Condition Type: Request = Expression 1
+-- Expression 1: CREATE</code></pre></div></div></div><div class="rich-section"><div class="rich-s-hdr"><div class="rich-icon res"><i class="fas fa-circle-check"></i></div><span class="rich-lbl">Output / Result</span><span class="rich-sub">expected output</span></div><div class="rich-s-body" style="padding:16px 18px"><div class="state-pill after"><i class="fas fa-circle-check"></i> Result</div><div class="rich-out-blk"><div class="rich-out-bar"><div class="d-r"></div><div class="d-y"></div><div class="d-g"></div><span class="out-t">Output</span></div><div class="out-body"><span class="l ok">P1_END_DATE &lt; P1_START_DATE</span><span class="l info">Validation FAILED:</span><span class="l info">  ⚠ End date must be after start date</span><span class="l info">Processing stopped — no DML executed</span></div></div></div></div><div class="rich-takeaway"><div class="rich-tk-icon"><i class="fas fa-bolt"></i></div><div class="rich-tk-body"><h4>Key Takeaway</h4><p>Validations are declarative or PL/SQL-based checks that run on page submission before processes execute.</p></div></div>
+    </div>
+  </div>
+</div>
+
+<div class="question-container" data-difficulty="intermediate">
+  <div class="question-header" role="button" tabindex="0" aria-expanded="false">
+    <div class="question-text">Q20. How does APEX handle DML (insert/update/delete) for forms?</div>
+    <div class="question-details">
+      <span class="difficulty-badge" style="background:#fef9c3;color:#713f12;border:1px solid #fde68a">intermediate</span>
+      <div class="question-toggle"><i class="fas fa-chevron-down"></i></div>
+    </div>
+  </div>
+  <div class="question-content" style="display:none;" aria-hidden="true">
+    <div class="rich-section"><div class="rich-s-hdr"><div class="rich-icon ans"><i class="fas fa-lightbulb"></i></div><span class="rich-lbl">Answer</span></div><div class="rich-s-body" style="padding:16px 18px"><p class="ans-txt">APEX handles DML in two ways. Automatic Row Processing (ARP) uses the built-in Form process type that automatically generates INSERT/UPDATE/DELETE SQL based on the form's source table and items. The form determines whether to insert or update based on the primary key value. Alternatively, you can write custom PL/SQL processes for full control. ARP supports optimistic locking (row version checking) to prevent lost updates when multiple users edit the same record.</p></div></div>
+    <button class="details-toggle-btn" onclick="toggleDetails(this)">
+      <span class="toggle-icon">+</span>&nbsp;Show Code &amp; Details
+    </button>
+    <div class="details-body">
+      <div class="rich-section"><div class="rich-s-hdr"><div class="rich-icon code"><i class="fas fa-code"></i></div><span class="rich-lbl">Code</span><span class="rich-sub">APEX / PL/SQL</span></div><div class="rich-s-body" style="padding:0"><div class="rich-code-blk"><div class="rich-code-bar"><span class="rich-lang-tag">APEX/PL/SQL</span><button class="rich-cp-btn" onclick="copyCode(this)"><i class="fas fa-copy"></i> Copy</button></div><pre><code class="language-sql">-- Automatic Row Processing (built-in)
+-- Configure Form region source:
+--   Table: EMPLOYEES
+--   Primary Key: EMPLOYEE_ID
+-- Add Process: Form - Automatic Row Processing (DML)
+-- APEX handles INSERT/UPDATE/DELETE automatically
+
+-- Custom DML (for complex logic)
+DECLARE
+  v_emp_id employees.employee_id%TYPE := :P1_EMP_ID;
+BEGIN
+  IF v_emp_id IS NULL THEN
+    -- INSERT
+    INSERT INTO employees(employee_name, salary, dept_id, hire_date, created_by)
+    VALUES(:P1_EMP_NAME, :P1_SALARY, :P1_DEPT_ID, SYSDATE, V('APP_USER'))
+    RETURNING employee_id INTO :P1_EMP_ID;
+  ELSE
+    -- UPDATE
+    UPDATE employees
+    SET employee_name=:P1_EMP_NAME, salary=:P1_SALARY
+    WHERE employee_id = v_emp_id;
+  END IF;
+  COMMIT;
+END;</code></pre></div></div></div><div class="rich-section"><div class="rich-s-hdr"><div class="rich-icon res"><i class="fas fa-circle-check"></i></div><span class="rich-lbl">Output / Result</span><span class="rich-sub">expected output</span></div><div class="rich-s-body" style="padding:16px 18px"><div class="state-pill after"><i class="fas fa-circle-check"></i> Result</div><div class="rich-out-blk"><div class="rich-out-bar"><div class="d-r"></div><div class="d-y"></div><div class="d-g"></div><span class="out-t">Output</span></div><div class="out-body"><span class="l ok">P1_EMP_ID is NULL → INSERT mode</span><span class="l info">New employee_id: 205</span><span class="l dim">Record inserted. Commit complete.</span><span class="l dim">Success message: Employee saved successfully.</span></div></div></div></div><div class="rich-takeaway"><div class="rich-tk-icon"><i class="fas fa-bolt"></i></div><div class="rich-tk-body"><h4>Key Takeaway</h4><p>APEX handles DML in two ways.</p></div></div>
+    </div>
+  </div>
+</div>
+
+<div class="question-container" data-difficulty="intermediate">
+  <div class="question-header" role="button" tabindex="0" aria-expanded="false">
+    <div class="question-text">Q21. What is the APEX_UTIL package?</div>
+    <div class="question-details">
+      <span class="difficulty-badge" style="background:#fef9c3;color:#713f12;border:1px solid #fde68a">intermediate</span>
+      <div class="question-toggle"><i class="fas fa-chevron-down"></i></div>
+    </div>
+  </div>
+  <div class="question-content" style="display:none;" aria-hidden="true">
+    <div class="rich-section"><div class="rich-s-hdr"><div class="rich-icon ans"><i class="fas fa-lightbulb"></i></div><span class="rich-lbl">Answer</span></div><div class="rich-s-body" style="padding:16px 18px"><p class="ans-txt">APEX_UTIL is a core APEX package providing utility functions for session state management, user management, security, date handling, and more. Key procedures include: SET_SESSION_STATE (set item values), GET_SESSION_STATE / V() (read values), REDIRECT_URL (navigate), COUNT_ROWS (count query results), IS_LOGIN_PASSWORD_VALID (authentication), GET_USER_ROLES, EXPIRE_PASSWORD, and DOWNLOAD_FILE. It's the Swiss army knife of APEX server-side development.</p></div></div>
+    <button class="details-toggle-btn" onclick="toggleDetails(this)">
+      <span class="toggle-icon">+</span>&nbsp;Show Code &amp; Details
+    </button>
+    <div class="details-body">
+      <div class="rich-section"><div class="rich-s-hdr"><div class="rich-icon code"><i class="fas fa-code"></i></div><span class="rich-lbl">Code</span><span class="rich-sub">APEX / PL/SQL</span></div><div class="rich-s-body" style="padding:0"><div class="rich-code-blk"><div class="rich-code-bar"><span class="rich-lang-tag">APEX/PL/SQL</span><button class="rich-cp-btn" onclick="copyCode(this)"><i class="fas fa-copy"></i> Copy</button></div><pre><code class="language-sql">-- Common apex_util operations
+
+-- Set and get session state
+apex_util.set_session_state('P1_STATUS', 'APPROVED');
+DBMS_OUTPUT.PUT_LINE(apex_util.get_session_state('P1_STATUS'));
+
+-- Check if user has role
+IF apex_util.current_user_in_group('MANAGERS') THEN
+  apex_util.set_session_state('P1_CAN_APPROVE','Y');
+END IF;
+
+-- Redirect
+apex_util.redirect_url(
+  apex_page.get_url(p_page =&gt; 2)
+);
+
+-- Download a BLOB file
+apex_util.download_file(
+  p_file =&gt; v_blob,
+  p_mime_type =&gt; 'application/pdf',
+  p_filename  =&gt; 'report.pdf'
+);</code></pre></div></div></div><div class="rich-section"><div class="rich-s-hdr"><div class="rich-icon res"><i class="fas fa-circle-check"></i></div><span class="rich-lbl">Output / Result</span><span class="rich-sub">expected output</span></div><div class="rich-s-body" style="padding:16px 18px"><div class="state-pill after"><i class="fas fa-circle-check"></i> Result</div><div class="rich-out-blk"><div class="rich-out-bar"><div class="d-r"></div><div class="d-y"></div><div class="d-g"></div><span class="out-t">Output</span></div><div class="out-body"><span class="l ok">P1_STATUS set to: APPROVED</span><span class="l info">User THARUN.K in group MANAGERS: TRUE</span><span class="l info">P1_CAN_APPROVE = Y</span><span class="l info">Redirecting to page 2...</span></div></div></div></div><div class="rich-takeaway"><div class="rich-tk-icon"><i class="fas fa-bolt"></i></div><div class="rich-tk-body"><h4>Key Takeaway</h4><p>APEX_UTIL is a core APEX package providing utility functions for session state management, user management, security, date handling, and more.</p></div></div>
+    </div>
+  </div>
+</div>
+
+<div class="question-container" data-difficulty="intermediate">
+  <div class="question-header" role="button" tabindex="0" aria-expanded="false">
+    <div class="question-text">Q22. What is APEX_APPLICATION_GLOBAL and APP_USER?</div>
+    <div class="question-details">
+      <span class="difficulty-badge" style="background:#fef9c3;color:#713f12;border:1px solid #fde68a">intermediate</span>
+      <div class="question-toggle"><i class="fas fa-chevron-down"></i></div>
+    </div>
+  </div>
+  <div class="question-content" style="display:none;" aria-hidden="true">
+    <div class="rich-section"><div class="rich-s-hdr"><div class="rich-icon ans"><i class="fas fa-lightbulb"></i></div><span class="rich-lbl">Answer</span></div><div class="rich-s-body" style="padding:16px 18px"><p class="ans-txt">APP_USER is an APEX substitution string that holds the username of the currently authenticated user. It is set during authentication and available throughout the session. In PL/SQL you access it via V('APP_USER') or :APP_USER. APEX_APPLICATION_GLOBAL is a package that provides access to global application-level information at runtime, such as the application ID, security group ID, and user info. These are essential for building multi-user, personalised applications.</p></div></div>
+    <button class="details-toggle-btn" onclick="toggleDetails(this)">
+      <span class="toggle-icon">+</span>&nbsp;Show Code &amp; Details
+    </button>
+    <div class="details-body">
+      <div class="rich-section"><div class="rich-s-hdr"><div class="rich-icon code"><i class="fas fa-code"></i></div><span class="rich-lbl">Code</span><span class="rich-sub">APEX / PL/SQL</span></div><div class="rich-s-body" style="padding:0"><div class="rich-code-blk"><div class="rich-code-bar"><span class="rich-lang-tag">APEX/PL/SQL</span><button class="rich-cp-btn" onclick="copyCode(this)"><i class="fas fa-copy"></i> Copy</button></div><pre><code class="language-sql">-- Get current user in different contexts
+
+-- In SQL query
+SELECT employee_name, salary
+FROM   employees
+WHERE  UPPER(created_by) = UPPER(V('APP_USER'));
+
+-- In PL/SQL
+DECLARE v_user VARCHAR2(100);
+BEGIN
+  v_user := V('APP_USER');  -- or :APP_USER
+  INSERT INTO audit_log(action, performed_by, log_date)
+  VALUES('LOGIN', v_user, SYSDATE);
+  COMMIT;
+END;
+
+-- Substitution string in HTML
+&lt;p&gt;Logged in as: &amp;APP_USER.&lt;/p&gt;
+&lt;p&gt;Application: &amp;APP_ID. | Session: &amp;APP_SESSION.&lt;/p&gt;</code></pre></div></div></div><div class="rich-section"><div class="rich-s-hdr"><div class="rich-icon res"><i class="fas fa-circle-check"></i></div><span class="rich-lbl">Output / Result</span><span class="rich-sub">expected output</span></div><div class="rich-s-body" style="padding:16px 18px"><div class="state-pill after"><i class="fas fa-circle-check"></i> Result</div><div class="rich-out-blk"><div class="rich-out-bar"><div class="d-r"></div><div class="d-y"></div><div class="d-g"></div><span class="out-t">Output</span></div><div class="out-body"><span class="l ok">Current user : THARUN.K</span><span class="l info">App ID       : 100</span><span class="l info">Session      : 12345678901234</span><span class="l dim">Audit log entry created.</span></div></div></div></div><div class="rich-takeaway"><div class="rich-tk-icon"><i class="fas fa-bolt"></i></div><div class="rich-tk-body"><h4>Key Takeaway</h4><p>APP_USER is an APEX substitution string that holds the username of the currently authenticated user.</p></div></div>
+    </div>
+  </div>
+</div>
+
+<div class="question-container" data-difficulty="intermediate">
+  <div class="question-header" role="button" tabindex="0" aria-expanded="false">
+    <div class="question-text">Q23. What are APEX Collections?</div>
+    <div class="question-details">
+      <span class="difficulty-badge" style="background:#fef9c3;color:#713f12;border:1px solid #fde68a">intermediate</span>
+      <div class="question-toggle"><i class="fas fa-chevron-down"></i></div>
+    </div>
+  </div>
+  <div class="question-content" style="display:none;" aria-hidden="true">
+    <div class="rich-section"><div class="rich-s-hdr"><div class="rich-icon ans"><i class="fas fa-lightbulb"></i></div><span class="rich-lbl">Answer</span></div><div class="rich-s-body" style="padding:16px 18px"><p class="ans-txt">APEX Collections are temporary multi-column data stores (like session-level tables) that persist for the duration of a session. They are useful for storing intermediate data during multi-step wizards, shopping cart items, or data that hasn't been committed yet. Collections are created with APEX_COLLECTION.CREATE_COLLECTION, rows are added with ADD_MEMBER, modified with UPDATE_MEMBER, and queried via the APEX_COLLECTIONS view. All data is lost when the session ends.</p></div></div>
+    <button class="details-toggle-btn" onclick="toggleDetails(this)">
+      <span class="toggle-icon">+</span>&nbsp;Show Code &amp; Details
+    </button>
+    <div class="details-body">
+      <div class="rich-section"><div class="rich-s-hdr"><div class="rich-icon code"><i class="fas fa-code"></i></div><span class="rich-lbl">Code</span><span class="rich-sub">APEX / PL/SQL</span></div><div class="rich-s-body" style="padding:0"><div class="rich-code-blk"><div class="rich-code-bar"><span class="rich-lang-tag">APEX/PL/SQL</span><button class="rich-cp-btn" onclick="copyCode(this)"><i class="fas fa-copy"></i> Copy</button></div><pre><code class="language-sql">-- Create collection
+apex_collection.create_or_truncate_collection('CART_ITEMS');
+
+-- Add rows to collection (up to 50 VARCHAR2 + CLOB + BLOB columns)
+apex_collection.add_member(
+  p_collection_name =&gt; 'CART_ITEMS',
+  p_c001 =&gt; :P1_PRODUCT_ID,
+  p_c002 =&gt; :P1_PRODUCT_NAME,
+  p_n001 =&gt; :P1_QUANTITY,
+  p_d001 =&gt; SYSDATE
+);
+
+-- Query collection
+SELECT seq_id, c001 AS product_id,
+       c002 AS product_name, n001 AS qty
+FROM   apex_collections
+WHERE  collection_name = 'CART_ITEMS'
+ORDER  BY seq_id;
+
+-- Delete collection
+apex_collection.delete_collection('CART_ITEMS');</code></pre></div></div></div><div class="rich-section"><div class="rich-s-hdr"><div class="rich-icon res"><i class="fas fa-circle-check"></i></div><span class="rich-lbl">Output / Result</span><span class="rich-sub">expected output</span></div><div class="rich-s-body" style="padding:16px 18px"><div class="state-pill after"><i class="fas fa-circle-check"></i> Result</div><div class="rich-out-blk"><div class="rich-out-bar"><div class="d-r"></div><div class="d-y"></div><div class="d-g"></div><span class="out-t">Output</span></div><div class="out-body"><span class="l ok">Collection CART_ITEMS created.</span><span class="l info">3 rows added to collection.</span><span class="l info">SEQ  PRODUCT_ID  NAME       QTY</span><span class="l info">1    P001        Keyboard   2</span><span class="l info">2    P002        Mouse      1</span><span class="l info">Collection deleted at session end.</span></div></div></div></div><div class="rich-takeaway"><div class="rich-tk-icon"><i class="fas fa-bolt"></i></div><div class="rich-tk-body"><h4>Key Takeaway</h4><p>APEX Collections are temporary multi-column data stores (like session-level tables) that persist for the duration of a session.</p></div></div>
+    </div>
+  </div>
+</div>
+
+<div class="question-container" data-difficulty="intermediate">
+  <div class="question-header" role="button" tabindex="0" aria-expanded="false">
+    <div class="question-text">Q24. How do you create a REST API in Oracle APEX using ORDS?</div>
+    <div class="question-details">
+      <span class="difficulty-badge" style="background:#fef9c3;color:#713f12;border:1px solid #fde68a">intermediate</span>
+      <div class="question-toggle"><i class="fas fa-chevron-down"></i></div>
+    </div>
+  </div>
+  <div class="question-content" style="display:none;" aria-hidden="true">
+    <div class="rich-section"><div class="rich-s-hdr"><div class="rich-icon ans"><i class="fas fa-lightbulb"></i></div><span class="rich-lbl">Answer</span></div><div class="rich-s-body" style="padding:16px 18px"><p class="ans-txt">Oracle REST Data Services (ORDS) enables you to expose Oracle Database objects and APEX applications as RESTful APIs. You can enable REST on database objects using ORDS.ENABLE_OBJECT or through APEX's RESTful Services module. REST handlers are defined for GET, POST, PUT, DELETE HTTP methods with URL patterns. Parameters are bound using :param syntax. APEX also provides REST Enabled SQL for ad-hoc REST calls and the APEX_WEB_SERVICE package for consuming external REST APIs.</p></div></div>
+    <button class="details-toggle-btn" onclick="toggleDetails(this)">
+      <span class="toggle-icon">+</span>&nbsp;Show Code &amp; Details
+    </button>
+    <div class="details-body">
+      <div class="rich-section"><div class="rich-s-hdr"><div class="rich-icon code"><i class="fas fa-code"></i></div><span class="rich-lbl">Code</span><span class="rich-sub">APEX / PL/SQL</span></div><div class="rich-s-body" style="padding:0"><div class="rich-code-blk"><div class="rich-code-bar"><span class="rich-lang-tag">APEX/PL/SQL</span><button class="rich-cp-btn" onclick="copyCode(this)"><i class="fas fa-copy"></i> Copy</button></div><pre><code class="language-sql">-- Enable REST on a table (ORDS)
+BEGIN
+  ORDS.ENABLE_OBJECT(
+    p_enabled        =&gt; TRUE,
+    p_schema         =&gt; 'HR',
+    p_object         =&gt; 'EMPLOYEES',
+    p_object_type    =&gt; 'TABLE',
+    p_object_alias   =&gt; 'employees',
+    p_auto_rest_auth =&gt; FALSE
+  );
+  COMMIT;
+END;
+/
+-- Now accessible at:
+-- GET  /ords/hr/employees/
+-- GET  /ords/hr/employees/:id
+-- POST /ords/hr/employees/
+
+-- Custom REST handler (GET by dept)
+SELECT employee_id, employee_name, salary
+FROM   employees
+WHERE  department_id = :dept_id;
+-- URL: GET /ords/hr/emp/dept/10</code></pre></div></div></div><div class="rich-section"><div class="rich-s-hdr"><div class="rich-icon res"><i class="fas fa-circle-check"></i></div><span class="rich-lbl">Output / Result</span><span class="rich-sub">expected output</span></div><div class="rich-s-body" style="padding:16px 18px"><div class="state-pill after"><i class="fas fa-circle-check"></i> Result</div><div class="rich-out-blk"><div class="rich-out-bar"><div class="d-r"></div><div class="d-y"></div><div class="d-g"></div><span class="out-t">Output</span></div><div class="out-body"><span class="l ok">GET /ords/hr/employees/ → 200 OK</span><span class="l info">Body: {"items":[{"employee_id":101,...}]}</span><span class="l dim">POST /ords/hr/employees/ → 201 Created</span><span class="l info">Custom handler: 3 employees in dept 10</span></div></div></div></div><div class="rich-takeaway"><div class="rich-tk-icon"><i class="fas fa-bolt"></i></div><div class="rich-tk-body"><h4>Key Takeaway</h4><p>Oracle REST Data Services (ORDS) enables you to expose Oracle Database objects and APEX applications as RESTful APIs.</p></div></div>
+    </div>
+  </div>
+</div>
+
+<div class="question-container" data-difficulty="intermediate">
+  <div class="question-header" role="button" tabindex="0" aria-expanded="false">
+    <div class="question-text">Q25. What are APEX Plugins?</div>
+    <div class="question-details">
+      <span class="difficulty-badge" style="background:#fef9c3;color:#713f12;border:1px solid #fde68a">intermediate</span>
+      <div class="question-toggle"><i class="fas fa-chevron-down"></i></div>
+    </div>
+  </div>
+  <div class="question-content" style="display:none;" aria-hidden="true">
+    <div class="rich-section"><div class="rich-s-hdr"><div class="rich-icon ans"><i class="fas fa-lightbulb"></i></div><span class="rich-lbl">Answer</span></div><div class="rich-s-body" style="padding:16px 18px"><p class="ans-txt">APEX Plugins extend the built-in component types with custom functionality packaged as reusable components. Plugin types include Region (custom UI containers), Item (custom form inputs), Process (custom server-side actions), Dynamic Action (custom client-side events/actions), and Authentication/Authorization. Plugins consist of a PL/SQL callback function, JavaScript/CSS files, and metadata. They can be exported, imported, and shared across applications. apex.oracle.com/plugins has a community plugin library.</p></div></div>
+    <button class="details-toggle-btn" onclick="toggleDetails(this)">
+      <span class="toggle-icon">+</span>&nbsp;Show Code &amp; Details
+    </button>
+    <div class="details-body">
+      <div class="rich-section"><div class="rich-s-hdr"><div class="rich-icon code"><i class="fas fa-code"></i></div><span class="rich-lbl">Code</span><span class="rich-sub">APEX / PL/SQL</span></div><div class="rich-s-body" style="padding:0"><div class="rich-code-blk"><div class="rich-code-bar"><span class="rich-lang-tag">APEX/PL/SQL</span><button class="rich-cp-btn" onclick="copyCode(this)"><i class="fas fa-copy"></i> Copy</button></div><pre><code class="language-sql">-- Create a simple Item Plugin
+-- PL/SQL render function
+FUNCTION render_star_rating(
+  p_item   IN apex_plugin.t_item,
+  p_plugin IN apex_plugin.t_plugin,
+  p_param  IN apex_plugin.t_item_render_param,
+  p_result IN OUT NOCOPY apex_plugin.t_item_render_result
+) RETURN apex_plugin.t_item_render_result IS
+BEGIN
+  -- Output HTML for star rating widget
+  apex_plugin_util.print_hidden_if_readonly(
+    p_item_name  =&gt; p_item.name,
+    p_value      =&gt; p_param.value,
+    p_is_readonly=&gt; p_param.is_readonly,
+    p_is_printer_friendly =&gt; p_param.is_printer_friendly
+  );
+  -- Render star rating HTML/JS
+  htp.p('&lt;div class="star-rating" id="' || p_item.name || '"&gt;');
+  htp.p('&lt;/div&gt;');
+  RETURN p_result;
+END;</code></pre></div></div></div><div class="rich-section"><div class="rich-s-hdr"><div class="rich-icon res"><i class="fas fa-circle-check"></i></div><span class="rich-lbl">Output / Result</span><span class="rich-sub">expected output</span></div><div class="rich-s-body" style="padding:16px 18px"><div class="state-pill after"><i class="fas fa-circle-check"></i> Result</div><div class="rich-out-blk"><div class="rich-out-bar"><div class="d-r"></div><div class="d-y"></div><div class="d-g"></div><span class="out-t">Output</span></div><div class="out-body"><span class="l ok">Plugin rendered: star-rating widget</span><span class="l info">Item P1_RATING displays 5-star selector</span><span class="l info">Value on submit: 4</span><span class="l info">Plugin exported as .sql for reuse</span></div></div></div></div><div class="rich-takeaway"><div class="rich-tk-icon"><i class="fas fa-bolt"></i></div><div class="rich-tk-body"><h4>Key Takeaway</h4><p>APEX Plugins extend the built-in component types with custom functionality packaged as reusable components.</p></div></div>
+    </div>
+  </div>
+</div>
+
+<div class="question-container" data-difficulty="intermediate">
+  <div class="question-header" role="button" tabindex="0" aria-expanded="false">
+    <div class="question-text">Q26. How does APEX handle file uploads and downloads?</div>
+    <div class="question-details">
+      <span class="difficulty-badge" style="background:#fef9c3;color:#713f12;border:1px solid #fde68a">intermediate</span>
+      <div class="question-toggle"><i class="fas fa-chevron-down"></i></div>
+    </div>
+  </div>
+  <div class="question-content" style="display:none;" aria-hidden="true">
+    <div class="rich-section"><div class="rich-s-hdr"><div class="rich-icon ans"><i class="fas fa-lightbulb"></i></div><span class="rich-lbl">Answer</span></div><div class="rich-s-body" style="padding:16px 18px"><p class="ans-txt">APEX handles file uploads via the File Browse item type, which stores uploaded files in the APEX_APPLICATION_FILES or WWV_FLOW_FILES table as BLOBs. For downloads, you use the Download File process or a custom PL/SQL process that uses APEX_UTIL.DOWNLOAD_FILE or WPG_DOCLOAD.DOWNLOAD_FILE to stream a BLOB to the browser. For large files, you should use chunked uploads or Oracle's BLOB storage with proper MIME types and Content-Disposition headers.</p></div></div>
+    <button class="details-toggle-btn" onclick="toggleDetails(this)">
+      <span class="toggle-icon">+</span>&nbsp;Show Code &amp; Details
+    </button>
+    <div class="details-body">
+      <div class="rich-section"><div class="rich-s-hdr"><div class="rich-icon code"><i class="fas fa-code"></i></div><span class="rich-lbl">Code</span><span class="rich-sub">APEX / PL/SQL</span></div><div class="rich-s-body" style="padding:0"><div class="rich-code-blk"><div class="rich-code-bar"><span class="rich-lang-tag">APEX/PL/SQL</span><button class="rich-cp-btn" onclick="copyCode(this)"><i class="fas fa-copy"></i> Copy</button></div><pre><code class="language-sql">-- Store uploaded file from APEX file browse item
+DECLARE
+  v_blob  BLOB;
+  v_mime  VARCHAR2(255);
+  v_fname VARCHAR2(255);
+BEGIN
+  SELECT blob_content, mime_type, filename
+  INTO   v_blob, v_mime, v_fname
+  FROM   apex_application_temp_files
+  WHERE  name = :P1_FILE_UPLOAD;
+
+  INSERT INTO employee_docs(
+    doc_id, employee_id, file_name, file_content, mime_type, uploaded_by, uploaded_date
+  ) VALUES(
+    doc_seq.NEXTVAL, :P1_EMP_ID, v_fname, v_blob, v_mime, V('APP_USER'), SYSDATE
+  );
+  COMMIT;
+END;
+
+-- Download file
+apex_util.download_file(
+  p_file      =&gt; v_blob,
+  p_mime_type =&gt; 'application/pdf',
+  p_filename  =&gt; 'employee_report.pdf'
+);</code></pre></div></div></div><div class="rich-section"><div class="rich-s-hdr"><div class="rich-icon res"><i class="fas fa-circle-check"></i></div><span class="rich-lbl">Output / Result</span><span class="rich-sub">expected output</span></div><div class="rich-s-body" style="padding:16px 18px"><div class="state-pill after"><i class="fas fa-circle-check"></i> Result</div><div class="rich-out-blk"><div class="rich-out-bar"><div class="d-r"></div><div class="d-y"></div><div class="d-g"></div><span class="out-t">Output</span></div><div class="out-body"><span class="l ok">File uploaded: contract.pdf (245 KB)</span><span class="l info">Stored in employee_docs table.</span><span class="l info">doc_id: 1001</span><span class="l info">Download triggered: browser saves file</span></div></div></div></div><div class="rich-takeaway"><div class="rich-tk-icon"><i class="fas fa-bolt"></i></div><div class="rich-tk-body"><h4>Key Takeaway</h4><p>APEX handles file uploads via the File Browse item type, which stores uploaded files in the APEX_APPLICATION_FILES or WWV_FLOW_FILES table as BLOBs.</p></div></div>
+    </div>
+  </div>
+</div>
+
+<div class="question-container" data-difficulty="intermediate">
+  <div class="question-header" role="button" tabindex="0" aria-expanded="false">
+    <div class="question-text">Q27. What is the difference between Page Load and On Submit processing?</div>
+    <div class="question-details">
+      <span class="difficulty-badge" style="background:#fef9c3;color:#713f12;border:1px solid #fde68a">intermediate</span>
+      <div class="question-toggle"><i class="fas fa-chevron-down"></i></div>
+    </div>
+  </div>
+  <div class="question-content" style="display:none;" aria-hidden="true">
+    <div class="rich-section"><div class="rich-s-hdr"><div class="rich-icon ans"><i class="fas fa-lightbulb"></i></div><span class="rich-lbl">Answer</span></div><div class="rich-s-body" style="padding:16px 18px"><p class="ans-txt">Page Load processing runs when a page is first rendered in the browser — it includes before-header processes, computations, regions rendering (SQL queries executing), and after-footer processes. On Submit processing runs when a user clicks a submit button — it includes validations (if any fail, processing stops), processes (DML, PL/SQL), and then branches (redirects). Understanding this sequence is critical for controlling when logic executes and avoiding issues like running DML on page load.</p></div></div>
+    <button class="details-toggle-btn" onclick="toggleDetails(this)">
+      <span class="toggle-icon">+</span>&nbsp;Show Code &amp; Details
+    </button>
+    <div class="details-body">
+      <div class="rich-section"><div class="rich-s-hdr"><div class="rich-icon code"><i class="fas fa-code"></i></div><span class="rich-lbl">Code</span><span class="rich-sub">APEX / PL/SQL</span></div><div class="rich-s-body" style="padding:0"><div class="rich-code-blk"><div class="rich-code-bar"><span class="rich-lang-tag">APEX/PL/SQL</span><button class="rich-cp-btn" onclick="copyCode(this)"><i class="fas fa-copy"></i> Copy</button></div><pre><code class="language-sql">-- PAGE LOAD sequence:
+-- 1. Before Header Processes
+-- 2. Computations (Before Header)
+-- 3. Fetch row from table (if form)
+-- 4. Computations (After Header)
+-- 5. Render regions/items/buttons
+-- 6. After Footer Processes
+
+-- ON SUBMIT sequence:
+-- 1. Computations (After Submit)
+-- 2. Validations (if any fail → stop, show errors)
+-- 3. Processes (After Submit) → DML, PL/SQL
+-- 4. Branch (redirect to next page)
+
+-- Example: Audit process only on submit
+BEGIN
+  -- This runs only when form is submitted
+  INSERT INTO audit_trail(user_id, action, table_name, record_id, action_date)
+  VALUES(V('APP_USER'), V('REQUEST'), 'EMPLOYEES', :P1_EMP_ID, SYSDATE);
+END;</code></pre></div></div></div><div class="rich-section"><div class="rich-s-hdr"><div class="rich-icon res"><i class="fas fa-circle-check"></i></div><span class="rich-lbl">Output / Result</span><span class="rich-sub">expected output</span></div><div class="rich-s-body" style="padding:16px 18px"><div class="state-pill after"><i class="fas fa-circle-check"></i> Result</div><div class="rich-out-blk"><div class="rich-out-bar"><div class="d-r"></div><div class="d-y"></div><div class="d-g"></div><span class="out-t">Output</span></div><div class="out-body"><span class="l ok">Page Load: form populated from DB</span><span class="l info">User edits fields, clicks Save</span><span class="l info">Validation: all items valid</span><span class="l info">Process: UPDATE EMPLOYEES → 1 row</span><span class="l info">Branch: redirect to page 1</span></div></div></div></div><div class="rich-takeaway"><div class="rich-tk-icon"><i class="fas fa-bolt"></i></div><div class="rich-tk-body"><h4>Key Takeaway</h4><p>Page Load processing runs when a page is first rendered in the browser — it includes before-header processes, computations, regions rendering (SQL queries executing), and after-footer processes.</p></div></div>
+    </div>
+  </div>
+</div>
+
+<div class="question-container" data-difficulty="advanced">
+  <div class="question-header" role="button" tabindex="0" aria-expanded="false">
+    <div class="question-text">Q28. How do you implement Row Level Security in APEX?</div>
+    <div class="question-details">
+      <span class="difficulty-badge" style="background:rgba(45,100,70,0.08);color:#2d6446;border:1px solid rgba(45,100,70,0.2)">advanced</span>
+      <div class="question-toggle"><i class="fas fa-chevron-down"></i></div>
+    </div>
+  </div>
+  <div class="question-content" style="display:none;" aria-hidden="true">
+    <div class="rich-section"><div class="rich-s-hdr"><div class="rich-icon ans"><i class="fas fa-lightbulb"></i></div><span class="rich-lbl">Answer</span></div><div class="rich-s-body" style="padding:16px 18px"><p class="ans-txt">Row Level Security (RLS) in APEX can be implemented using Oracle VPD (Virtual Private Database) policies, APEX authorization schemes on regions with WHERE clause conditions, or by using the current user context in all SQL queries. VPD automatically appends WHERE clauses to queries based on the user context. In APEX, you can set the client identifier using DBMS_SESSION.SET_IDENTIFIER in an application initialization process, making the user context available to VPD policies.</p></div></div>
+    <button class="details-toggle-btn" onclick="toggleDetails(this)">
+      <span class="toggle-icon">+</span>&nbsp;Show Code &amp; Details
+    </button>
+    <div class="details-body">
+      <div class="rich-section"><div class="rich-s-hdr"><div class="rich-icon code"><i class="fas fa-code"></i></div><span class="rich-lbl">Code</span><span class="rich-sub">APEX / PL/SQL</span></div><div class="rich-s-body" style="padding:0"><div class="rich-code-blk"><div class="rich-code-bar"><span class="rich-lang-tag">APEX/PL/SQL</span><button class="rich-cp-btn" onclick="copyCode(this)"><i class="fas fa-copy"></i> Copy</button></div><pre><code class="language-sql">-- Set client identifier in APEX initialization process
+BEGIN
+  DBMS_SESSION.SET_IDENTIFIER(V('APP_USER'));
+END;
+
+-- VPD Policy function
+CREATE OR REPLACE FUNCTION fn_emp_security(
+  p_schema IN VARCHAR2,
+  p_object IN VARCHAR2
+) RETURN VARCHAR2 IS
+BEGIN
+  -- Each user only sees their department's employees
+  RETURN 'department_id IN (
+    SELECT dept_id FROM user_departments
+    WHERE  username = SYS_CONTEXT(''USERENV'',''CLIENT_IDENTIFIER'')
+  )';
+END;
+/
+
+-- Apply VPD policy
+DBMS_RLS.ADD_POLICY(
+  object_schema =&gt; 'HR',
+  object_name   =&gt; 'EMPLOYEES',
+  policy_name   =&gt; 'EMP_DEPT_POLICY',
+  function_schema =&gt; 'HR',
+  policy_function =&gt; 'FN_EMP_SECURITY',
+  statement_types =&gt; 'SELECT,INSERT,UPDATE,DELETE'
+);</code></pre></div></div></div><div class="rich-section"><div class="rich-s-hdr"><div class="rich-icon res"><i class="fas fa-circle-check"></i></div><span class="rich-lbl">Output / Result</span><span class="rich-sub">expected output</span></div><div class="rich-s-body" style="padding:16px 18px"><div class="state-pill after"><i class="fas fa-circle-check"></i> Result</div><div class="rich-out-blk"><div class="rich-out-bar"><div class="d-r"></div><div class="d-y"></div><div class="d-g"></div><span class="out-t">Output</span></div><div class="out-body"><span class="l ok">Client ID set: THARUN.K</span><span class="l info">VPD policy applied to EMPLOYEES table</span><span class="l info">THARUN.K queries employees →</span><span class="l info">  Only sees Engineering dept (dept_id=10)</span><span class="l info">Other dept rows hidden automatically</span></div></div></div></div><div class="rich-takeaway"><div class="rich-tk-icon"><i class="fas fa-bolt"></i></div><div class="rich-tk-body"><h4>Key Takeaway</h4><p>Row Level Security (RLS) in APEX can be implemented using Oracle VPD (Virtual Private Database) policies, APEX authorization schemes on regions with WHERE clause conditions, or by using the current user context in all SQL queries.</p></div></div>
+    </div>
+  </div>
+</div>
+
+<div class="question-container" data-difficulty="advanced">
+  <div class="question-header" role="button" tabindex="0" aria-expanded="false">
+    <div class="question-text">Q29. How do you implement APEX background jobs using DBMS_SCHEDULER?</div>
+    <div class="question-details">
+      <span class="difficulty-badge" style="background:rgba(45,100,70,0.08);color:#2d6446;border:1px solid rgba(45,100,70,0.2)">advanced</span>
+      <div class="question-toggle"><i class="fas fa-chevron-down"></i></div>
+    </div>
+  </div>
+  <div class="question-content" style="display:none;" aria-hidden="true">
+    <div class="rich-section"><div class="rich-s-hdr"><div class="rich-icon ans"><i class="fas fa-lightbulb"></i></div><span class="rich-lbl">Answer</span></div><div class="rich-s-body" style="padding:16px 18px"><p class="ans-txt">APEX applications can trigger long-running background jobs using DBMS_SCHEDULER or APEX_BACKGROUND_PROCESS. You create a scheduler job from an APEX process, and optionally track progress via an APEX collection or a status table. APEX 21.1+ introduced the APEX_BACKGROUND_PROCESS package which integrates jobs with the APEX session context, allowing you to track job status in the UI and display progress bars.</p></div></div>
+    <button class="details-toggle-btn" onclick="toggleDetails(this)">
+      <span class="toggle-icon">+</span>&nbsp;Show Code &amp; Details
+    </button>
+    <div class="details-body">
+      <div class="rich-section"><div class="rich-s-hdr"><div class="rich-icon code"><i class="fas fa-code"></i></div><span class="rich-lbl">Code</span><span class="rich-sub">APEX / PL/SQL</span></div><div class="rich-s-body" style="padding:0"><div class="rich-code-blk"><div class="rich-code-bar"><span class="rich-lang-tag">APEX/PL/SQL</span><button class="rich-cp-btn" onclick="copyCode(this)"><i class="fas fa-copy"></i> Copy</button></div><pre><code class="language-sql">-- Create background job from APEX process
+DECLARE
+  v_job_name VARCHAR2(100) := 'REPORT_GEN_' || :APP_SESSION;
+BEGIN
+  DBMS_SCHEDULER.CREATE_JOB(
+    job_name        =&gt; v_job_name,
+    job_type        =&gt; 'PLSQL_BLOCK',
+    job_action      =&gt; '
+      BEGIN
+        prc_generate_monthly_report(
+          p_month  =&gt; TO_DATE(''' || :P1_MONTH || ''',''YYYY-MM''),
+          p_user   =&gt; ''' || V('APP_USER') || '''
+        );
+      END;',
+    start_date      =&gt; SYSTIMESTAMP,
+    enabled         =&gt; TRUE,
+    auto_drop       =&gt; TRUE,
+    comments        =&gt; 'Monthly report: ' || V('APP_USER')
+  );
+  :P1_JOB_NAME := v_job_name;
+END;
+
+-- Check job status
+SELECT job_name, state, run_count, last_run_duration
+FROM   user_scheduler_jobs
+WHERE  job_name = :P1_JOB_NAME;</code></pre></div></div></div><div class="rich-section"><div class="rich-s-hdr"><div class="rich-icon res"><i class="fas fa-circle-check"></i></div><span class="rich-lbl">Output / Result</span><span class="rich-sub">expected output</span></div><div class="rich-s-body" style="padding:16px 18px"><div class="state-pill after"><i class="fas fa-circle-check"></i> Result</div><div class="rich-out-blk"><div class="rich-out-bar"><div class="d-r"></div><div class="d-y"></div><div class="d-g"></div><span class="out-t">Output</span></div><div class="out-body"><span class="l ok">Job REPORT_GEN_12345 created.</span><span class="l info">State: RUNNING</span><span class="l dim">Progress: 67% complete</span><span class="l info">State: SUCCEEDED</span><span class="l info">run_count: 1 | Duration: 00:02:45</span></div></div></div></div><div class="rich-takeaway"><div class="rich-tk-icon"><i class="fas fa-bolt"></i></div><div class="rich-tk-body"><h4>Key Takeaway</h4><p>APEX applications can trigger long-running background jobs using DBMS_SCHEDULER or APEX_BACKGROUND_PROCESS.</p></div></div>
+    </div>
+  </div>
+</div>
+
+<div class="question-container" data-difficulty="advanced">
+  <div class="question-header" role="button" tabindex="0" aria-expanded="false">
+    <div class="question-text">Q30. How do you use APEX_WEB_SERVICE to call an external REST API?</div>
+    <div class="question-details">
+      <span class="difficulty-badge" style="background:rgba(45,100,70,0.08);color:#2d6446;border:1px solid rgba(45,100,70,0.2)">advanced</span>
+      <div class="question-toggle"><i class="fas fa-chevron-down"></i></div>
+    </div>
+  </div>
+  <div class="question-content" style="display:none;" aria-hidden="true">
+    <div class="rich-section"><div class="rich-s-hdr"><div class="rich-icon ans"><i class="fas fa-lightbulb"></i></div><span class="rich-lbl">Answer</span></div><div class="rich-s-body" style="padding:16px 18px"><p class="ans-txt">APEX_WEB_SERVICE is the APEX package for calling external REST and SOAP web services. For REST, use APEX_WEB_SERVICE.MAKE_REST_REQUEST which returns the response as a CLOB. You set headers (including Authorization), specify the HTTP method, and parse the JSON/XML response. For OAuth2 APIs, you first get a token, then use it in subsequent calls. ACLs (Access Control Lists) must be granted for the database to make outbound HTTP calls.</p></div></div>
+    <button class="details-toggle-btn" onclick="toggleDetails(this)">
+      <span class="toggle-icon">+</span>&nbsp;Show Code &amp; Details
+    </button>
+    <div class="details-body">
+      <div class="rich-section"><div class="rich-s-hdr"><div class="rich-icon code"><i class="fas fa-code"></i></div><span class="rich-lbl">Code</span><span class="rich-sub">APEX / PL/SQL</span></div><div class="rich-s-body" style="padding:0"><div class="rich-code-blk"><div class="rich-code-bar"><span class="rich-lang-tag">APEX/PL/SQL</span><button class="rich-cp-btn" onclick="copyCode(this)"><i class="fas fa-copy"></i> Copy</button></div><pre><code class="language-sql">-- Grant ACL for outbound calls (run as DBA)
+BEGIN
+  DBMS_NETWORK_ACL_ADMIN.APPEND_HOST_ACE(
+    host =&gt; 'api.example.com',
+    ace  =&gt; xs$ace_type(
+      privilege_list =&gt; xs$name_list('connect','resolve'),
+      principal_name =&gt; 'HR',
+      principal_type =&gt; xs_acl.ptype_db
+    )
+  );
+END;
+/
+-- Call REST API
+DECLARE
+  v_response CLOB;
+  v_emp_name VARCHAR2(200);
+BEGIN
+  apex_web_service.set_request_headers(
+    p_name_01  =&gt; 'Authorization',
+    p_value_01 =&gt; 'Bearer ' || :P1_API_TOKEN,
+    p_name_02  =&gt; 'Content-Type',
+    p_value_02 =&gt; 'application/json'
+  );
+  v_response := apex_web_service.make_rest_request(
+    p_url         =&gt; 'https://api.example.com/employees/101',
+    p_http_method =&gt; 'GET'
+  );
+  -- Parse JSON response
+  v_emp_name := apex_json.get_varchar2(
+    p_path =&gt; 'employee_name',
+    p_values =&gt; apex_json.parse(v_response)
+  );
+  :P1_API_EMP_NAME := v_emp_name;
+END;</code></pre></div></div></div><div class="rich-section"><div class="rich-s-hdr"><div class="rich-icon res"><i class="fas fa-circle-check"></i></div><span class="rich-lbl">Output / Result</span><span class="rich-sub">expected output</span></div><div class="rich-s-body" style="padding:16px 18px"><div class="state-pill after"><i class="fas fa-circle-check"></i> Result</div><div class="rich-out-blk"><div class="rich-out-bar"><div class="d-r"></div><div class="d-y"></div><div class="d-g"></div><span class="out-t">Output</span></div><div class="out-body"><span class="l ok">ACL granted for api.example.com</span><span class="l info">GET https://api.example.com/employees/101</span><span class="l info">HTTP 200 OK</span><span class="l info">Response parsed: employee_name = Alice Johnson</span><span class="l info">P1_API_EMP_NAME = Alice Johnson</span></div></div></div></div><div class="rich-takeaway"><div class="rich-tk-icon"><i class="fas fa-bolt"></i></div><div class="rich-tk-body"><h4>Key Takeaway</h4><p>APEX_WEB_SERVICE is the APEX package for calling external REST and SOAP web services.</p></div></div>
+    </div>
+  </div>
+</div>
+
+<div class="question-container" data-difficulty="advanced">
+  <div class="question-header" role="button" tabindex="0" aria-expanded="false">
+    <div class="question-text">Q31. What is APEX_JSON and how do you use it?</div>
+    <div class="question-details">
+      <span class="difficulty-badge" style="background:rgba(45,100,70,0.08);color:#2d6446;border:1px solid rgba(45,100,70,0.2)">advanced</span>
+      <div class="question-toggle"><i class="fas fa-chevron-down"></i></div>
+    </div>
+  </div>
+  <div class="question-content" style="display:none;" aria-hidden="true">
+    <div class="rich-section"><div class="rich-s-hdr"><div class="rich-icon ans"><i class="fas fa-lightbulb"></i></div><span class="rich-lbl">Answer</span></div><div class="rich-s-body" style="padding:16px 18px"><p class="ans-txt">APEX_JSON is the APEX package for generating and parsing JSON. APEX_JSON.OPEN_OBJECT/CLOSE_OBJECT/WRITE generates JSON output in PL/SQL Dynamic Content regions or REST handlers. APEX_JSON.PARSE parses a JSON string into an internal structure, and APEX_JSON.GET_VARCHAR2/GET_NUMBER/GET_DATE reads values by JSON path. It's used extensively in AJAX callbacks, REST API responses, and processing JSON data from external APIs.</p></div></div>
+    <button class="details-toggle-btn" onclick="toggleDetails(this)">
+      <span class="toggle-icon">+</span>&nbsp;Show Code &amp; Details
+    </button>
+    <div class="details-body">
+      <div class="rich-section"><div class="rich-s-hdr"><div class="rich-icon code"><i class="fas fa-code"></i></div><span class="rich-lbl">Code</span><span class="rich-sub">APEX / PL/SQL</span></div><div class="rich-s-body" style="padding:0"><div class="rich-code-blk"><div class="rich-code-bar"><span class="rich-lang-tag">APEX/PL/SQL</span><button class="rich-cp-btn" onclick="copyCode(this)"><i class="fas fa-copy"></i> Copy</button></div><pre><code class="language-sql">-- Generate JSON (in AJAX callback or REST handler)
+BEGIN
+  apex_json.open_object;                        -- {
+  apex_json.write('status', 'success');         -- "status":"success"
+  apex_json.write('employee_id', 101);          -- "employee_id":101
+  apex_json.open_array('departments');          -- "departments":[
+  FOR r IN (SELECT dept_id,dept_name FROM departments) LOOP
+    apex_json.open_object;                      --   {
+    apex_json.write('id',   r.dept_id);         --     "id":10
+    apex_json.write('name', r.dept_name);       --     "name":"Engineering"
+    apex_json.close_object;                     --   }
+  END LOOP;
+  apex_json.close_array;                        -- ]
+  apex_json.close_object;                       -- }
+END;
+
+-- Parse JSON
+DECLARE
+  v_json  CLOB := '{"name":"Alice","salary":50000}';
+  v_vals  apex_json.t_values;
+BEGIN
+  apex_json.parse(v_vals, v_json);
+  :P1_NAME   := apex_json.get_varchar2(p_path=&gt;'name',   p_values=&gt;v_vals);
+  :P1_SALARY := apex_json.get_number  (p_path=&gt;'salary', p_values=&gt;v_vals);
+END;</code></pre></div></div></div><div class="rich-section"><div class="rich-s-hdr"><div class="rich-icon res"><i class="fas fa-circle-check"></i></div><span class="rich-lbl">Output / Result</span><span class="rich-sub">expected output</span></div><div class="rich-s-body" style="padding:16px 18px"><div class="state-pill after"><i class="fas fa-circle-check"></i> Result</div><div class="rich-out-blk"><div class="rich-out-bar"><div class="d-r"></div><div class="d-y"></div><div class="d-g"></div><span class="out-t">Output</span></div><div class="out-body"><span class="l ok">{</span><span class="l dim">  "status": "success",</span><span class="l info">  "employee_id": 101,</span><span class="l info">  "departments": [{"id":10,"name":"Engineering"}]</span><span class="l info">}</span><span class="l info">Parsed: name=Alice, salary=50000</span></div></div></div></div><div class="rich-takeaway"><div class="rich-tk-icon"><i class="fas fa-bolt"></i></div><div class="rich-tk-body"><h4>Key Takeaway</h4><p>APEX_JSON is the APEX package for generating and parsing JSON.</p></div></div>
+    </div>
+  </div>
+</div>
+
+<div class="question-container" data-difficulty="advanced">
+  <div class="question-header" role="button" tabindex="0" aria-expanded="false">
+    <div class="question-text">Q32. How do you implement pagination and lazy loading in APEX reports?</div>
+    <div class="question-details">
+      <span class="difficulty-badge" style="background:rgba(45,100,70,0.08);color:#2d6446;border:1px solid rgba(45,100,70,0.2)">advanced</span>
+      <div class="question-toggle"><i class="fas fa-chevron-down"></i></div>
+    </div>
+  </div>
+  <div class="question-content" style="display:none;" aria-hidden="true">
+    <div class="rich-section"><div class="rich-s-hdr"><div class="rich-icon ans"><i class="fas fa-lightbulb"></i></div><span class="rich-lbl">Answer</span></div><div class="rich-s-body" style="padding:16px 18px"><p class="ans-txt">APEX Interactive Reports and Classic Reports have built-in pagination — you set rows per page and pagination type (Row Ranges with Next/Previous, or row-by-row). For custom lazy loading, you can use APEX's scroll-to-load feature in Interactive Grids or implement it with JavaScript and AJAX callbacks that call apex.server.process to fetch the next batch of rows and append to the DOM. Proper indexing and ROWNUM/FETCH FIRST logic in SQL is critical for performance.</p></div></div>
+    <button class="details-toggle-btn" onclick="toggleDetails(this)">
+      <span class="toggle-icon">+</span>&nbsp;Show Code &amp; Details
+    </button>
+    <div class="details-body">
+      <div class="rich-section"><div class="rich-s-hdr"><div class="rich-icon code"><i class="fas fa-code"></i></div><span class="rich-lbl">Code</span><span class="rich-sub">APEX / PL/SQL</span></div><div class="rich-s-body" style="padding:0"><div class="rich-code-blk"><div class="rich-code-bar"><span class="rich-lang-tag">APEX/PL/SQL</span><button class="rich-cp-btn" onclick="copyCode(this)"><i class="fas fa-copy"></i> Copy</button></div><pre><code class="language-sql">-- Classic Report with pagination SQL
+SELECT *
+FROM (
+  SELECT employee_id, employee_name, salary,
+         ROWNUM AS rn
+  FROM (
+    SELECT employee_id, employee_name, salary
+    FROM   employees
+    ORDER  BY employee_name
+  )
+  WHERE ROWNUM &lt;= :P1_PAGE_NUM * :P1_PAGE_SIZE
+)
+WHERE rn &gt; (:P1_PAGE_NUM - 1) * :P1_PAGE_SIZE;
+
+-- Modern Oracle 12c+ pagination
+SELECT employee_id, employee_name, salary
+FROM   employees
+ORDER  BY employee_name
+OFFSET (:P1_PAGE_NUM-1)*:P1_PAGE_SIZE ROWS
+FETCH  NEXT :P1_PAGE_SIZE ROWS ONLY;
+
+-- APEX server-side AJAX call (JS)
+apex.server.process('LOAD_MORE_ROWS', {
+  pageItems: '#P1_LAST_EMP_ID'
+}, {
+  success: function(data) {
+    $('#emp-list').append(data.html);
+  }
+});</code></pre></div></div></div><div class="rich-section"><div class="rich-s-hdr"><div class="rich-icon res"><i class="fas fa-circle-check"></i></div><span class="rich-lbl">Output / Result</span><span class="rich-sub">expected output</span></div><div class="rich-s-body" style="padding:16px 18px"><div class="state-pill after"><i class="fas fa-circle-check"></i> Result</div><div class="rich-out-blk"><div class="rich-out-bar"><div class="d-r"></div><div class="d-y"></div><div class="d-g"></div><span class="out-t">Output</span></div><div class="out-body"><span class="l ok">Page 1: rows 1-10 of 65</span><span class="l info">OFFSET 0 FETCH NEXT 10 ROWS ONLY</span><span class="l info">Page 2: rows 11-20</span><span class="l info">AJAX: 10 more rows appended to DOM</span></div></div></div></div><div class="rich-takeaway"><div class="rich-tk-icon"><i class="fas fa-bolt"></i></div><div class="rich-tk-body"><h4>Key Takeaway</h4><p>APEX Interactive Reports and Classic Reports have built-in pagination — you set rows per page and pagination type (Row Ranges with Next/Previous, or row-by-row).</p></div></div>
+    </div>
+  </div>
+</div>
+
+<div class="question-container" data-difficulty="advanced">
+  <div class="question-header" role="button" tabindex="0" aria-expanded="false">
+    <div class="question-text">Q33. What is the APEX Interactive Report API (APEX_IR)?</div>
+    <div class="question-details">
+      <span class="difficulty-badge" style="background:rgba(45,100,70,0.08);color:#2d6446;border:1px solid rgba(45,100,70,0.2)">advanced</span>
+      <div class="question-toggle"><i class="fas fa-chevron-down"></i></div>
+    </div>
+  </div>
+  <div class="question-content" style="display:none;" aria-hidden="true">
+    <div class="rich-section"><div class="rich-s-hdr"><div class="rich-icon ans"><i class="fas fa-lightbulb"></i></div><span class="rich-lbl">Answer</span></div><div class="rich-s-body" style="padding:16px 18px"><p class="ans-txt">The APEX_IR package provides PL/SQL APIs to programmatically manage Interactive Report saved reports, filters, highlights, and settings. Key procedures include APEX_IR.RESET_REPORT (clear all user customisations), ADD_FILTER (add a WHERE filter), DELETE_FILTER, GET_REPORT (get current report metadata), and CHANGE_REPORT_OWNER. This is useful for applying default filters on page load, resetting reports via buttons, and building report management features.</p></div></div>
+    <button class="details-toggle-btn" onclick="toggleDetails(this)">
+      <span class="toggle-icon">+</span>&nbsp;Show Code &amp; Details
+    </button>
+    <div class="details-body">
+      <div class="rich-section"><div class="rich-s-hdr"><div class="rich-icon code"><i class="fas fa-code"></i></div><span class="rich-lbl">Code</span><span class="rich-sub">APEX / PL/SQL</span></div><div class="rich-s-body" style="padding:0"><div class="rich-code-blk"><div class="rich-code-bar"><span class="rich-lang-tag">APEX/PL/SQL</span><button class="rich-cp-btn" onclick="copyCode(this)"><i class="fas fa-copy"></i> Copy</button></div><pre><code class="language-sql">-- Reset IR (remove all user customizations)
+apex_ir.reset_report(
+  p_page_id         =&gt; 2,
+  p_region_id       =&gt; apex_ir.g_report_region_id,
+  p_report_id       =&gt; apex_ir.g_report_id
+);
+
+-- Add a filter programmatically
+apex_ir.add_filter(
+  p_page_id         =&gt; 2,
+  p_region_id       =&gt; 1234567890,  -- region static ID or ID
+  p_report_column   =&gt; 'DEPARTMENT_ID',
+  p_filter_value    =&gt; :P1_DEPT_ID,
+  p_operator_abbr   =&gt; 'EQ'  -- EQ, NEQ, GT, LT, LIKE, etc.
+);
+
+-- Get current report ID
+SELECT ir_report_id, report_name, report_type
+FROM   apex_ir_reports
+WHERE  application_id = :APP_ID
+  AND  page_id        = 2
+  AND  base_report_id = 0;</code></pre></div></div></div><div class="rich-section"><div class="rich-s-hdr"><div class="rich-icon res"><i class="fas fa-circle-check"></i></div><span class="rich-lbl">Output / Result</span><span class="rich-sub">expected output</span></div><div class="rich-s-body" style="padding:16px 18px"><div class="state-pill after"><i class="fas fa-circle-check"></i> Result</div><div class="rich-out-blk"><div class="rich-out-bar"><div class="d-r"></div><div class="d-y"></div><div class="d-g"></div><span class="out-t">Output</span></div><div class="out-body"><span class="l ok">IR reset: all user filters cleared</span><span class="l info">Filter added: DEPARTMENT_ID = 10</span><span class="l info">Report refreshes showing filtered data</span><span class="l info">Report ID: 987654321</span></div></div></div></div><div class="rich-takeaway"><div class="rich-tk-icon"><i class="fas fa-bolt"></i></div><div class="rich-tk-body"><h4>Key Takeaway</h4><p>The APEX_IR package provides PL/SQL APIs to programmatically manage Interactive Report saved reports, filters, highlights, and settings.</p></div></div>
+    </div>
+  </div>
+</div>
+
+<div class="question-container" data-difficulty="advanced">
+  <div class="question-header" role="button" tabindex="0" aria-expanded="false">
+    <div class="question-text">Q34. How do you secure an APEX application against XSS and CSRF?</div>
+    <div class="question-details">
+      <span class="difficulty-badge" style="background:rgba(45,100,70,0.08);color:#2d6446;border:1px solid rgba(45,100,70,0.2)">advanced</span>
+      <div class="question-toggle"><i class="fas fa-chevron-down"></i></div>
+    </div>
+  </div>
+  <div class="question-content" style="display:none;" aria-hidden="true">
+    <div class="rich-section"><div class="rich-s-hdr"><div class="rich-icon ans"><i class="fas fa-lightbulb"></i></div><span class="rich-lbl">Answer</span></div><div class="rich-s-body" style="padding:16px 18px"><p class="ans-txt">APEX has built-in XSS protection: all item values are HTML-escaped by default when displayed. For CSRF, APEX generates and validates a hidden session token on every page submission — if the token doesn't match, the request is rejected. Best practices include: never using APEX_UTIL.RAW_ESCAPE to bypass escaping, always using bind variables in SQL (not concatenation), enabling checksum validation on URL parameters, using HTTPS, setting secure cookie attributes, and restricting public page access properly.</p></div></div>
+    <button class="details-toggle-btn" onclick="toggleDetails(this)">
+      <span class="toggle-icon">+</span>&nbsp;Show Code &amp; Details
+    </button>
+    <div class="details-body">
+      <div class="rich-section"><div class="rich-s-hdr"><div class="rich-icon code"><i class="fas fa-code"></i></div><span class="rich-lbl">Code</span><span class="rich-sub">APEX / PL/SQL</span></div><div class="rich-s-body" style="padding:0"><div class="rich-code-blk"><div class="rich-code-bar"><span class="rich-lang-tag">APEX/PL/SQL</span><button class="rich-cp-btn" onclick="copyCode(this)"><i class="fas fa-copy"></i> Copy</button></div><pre><code class="language-sql">-- APEX automatically escapes output, but verify:
+-- In item Display Only: Escape Special Chars = Yes (default)
+
+-- Never concatenate user input into SQL (SQL injection):
+-- BAD:
+v_sql := 'SELECT * FROM emp WHERE name = ''' || :P1_NAME || '''';
+-- GOOD: use bind variables
+SELECT * FROM employees WHERE employee_name = :P1_NAME;
+
+-- CSRF: APEX auto-generates hidden token
+-- Verify checksum on URL items
+apex_util.set_security_group_id;
+
+-- Content Security Policy header
+BEGIN
+  owa_util.mime_header('text/html', FALSE);
+  htp.p('Content-Security-Policy: default-src ''self''; '
+     || 'script-src ''self'' ''unsafe-inline''; '
+     || 'style-src ''self'' ''unsafe-inline'';');
+  owa_util.http_header_close;
+END;
+
+-- Restrict page to authenticated users
+-- Page → Security → Authentication = Page Requires Authentication</code></pre></div></div></div><div class="rich-section"><div class="rich-s-hdr"><div class="rich-icon res"><i class="fas fa-circle-check"></i></div><span class="rich-lbl">Output / Result</span><span class="rich-sub">expected output</span></div><div class="rich-s-body" style="padding:16px 18px"><div class="state-pill after"><i class="fas fa-circle-check"></i> Result</div><div class="rich-out-blk"><div class="rich-out-bar"><div class="d-r"></div><div class="d-y"></div><div class="d-g"></div><span class="out-t">Output</span></div><div class="out-body"><span class="l ok">XSS: output HTML-escaped by default</span><span class="l info">CSRF token validated on submit</span><span class="l info">Bind variables prevent SQL injection</span><span class="l info">HTTPS enforced via authentication scheme</span></div></div></div></div><div class="rich-takeaway"><div class="rich-tk-icon"><i class="fas fa-bolt"></i></div><div class="rich-tk-body"><h4>Key Takeaway</h4><p>APEX has built-in XSS protection: all item values are HTML-escaped by default when displayed.</p></div></div>
+    </div>
+  </div>
+</div>
+
+<div class="question-container" data-difficulty="advanced">
+  <div class="question-header" role="button" tabindex="0" aria-expanded="false">
+    <div class="question-text">Q35. What are APEX Task Manager and Workflow features?</div>
+    <div class="question-details">
+      <span class="difficulty-badge" style="background:rgba(45,100,70,0.08);color:#2d6446;border:1px solid rgba(45,100,70,0.2)">advanced</span>
+      <div class="question-toggle"><i class="fas fa-chevron-down"></i></div>
+    </div>
+  </div>
+  <div class="question-content" style="display:none;" aria-hidden="true">
+    <div class="rich-section"><div class="rich-s-hdr"><div class="rich-icon ans"><i class="fas fa-lightbulb"></i></div><span class="rich-lbl">Answer</span></div><div class="rich-s-body" style="padding:16px 18px"><p class="ans-txt">Oracle APEX 22.1+ introduced Approvals (Task Manager) built-in functionality that allows developers to create human approval workflows without custom code. You define task definitions with assignees, deadlines, actions, and parameters. Tasks can be initiated from APEX pages, monitored in a unified My Tasks interface, and integrated with email notifications. The APEX_APPROVAL package provides PL/SQL APIs to create, complete, and query tasks programmatically.</p></div></div>
+    <button class="details-toggle-btn" onclick="toggleDetails(this)">
+      <span class="toggle-icon">+</span>&nbsp;Show Code &amp; Details
+    </button>
+    <div class="details-body">
+      <div class="rich-section"><div class="rich-s-hdr"><div class="rich-icon code"><i class="fas fa-code"></i></div><span class="rich-lbl">Code</span><span class="rich-sub">APEX / PL/SQL</span></div><div class="rich-s-body" style="padding:0"><div class="rich-code-blk"><div class="rich-code-bar"><span class="rich-lang-tag">APEX/PL/SQL</span><button class="rich-cp-btn" onclick="copyCode(this)"><i class="fas fa-copy"></i> Copy</button></div><pre><code class="language-sql">-- Create approval task from PL/SQL process
+DECLARE
+  v_task_id NUMBER;
+BEGIN
+  v_task_id := apex_approval.create_task(
+    p_application_id     =&gt; :APP_ID,
+    p_task_def_static_id =&gt; 'EXPENSE_APPROVAL',
+    p_initiator          =&gt; V('APP_USER'),
+    p_parameters         =&gt; apex_approval.t_task_parameters(
+      apex_approval.t_task_parameter(
+        p_static_id =&gt; 'AMOUNT',
+        p_value     =&gt; :P1_AMOUNT
+      ),
+      apex_approval.t_task_parameter(
+        p_static_id =&gt; 'EMP_NAME',
+        p_value     =&gt; :P1_EMP_NAME
+      )
+    )
+  );
+  :P1_TASK_ID := v_task_id;
+END;
+
+-- Check task status
+SELECT task_id, task_status, assignee, due_on
+FROM   apex_tasks
+WHERE  application_id = :APP_ID
+  AND  task_id        = :P1_TASK_ID;</code></pre></div></div></div><div class="rich-section"><div class="rich-s-hdr"><div class="rich-icon res"><i class="fas fa-circle-check"></i></div><span class="rich-lbl">Output / Result</span><span class="rich-sub">expected output</span></div><div class="rich-s-body" style="padding:16px 18px"><div class="state-pill after"><i class="fas fa-circle-check"></i> Result</div><div class="rich-out-blk"><div class="rich-out-bar"><div class="d-r"></div><div class="d-y"></div><div class="d-g"></div><span class="out-t">Output</span></div><div class="out-body"><span class="l ok">Task created: ID = 5001</span><span class="l info">Task: EXPENSE_APPROVAL</span><span class="l info">Assignee: manager@company.com</span><span class="l info">Status: ASSIGNED</span><span class="l info">Email notification sent to assignee</span></div></div></div></div><div class="rich-takeaway"><div class="rich-tk-icon"><i class="fas fa-bolt"></i></div><div class="rich-tk-body"><h4>Key Takeaway</h4><p>Oracle APEX 22.</p></div></div>
+    </div>
+  </div>
+</div>
+
+<div class="question-container" data-difficulty="advanced">
+  <div class="question-header" role="button" tabindex="0" aria-expanded="false">
+    <div class="question-text">Q36. How do you implement real-time features in APEX using Push Notifications?</div>
+    <div class="question-details">
+      <span class="difficulty-badge" style="background:rgba(45,100,70,0.08);color:#2d6446;border:1px solid rgba(45,100,70,0.2)">advanced</span>
+      <div class="question-toggle"><i class="fas fa-chevron-down"></i></div>
+    </div>
+  </div>
+  <div class="question-content" style="display:none;" aria-hidden="true">
+    <div class="rich-section"><div class="rich-s-hdr"><div class="rich-icon ans"><i class="fas fa-lightbulb"></i></div><span class="rich-lbl">Answer</span></div><div class="rich-s-body" style="padding:16px 18px"><p class="ans-txt">Oracle APEX 21.1+ supports Progressive Web App (PWA) features including Push Notifications. You enable PWA mode in Application Definition, configure the push credentials (VAPID keys), and use APEX_PWA.PUSH_NOTIFICATION to send notifications from PL/SQL. On the client side, a service worker handles the push events. This enables APEX applications to send real-time alerts to users even when the browser tab is not active.</p></div></div>
+    <button class="details-toggle-btn" onclick="toggleDetails(this)">
+      <span class="toggle-icon">+</span>&nbsp;Show Code &amp; Details
+    </button>
+    <div class="details-body">
+      <div class="rich-section"><div class="rich-s-hdr"><div class="rich-icon code"><i class="fas fa-code"></i></div><span class="rich-lbl">Code</span><span class="rich-sub">APEX / PL/SQL</span></div><div class="rich-s-body" style="padding:0"><div class="rich-code-blk"><div class="rich-code-bar"><span class="rich-lang-tag">APEX/PL/SQL</span><button class="rich-cp-btn" onclick="copyCode(this)"><i class="fas fa-copy"></i> Copy</button></div><pre><code class="language-sql">-- Enable PWA in Application Definition
+-- Application → Definition → Progressive Web App → Yes
+
+-- Generate VAPID keys (once per instance)
+apex_pwa.generate_vapid_keys;
+
+-- Subscribe user to push notifications (JS)
+apex.pwa.subscribe();
+
+-- Send push notification from PL/SQL
+BEGIN
+  FOR r IN (
+    SELECT subscription_id
+    FROM   apex_pwa_push_subscriptions
+    WHERE  application_id = :APP_ID
+      AND  user_name      = UPPER(:P1_TARGET_USER)
+  ) LOOP
+    apex_pwa.push_notification(
+      p_subscription_id =&gt; r.subscription_id,
+      p_title           =&gt; 'Expense Approved',
+      p_body            =&gt; 'Your expense of $' || :P1_AMOUNT || ' was approved.',
+      p_icon            =&gt; '/images/app-icon.png',
+      p_target_url      =&gt; apex_page.get_url(p_page =&gt; 10)
+    );
+  END LOOP;
+END;</code></pre></div></div></div><div class="rich-section"><div class="rich-s-hdr"><div class="rich-icon res"><i class="fas fa-circle-check"></i></div><span class="rich-lbl">Output / Result</span><span class="rich-sub">expected output</span></div><div class="rich-s-body" style="padding:16px 18px"><div class="state-pill after"><i class="fas fa-circle-check"></i> Result</div><div class="rich-out-blk"><div class="rich-out-bar"><div class="d-r"></div><div class="d-y"></div><div class="d-g"></div><span class="out-t">Output</span></div><div class="out-body"><span class="l ok">PWA enabled for application 100</span><span class="l info">User subscribed to push notifications</span><span class="l info">Notification sent to: tharun.k@company.com</span><span class="l info">Browser shows: " Expense Approved"</span><span class="l info">" Your expense of $500 was approved."</span></div></div></div></div><div class="rich-takeaway"><div class="rich-tk-icon"><i class="fas fa-bolt"></i></div><div class="rich-tk-body"><h4>Key Takeaway</h4><p>Oracle APEX 21.</p></div></div>
+    </div>
+  </div>
+</div>
+
+<div class="question-container" data-difficulty="advanced">
+  <div class="question-header" role="button" tabindex="0" aria-expanded="false">
+    <div class="question-text">Q37. What is the APEX_DEBUG package and how do you use it?</div>
+    <div class="question-details">
+      <span class="difficulty-badge" style="background:rgba(45,100,70,0.08);color:#2d6446;border:1px solid rgba(45,100,70,0.2)">advanced</span>
+      <div class="question-toggle"><i class="fas fa-chevron-down"></i></div>
+    </div>
+  </div>
+  <div class="question-content" style="display:none;" aria-hidden="true">
+    <div class="rich-section"><div class="rich-s-hdr"><div class="rich-icon ans"><i class="fas fa-lightbulb"></i></div><span class="rich-lbl">Answer</span></div><div class="rich-s-body" style="padding:16px 18px"><p class="ans-txt">APEX_DEBUG is the package for writing debug messages in APEX applications. You can write messages at different log levels (INFO, WARN, ERROR) using APEX_DEBUG.MESSAGE, APEX_DEBUG.WARN, APEX_DEBUG.ERROR. Debug mode can be enabled from the URL (&amp;p_debug=YES), from the Developer Toolbar, or programmatically. Debug messages are stored in APEX_DEBUG_MESSAGES and visible in the Debug view in APEX Builder. This is essential for troubleshooting complex applications in production without affecting all users.</p></div></div>
+    <button class="details-toggle-btn" onclick="toggleDetails(this)">
+      <span class="toggle-icon">+</span>&nbsp;Show Code &amp; Details
+    </button>
+    <div class="details-body">
+      <div class="rich-section"><div class="rich-s-hdr"><div class="rich-icon code"><i class="fas fa-code"></i></div><span class="rich-lbl">Code</span><span class="rich-sub">APEX / PL/SQL</span></div><div class="rich-s-body" style="padding:0"><div class="rich-code-blk"><div class="rich-code-bar"><span class="rich-lang-tag">APEX/PL/SQL</span><button class="rich-cp-btn" onclick="copyCode(this)"><i class="fas fa-copy"></i> Copy</button></div><pre><code class="language-sql">-- Enable debug in URL
+f?p=100:1:&amp;APP_SESSION.:::::&amp;p_debug=YES
+
+-- Write debug messages in PL/SQL
+BEGIN
+  apex_debug.message('Starting salary update for emp: %s', :P1_EMP_ID);
+  apex_debug.info('Old salary: %s, New salary: %s', :P1_OLD_SAL, :P1_NEW_SALARY);
+
+  UPDATE employees SET salary = :P1_NEW_SALARY
+  WHERE  employee_id = :P1_EMP_ID;
+
+  IF SQL%ROWCOUNT = 0 THEN
+    apex_debug.warn('No rows updated for emp_id: %s', :P1_EMP_ID);
+  ELSE
+    apex_debug.message('Update successful: %s row(s)', SQL%ROWCOUNT);
+  END IF;
+END;
+
+-- Query debug messages
+SELECT message_timestamp, component_name, message
+FROM   apex_debug_messages
+WHERE  page_id = 1
+  AND  session_id = :APP_SESSION
+ORDER  BY message_timestamp;</code></pre></div></div></div><div class="rich-section"><div class="rich-s-hdr"><div class="rich-icon res"><i class="fas fa-circle-check"></i></div><span class="rich-lbl">Output / Result</span><span class="rich-sub">expected output</span></div><div class="rich-s-body" style="padding:16px 18px"><div class="state-pill after"><i class="fas fa-circle-check"></i> Result</div><div class="rich-out-blk"><div class="rich-out-bar"><div class="d-r"></div><div class="d-y"></div><div class="d-g"></div><span class="out-t">Output</span></div><div class="out-body"><span class="l ok">[INFO] Starting salary update for emp: 101</span><span class="l info">[INFO] Old salary: 50000, New salary: 75000</span><span class="l dim">[INFO] Update successful: 1 row(s)</span><span class="l info">Debug visible in APEX Builder → Debug view</span></div></div></div></div><div class="rich-takeaway"><div class="rich-tk-icon"><i class="fas fa-bolt"></i></div><div class="rich-tk-body"><h4>Key Takeaway</h4><p>APEX_DEBUG is the package for writing debug messages in APEX applications.</p></div></div>
+    </div>
+  </div>
+</div>
+  </div>
+</div>
+
+<footer class="footer">
+  <div class="footer-top">
+    <div>
+      <div class="footer-logo">
+        <div class="footer-logo-mark"><i class="fas fa-code"></i></div>
+        <span class="footer-logo-text">APEX Mastery</span>
+      </div>
+      <p class="footer-brand-desc">The most comprehensive Oracle APEX interview preparation platform.</p>
+    </div>
+    <div class="footer-col"><h4>Practice</h4><ul>
+      <li><a href="oracle-sql.html">Oracle SQL</a></li>
+      <li><a href="plsql.html">PL/SQL</a></li>
+      <li><a href="oracle-apex.html">Oracle APEX</a></li>
+      <li><a href="oracle-apex-quiz.html">Quiz</a></li>
+    </ul></div>
+    <div class="footer-col"><h4>Frontend</h4><ul>
+      <li><a href="html-questions.html">HTML</a></li>
+      <li><a href="css-questions.html">CSS</a></li>
+      <li><a href="javascript-questions.html">JavaScript</a></li>
+      <li><a href="jquery-questions.html">jQuery</a></li>
+    </ul></div>
+    <div class="footer-col"><h4>Resources</h4><ul>
+      <li><a href="pdf-resources.html">PDF Downloads</a></li>
+      <li><a href="index.html">Home</a></li>
+    </ul></div>
+  </div>
+  <div class="footer-bottom">
+    <span class="footer-copy">&copy; 2025 Oracle APEX Interview Mastery</span>
+    <span class="footer-copy">Built for developers by developers</span>
+  </div>
+</footer>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-sql.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-javascript.min.js"></script>
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  var container = document.getElementById('questionsContainer');
+  if (!container) return;
+
+  // Question click - open/close
+  container.addEventListener('click', function(e) {
+    if (e.target.closest('.details-toggle-btn')) return;
+    if (e.target.closest('.rich-cp-btn')) return;
+    var header = e.target.closest('.question-header');
+    if (!header) return;
+    var card    = header.closest('.question-container');
+    if (!card) return;
+    var content = card.querySelector('.question-content');
+    if (!content) return;
+    var icon    = header.querySelector('.question-toggle');
+    var isOpen  = content.style.display === 'block';
+    content.style.display = isOpen ? 'none' : 'block';
+    if (icon) icon.classList.toggle('rotated', !isOpen);
+  });
+
+  // Filter tabs
+  document.querySelectorAll('.filter-tab').forEach(function(tab) {
+    tab.addEventListener('click', function() {
+      document.querySelectorAll('.filter-tab').forEach(function(t) { t.classList.remove('active'); });
+      tab.classList.add('active');
+      var f = tab.dataset.filter;
+      document.querySelectorAll('.question-container').forEach(function(card) {
+        card.style.display = (f === 'all' || card.dataset.difficulty === f) ? 'block' : 'none';
+      });
+    });
+  });
+
+  // Search
+  var searchEl = document.getElementById('searchInput');
+  if (searchEl) {
+    searchEl.addEventListener('input', function() {
+      var q = this.value.toLowerCase().trim();
+      document.querySelectorAll('.question-container').forEach(function(card) {
+        card.style.display = (!q || card.textContent.toLowerCase().includes(q)) ? 'block' : 'none';
+      });
+    });
+  }
+});
+
+// Inner + / - toggle
+function toggleDetails(btn) {
+  var body = btn.nextElementSibling;
+  if (!body) return;
+  var isOpen = body.classList.contains('open');
+  if (isOpen) {
+    body.classList.remove('open');
+    btn.innerHTML = '<span class="toggle-icon">+</span>&nbsp;Show Code &amp; Details';
+  } else {
+    body.classList.add('open');
+    btn.innerHTML = '<span class="toggle-icon">&#8722;</span>&nbsp;Hide Details';
+    if (window.Prism) {
+      setTimeout(function() {
+        body.querySelectorAll('code[class*="language-"]').forEach(function(el) {
+          Prism.highlightElement(el);
+        });
+      }, 50);
+    }
+  }
+}
+
+// Copy code
+function copyCode(btn) {
+  var blk = btn.closest('.rich-code-blk');
+  if (!blk) return;
+  var code = blk.querySelector('code').textContent;
+  navigator.clipboard.writeText(code).catch(function() {
+    var ta = document.createElement('textarea');
+    ta.value = code; document.body.appendChild(ta);
+    ta.select(); document.execCommand('copy'); document.body.removeChild(ta);
+  });
+  var orig = btn.innerHTML;
+  btn.innerHTML = '<i class="fas fa-check"></i> Copied!';
+  btn.style.color = '#a8d080';
+  setTimeout(function() { btn.innerHTML = orig; btn.style.color = ''; }, 2000);
+}
+</script>
+
+</body>
+</body>
+</html>

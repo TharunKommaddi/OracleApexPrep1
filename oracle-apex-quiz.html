@@ -1,0 +1,414 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Oracle APEX Quiz — APEX Interview Mastery</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,500;12..96,600;12..96,700;12..96,800&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,300&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='0.9em' font-size='90'>💻</text></svg>">
+<style>
+
+:root {
+  --bg-base:#f5f0e8;--bg-surface:#ede7da;--bg-card:#faf7f2;--bg-card-hover:#fff9f3;
+  --bg-nav:rgba(245,240,232,0.94);--border-soft:rgba(160,130,100,0.13);
+  --border-mid:rgba(160,130,100,0.22);--border-accent:rgba(45,100,70,0.22);
+  --text-primary:#1c1208;--text-secondary:#5a4a35;--text-muted:#9a856a;--text-faint:#c4ad92;
+  --accent:#2d6446;--accent-light:#3a7d57;--accent-pale:#f0f7f3;--accent-border:rgba(45,100,70,0.2);
+  --shadow-sm:0 1px 4px rgba(100,70,40,0.06);--shadow-md:0 4px 20px rgba(100,70,40,0.09);
+  --shadow-lg:0 12px 40px rgba(100,70,40,0.12);
+  --r-sm:8px;--r-md:12px;--r-lg:16px;--r-xl:20px;--r-pill:100px;--transition:0.2s ease;
+}
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{background:var(--bg-base);color:var(--text-primary);font-family:'DM Sans',sans-serif;font-size:16px;line-height:1.6;-webkit-font-smoothing:antialiased;}
+a{text-decoration:none;color:inherit;}
+
+/* NAV */
+.nav{position:sticky;top:0;z-index:500;background:var(--bg-nav);backdrop-filter:blur(20px);border-bottom:1px solid var(--border-soft);height:64px;display:flex;align-items:center;padding:0 48px;}
+.nav-logo{display:flex;align-items:center;gap:10px;margin-right:36px;flex-shrink:0;}
+.nav-logo-mark{width:32px;height:32px;border-radius:9px;background:var(--accent);display:flex;align-items:center;justify-content:center;color:#fff;font-size:13px;font-weight:700;font-family:'Bricolage Grotesque',sans-serif;}
+.nav-logo-text{font-family:'Bricolage Grotesque',sans-serif;font-size:17px;font-weight:700;color:var(--text-primary);letter-spacing:-0.4px;}
+.nav-links{display:flex;gap:2px;flex:1;list-style:none;}
+.nav-links a{color:var(--text-secondary);font-size:14px;font-weight:500;padding:7px 12px;border-radius:var(--r-sm);transition:all var(--transition);display:flex;align-items:center;gap:6px;white-space:nowrap;}
+.nav-links a:hover{color:var(--text-primary);background:var(--border-soft);}
+.nav-links a.active{color:var(--accent);font-weight:600;}
+.nav-dropdown{position:relative;}
+.nav-dropdown-menu{position:absolute;top:calc(100% + 8px);left:0;background:var(--bg-card);border:1px solid var(--border-soft);border-radius:var(--r-lg);box-shadow:var(--shadow-lg);min-width:180px;padding:8px;list-style:none;opacity:0;visibility:hidden;transform:translateY(-8px);transition:all 0.18s ease;z-index:600;}
+.nav-dropdown:hover .nav-dropdown-menu{opacity:1;visibility:visible;transform:translateY(0);}
+.nav-dropdown-menu a{display:flex;align-items:center;gap:10px;padding:9px 12px;border-radius:var(--r-sm);color:var(--text-secondary);font-size:14px;}
+.nav-dropdown-menu a:hover{background:var(--bg-surface);color:var(--accent);}
+@media(max-width:768px){.nav{padding:0 20px;}.nav-links{display:none;}}
+
+/* PAGE HEADER */
+.page-header{background:var(--bg-surface);border-bottom:1px solid var(--border-soft);padding:48px 48px 40px;}
+@media(max-width:768px){.page-header{padding:32px 20px;}}
+.page-eyebrow{display:inline-flex;align-items:center;gap:8px;color:var(--accent);font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:2px;margin-bottom:12px;}
+.page-eyebrow::before{content:'';width:20px;height:2px;background:var(--accent);border-radius:1px;}
+.page-title{font-family:'Bricolage Grotesque',sans-serif;font-size:clamp(28px,4vw,44px);font-weight:800;letter-spacing:-1.5px;color:var(--text-primary);margin-bottom:8px;}
+.page-subtitle{color:var(--text-muted);font-size:16px;font-weight:300;}
+
+/* CONTAINER */
+.container{max-width:1000px;margin:0 auto;padding:32px 48px 72px;}
+@media(max-width:768px){.container{padding:24px 20px 48px;}}
+
+/* FILTER */
+.filter-section{background:var(--bg-card);border:1px solid var(--border-soft);border-radius:var(--r-xl);padding:24px;margin-bottom:24px;box-shadow:var(--shadow-sm);}
+.filter-title{font-family:'Bricolage Grotesque',sans-serif;font-size:14px;font-weight:700;color:var(--text-primary);margin-bottom:14px;display:flex;align-items:center;gap:8px;}
+.filter-title i{color:var(--accent);}
+.filter-tabs{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:14px;}
+.filter-tab{padding:7px 18px;border-radius:var(--r-pill);font-size:12px;font-weight:600;cursor:pointer;border:1.5px solid var(--border-soft);background:var(--bg-surface);color:var(--text-muted);transition:all var(--transition);font-family:'DM Sans',sans-serif;}
+.filter-tab:hover{border-color:var(--accent-border);color:var(--accent);}
+.filter-tab.active{background:var(--accent);color:#fff;border-color:var(--accent);}
+.search-wrap{position:relative;}
+.search-icon{position:absolute;left:14px;top:50%;transform:translateY(-50%);color:var(--text-faint);font-size:13px;}
+.search-input{width:100%;padding:10px 14px 10px 38px;border-radius:var(--r-sm);border:1px solid var(--border-mid);background:var(--bg-surface);font-size:13px;font-family:'DM Sans',sans-serif;color:var(--text-primary);outline:none;transition:all var(--transition);}
+.search-input:focus{border-color:var(--accent);box-shadow:0 0 0 3px rgba(45,100,70,0.1);background:var(--bg-card);}
+
+/* QUESTION CARD */
+.question-container{background:var(--bg-card);border:1px solid var(--border-soft);border-radius:var(--r-lg);margin-bottom:8px;box-shadow:var(--shadow-sm);overflow:hidden;transition:border-color var(--transition);}
+.question-container:hover{border-color:var(--accent-border);}
+.question-header{display:flex;align-items:center;justify-content:space-between;padding:18px 22px;cursor:pointer;user-select:none;gap:12px;}
+.question-header:hover{background:var(--accent-pale);}
+.question-text{font-family:'Bricolage Grotesque',sans-serif;font-size:15px;font-weight:700;color:var(--text-primary);line-height:1.4;flex:1;letter-spacing:-0.2px;}
+.question-details{display:flex;align-items:center;gap:10px;flex-shrink:0;}
+.difficulty-badge{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:0.5px;padding:3px 10px;border-radius:var(--r-pill);white-space:nowrap;}
+.question-toggle{width:28px;height:28px;border-radius:50%;background:var(--bg-surface);border:1px solid var(--border-soft);display:flex;align-items:center;justify-content:center;font-size:11px;color:var(--text-muted);transition:transform .25s ease;flex-shrink:0;}
+.question-toggle.rotated{transform:rotate(180deg);}
+.question-content{display:none;padding:4px 16px 16px;}
+
+/* RICH SECTIONS */
+.rich-section{background:var(--bg-card);border:1px solid var(--border-soft);border-radius:var(--r-md);margin:6px 0;overflow:hidden;}
+.rich-s-hdr{display:flex;align-items:center;gap:10px;padding:10px 18px;border-bottom:1px solid var(--border-soft);background:var(--bg-surface);}
+.rich-icon{width:26px;height:26px;border-radius:7px;display:flex;align-items:center;justify-content:center;font-size:11px;flex-shrink:0;}
+.rich-icon.ans{background:var(--accent-pale);color:var(--accent);}
+.rich-icon.tbl{background:rgba(30,64,175,0.08);color:#1e40af;}
+.rich-icon.code{background:rgba(0,0,0,0.06);color:#555;}
+.rich-icon.before-ic{background:rgba(183,121,31,0.1);color:#b7791f;}
+.rich-icon.res{background:var(--accent-pale);color:var(--accent);}
+.rich-lbl{font-family:'Bricolage Grotesque',sans-serif;font-size:12px;font-weight:700;color:var(--text-primary);}
+.rich-sub{font-size:11px;color:var(--text-muted);margin-left:auto;font-family:'DM Mono',monospace;}
+.rich-s-body{padding:16px 18px;}
+.ans-txt{font-size:14px;color:var(--text-secondary);line-height:1.85;font-weight:300;}
+
+/* TABLES */
+.rich-two-tbl{display:grid;grid-template-columns:1fr 1fr;gap:12px;}
+@media(max-width:580px){.rich-two-tbl{grid-template-columns:1fr;}}
+.rich-tbl-lbl{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:0.8px;color:var(--text-muted);margin-bottom:6px;display:flex;align-items:center;gap:5px;}
+.rich-tbl-wrap{overflow-x:auto;border-radius:var(--r-sm);border:1px solid var(--border-soft);}
+.rich-tbl{width:100%;border-collapse:collapse;font-size:12px;font-family:'DM Mono',monospace;}
+.rich-tbl thead tr{background:var(--bg-surface);}
+.rich-tbl th{padding:8px 12px;text-align:left;font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:0.5px;color:var(--text-muted);border-bottom:1px solid var(--border-soft);white-space:nowrap;}
+.rich-tbl td{padding:8px 12px;border-bottom:1px solid var(--border-soft);color:var(--text-secondary);}
+.rich-tbl .td-null{color:var(--text-faint);font-style:italic;}
+.rich-tbl tbody tr:last-child td{border-bottom:none;}
+.rich-tbl tbody tr:hover{background:rgba(245,240,232,0.6);}
+
+/* CODE */
+.rich-code-blk{background:#1a1612;border-radius:0;overflow:hidden;}
+.rich-code-bar{display:flex;align-items:center;justify-content:space-between;padding:9px 14px;background:rgba(0,0,0,0.25);border-bottom:1px solid rgba(255,255,255,0.06);}
+.rich-lang-tag{font-family:'DM Mono',monospace;font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:1px;color:#e6a050;}
+.rich-cp-btn{background:rgba(255,255,255,0.07);border:1px solid rgba(255,255,255,0.1);color:rgba(255,255,255,0.4);padding:3px 10px;border-radius:5px;cursor:pointer;font-size:11px;font-family:'DM Sans',sans-serif;display:flex;align-items:center;gap:4px;transition:all .2s;}
+.rich-cp-btn:hover{background:rgba(255,255,255,0.13);color:#fff;}
+.rich-code-blk pre{margin:0!important;padding:16px 20px!important;background:transparent!important;font-size:12.5px!important;line-height:1.75!important;font-family:'DM Mono',monospace!important;text-shadow:none!important;overflow-x:auto;}
+.rich-code-blk code{font-family:'DM Mono',monospace!important;background:transparent!important;text-shadow:none!important;}
+.token.comment{color:#6b5a3e!important;font-style:italic;}
+.token.keyword{color:#e6a050!important;font-weight:600;}
+.token.string{color:#a8d080!important;}
+.token.number{color:#c5a3ff!important;}
+.token.function{color:#7ec8e3!important;}
+.token.operator{color:#e6a050!important;}
+.token.punctuation{color:#c4a882!important;}
+
+/* STATE PILLS */
+.state-pill{display:inline-flex;align-items:center;gap:5px;font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:0.8px;padding:3px 12px;border-radius:var(--r-pill);margin-bottom:10px;}
+.state-pill.before{background:rgba(183,121,31,0.1);color:#92400e;border:1px solid rgba(183,121,31,0.25);}
+.state-pill.after{background:var(--accent-pale);color:var(--accent);border:1px solid var(--accent-border);}
+.rich-note{margin-top:8px;font-size:12px;color:var(--text-muted);font-style:italic;}
+
+/* OUTPUT */
+.rich-out-blk{background:#0f1117;border-radius:var(--r-sm);overflow:hidden;border:1px solid rgba(255,255,255,0.05);font-family:'DM Mono',monospace;}
+.rich-out-bar{display:flex;align-items:center;gap:6px;padding:8px 12px;background:rgba(0,0,0,0.3);border-bottom:1px solid rgba(255,255,255,0.06);}
+.d-r{width:9px;height:9px;border-radius:50%;background:#ff5f57;}
+.d-y{width:9px;height:9px;border-radius:50%;background:#febc2e;}
+.d-g{width:9px;height:9px;border-radius:50%;background:#28c840;}
+.out-t{font-size:10px;color:rgba(255,255,255,0.25);margin-left:4px;}
+.out-body{padding:12px 16px;font-size:12px;line-height:1.85;color:#c9bfa8;}
+.out-body .l{display:block;}
+.out-body .ok{color:#a8d080;}
+.out-body .info{color:#7ec8e3;}
+.out-body .dim{color:rgba(255,255,255,0.25);font-style:italic;}
+
+/* TAKEAWAY */
+.rich-takeaway{display:flex;gap:12px;align-items:flex-start;background:var(--accent-pale);border:1px solid var(--accent-border);border-radius:var(--r-md);padding:14px 18px;margin:6px 0 2px;}
+.rich-tk-icon{width:30px;height:30px;background:var(--accent);color:#fff;border-radius:var(--r-sm);display:flex;align-items:center;justify-content:center;font-size:12px;flex-shrink:0;}
+.rich-tk-body h4{font-family:'Bricolage Grotesque',sans-serif;font-size:11px;font-weight:800;color:var(--accent);margin-bottom:3px;text-transform:uppercase;letter-spacing:0.5px;}
+.rich-tk-body p{font-size:13px;color:var(--text-secondary);line-height:1.65;font-weight:300;}
+
+/* INNER DETAILS TOGGLE */
+.details-toggle-btn{display:inline-flex;align-items:center;gap:8px;margin-top:12px;padding:7px 16px;border-radius:var(--r-pill);border:1.5px solid var(--accent-border);background:var(--accent-pale);color:var(--accent);font-size:12px;font-weight:700;cursor:pointer;font-family:'DM Sans',sans-serif;transition:all 0.2s;user-select:none;}
+.details-toggle-btn:hover{background:var(--accent);color:#fff;}
+.details-toggle-btn .toggle-icon{width:18px;height:18px;border-radius:50%;background:var(--accent);color:#fff;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:800;flex-shrink:0;transition:background 0.2s;}
+.details-toggle-btn:hover .toggle-icon{background:#fff;color:var(--accent);}
+.details-body{display:none;margin-top:4px;}
+.details-body.open{display:block;}
+
+/* JOIN BADGES */
+.join-type-header{display:flex;align-items:center;gap:10px;padding:12px 0 4px;margin-top:8px;}
+.join-badge{font-family:'Bricolage Grotesque',sans-serif;font-size:13px;font-weight:800;padding:4px 14px;border-radius:var(--r-pill);}
+.join-badge.inner{background:#dbeafe;color:#1e40af;border:1px solid #bfdbfe;}
+.join-badge.left{background:var(--accent-pale);color:var(--accent);border:1px solid var(--accent-border);}
+.join-badge.right{background:rgba(124,58,237,0.08);color:#7c3aed;border:1px solid rgba(124,58,237,0.2);}
+.join-badge.full{background:rgba(183,121,31,0.08);color:#b7791f;border:1px solid rgba(183,121,31,0.2);}
+.join-badge-desc{font-size:12px;color:var(--text-muted);font-weight:300;}
+
+/* FOOTER */
+.footer{background:var(--bg-surface);border-top:1px solid var(--border-soft);padding:48px 48px 28px;}
+@media(max-width:768px){.footer{padding:40px 20px 24px;}}
+.footer-top{display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:48px;margin-bottom:36px;padding-bottom:36px;border-bottom:1px solid var(--border-soft);}
+@media(max-width:900px){.footer-top{grid-template-columns:1fr 1fr;gap:32px;}}
+@media(max-width:560px){.footer-top{grid-template-columns:1fr;gap:24px;}}
+.footer-logo{display:flex;align-items:center;gap:10px;margin-bottom:12px;}
+.footer-logo-mark{width:28px;height:28px;border-radius:7px;background:var(--accent);display:flex;align-items:center;justify-content:center;color:#fff;font-size:12px;}
+.footer-logo-text{font-family:'Bricolage Grotesque',sans-serif;font-size:15px;font-weight:700;color:var(--text-primary);}
+.footer-brand-desc{color:var(--text-muted);font-size:13px;line-height:1.7;font-weight:300;}
+.footer-col h4{font-size:13px;font-weight:700;color:var(--text-primary);margin-bottom:14px;}
+.footer-col ul{list-style:none;display:flex;flex-direction:column;gap:9px;}
+.footer-col ul a{color:var(--text-muted);font-size:13px;transition:color var(--transition);}
+.footer-col ul a:hover{color:var(--accent);}
+.footer-bottom{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:8px;}
+.footer-copy{color:var(--text-faint);font-size:12px;}
+
+.quiz-wrap{max-width:700px;margin:0 auto;padding:32px 48px 72px;}
+@media(max-width:768px){.quiz-wrap{padding:24px 20px 48px;}}
+.quiz-header{background:var(--bg-card);border:1px solid var(--border-soft);border-radius:var(--r-xl);padding:28px;margin-bottom:24px;box-shadow:var(--shadow-sm);}
+.quiz-progress-bar{width:100%;height:6px;background:var(--bg-surface);border-radius:3px;margin-bottom:12px;overflow:hidden;}
+.quiz-progress-fill{height:100%;background:var(--accent);border-radius:3px;transition:width 0.4s ease;}
+.quiz-counter{font-size:13px;color:var(--text-muted);font-weight:500;}
+.quiz-score-pill{font-family:'DM Mono',monospace;font-size:13px;font-weight:700;color:var(--accent);background:var(--accent-pale);border:1px solid var(--accent-border);padding:4px 14px;border-radius:var(--r-pill);}
+.quiz-card{background:var(--bg-card);border:1px solid var(--border-soft);border-radius:var(--r-xl);padding:32px;box-shadow:var(--shadow-sm);}
+.quiz-q-num{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:1.5px;color:var(--accent);margin-bottom:10px;}
+.quiz-q-text{font-family:'Bricolage Grotesque',sans-serif;font-size:18px;font-weight:700;color:var(--text-primary);line-height:1.5;letter-spacing:-0.3px;margin-bottom:24px;}
+.quiz-options{display:flex;flex-direction:column;gap:10px;}
+.quiz-opt{background:var(--bg-surface);border:2px solid var(--border-soft);border-radius:var(--r-lg);padding:14px 18px;cursor:pointer;display:flex;align-items:center;gap:12px;transition:all 0.18s ease;font-size:14px;color:var(--text-secondary);font-family:'DM Sans',sans-serif;text-align:left;}
+.quiz-opt:hover{border-color:var(--accent-border);background:var(--accent-pale);color:var(--text-primary);}
+.quiz-opt.correct{background:#d1fae5;border-color:#6ee7b7;color:#065f46;font-weight:600;}
+.quiz-opt.wrong{background:#fee2e2;border-color:#fca5a5;color:#991b1b;}
+.quiz-opt.disabled{cursor:not-allowed;opacity:0.7;}
+.quiz-opt-letter{width:28px;height:28px;border-radius:50%;background:rgba(0,0,0,0.07);display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:800;flex-shrink:0;font-family:'DM Mono',monospace;}
+.quiz-opt.correct .quiz-opt-letter{background:#6ee7b7;color:#065f46;}
+.quiz-opt.wrong .quiz-opt-letter{background:#fca5a5;color:#991b1b;}
+.quiz-explanation{margin-top:16px;padding:14px 18px;background:var(--accent-pale);border:1px solid var(--accent-border);border-radius:var(--r-md);font-size:13px;color:var(--text-secondary);line-height:1.7;display:none;}
+.quiz-explanation.show{display:block;}
+.quiz-explanation strong{color:var(--accent);}
+.quiz-nav{display:flex;justify-content:flex-end;margin-top:20px;}
+.quiz-btn{background:var(--accent);color:#fff;border:none;padding:10px 24px;border-radius:var(--r-pill);font-size:14px;font-weight:600;cursor:pointer;font-family:'DM Sans',sans-serif;transition:all 0.2s;display:none;align-items:center;gap:8px;}
+.quiz-btn:hover{background:var(--accent-light);transform:translateY(-1px);}
+.quiz-btn.show{display:flex;}
+.quiz-result{background:var(--bg-card);border:1px solid var(--border-soft);border-radius:var(--r-xl);padding:48px 32px;text-align:center;box-shadow:var(--shadow-sm);display:none;}
+.quiz-result.show{display:block;}
+.quiz-result-score{font-family:'Bricolage Grotesque',sans-serif;font-size:72px;font-weight:800;letter-spacing:-3px;color:var(--accent);line-height:1;}
+.quiz-result-label{font-size:16px;color:var(--text-muted);margin:8px 0 24px;font-weight:300;}
+.quiz-result-msg{font-size:18px;font-weight:600;color:var(--text-primary);margin-bottom:8px;}
+.quiz-result-sub{font-size:14px;color:var(--text-muted);margin-bottom:32px;}
+.quiz-restart{background:var(--accent);color:#fff;border:none;padding:12px 32px;border-radius:var(--r-pill);font-size:15px;font-weight:600;cursor:pointer;font-family:'DM Sans',sans-serif;transition:all 0.2s;}
+.quiz-restart:hover{background:var(--accent-light);transform:translateY(-2px);}
+</style>
+</head>
+<body>
+<nav class="nav">
+  <a href="index.html" class="nav-logo">
+    <div class="nav-logo-mark">A</div>
+    <span class="nav-logo-text">APEX Mastery</span>
+  </a>
+  <ul class="nav-links">
+    <li><a href="index.html"><i class="fas fa-home"></i> Home</a></li>
+    <li><a href="oracle-sql.html"><i class="fas fa-database"></i> Oracle SQL</a></li>
+    <li><a href="plsql.html"><i class="fas fa-code"></i> PL/SQL</a></li>
+    <li><a href="oracle-apex.html"><i class="fas fa-layer-group"></i> APEX</a></li>
+    <li class="nav-dropdown">
+      <a><i class="fas fa-paint-brush"></i> Frontend <i class="fas fa-chevron-down" style="font-size:10px;margin-left:2px"></i></a>
+      <ul class="nav-dropdown-menu">
+        <li><a href="html-questions.html"><i class="fab fa-html5"></i> HTML</a></li>
+        <li><a href="css-questions.html"><i class="fab fa-css3-alt"></i> CSS</a></li>
+        <li><a href="javascript-questions.html"><i class="fab fa-js"></i> JavaScript</a></li>
+        <li><a href="jquery-questions.html"><i class="fas fa-dollar-sign"></i> jQuery</a></li>
+      </ul>
+    </li>
+    <li><a href="oracle-apex-quiz.html" class="active"><i class="fas fa-circle-question"></i> Quiz</a></li>
+    <li><a href="pdf-resources.html"><i class="fas fa-file-pdf"></i> PDFs</a></li>
+  </ul>
+</nav>
+<div class="page-header">
+  <div style="max-width:700px;margin:0 auto">
+    <div class="page-eyebrow">Interactive</div>
+    <h1 class="page-title">Oracle APEX Practice Quiz</h1>
+    <p class="page-subtitle">20 questions · Test your APEX knowledge · Instant feedback</p>
+  </div>
+</div>
+<div class="quiz-wrap">
+  <!-- Progress -->
+  <div class="quiz-header">
+    <div class="quiz-progress-bar"><div class="quiz-progress-fill" id="progressFill" style="width:0%"></div></div>
+    <div style="display:flex;justify-content:space-between;align-items:center">
+      <span class="quiz-counter" id="quizCounter">Question 1 of 20</span>
+      <span class="quiz-score-pill" id="quizScore">Score: 0</span>
+    </div>
+  </div>
+
+  <!-- Question card -->
+  <div class="quiz-card" id="quizCard">
+    <div class="quiz-q-num" id="qNum">Question 1</div>
+    <div class="quiz-q-text" id="qText"></div>
+    <div class="quiz-options" id="qOpts"></div>
+    <div class="quiz-explanation" id="qExp"></div>
+    <div class="quiz-nav">
+      <button class="quiz-btn" id="nextBtn" onclick="nextQuestion()">
+        Next <i class="fas fa-arrow-right"></i>
+      </button>
+    </div>
+  </div>
+
+  <!-- Result -->
+  <div class="quiz-result" id="quizResult">
+    <div class="quiz-result-score" id="resultScore"></div>
+    <div class="quiz-result-label">out of 20 correct</div>
+    <div class="quiz-result-msg" id="resultMsg"></div>
+    <div class="quiz-result-sub" id="resultSub"></div>
+    <button class="quiz-restart" onclick="restartQuiz()">
+      <i class="fas fa-rotate-right"></i> Try Again
+    </button>
+  </div>
+</div>
+<footer class="footer">
+  <div class="footer-top">
+    <div>
+      <div class="footer-logo">
+        <div class="footer-logo-mark"><i class="fas fa-code"></i></div>
+        <span class="footer-logo-text">APEX Mastery</span>
+      </div>
+      <p class="footer-brand-desc">The most comprehensive Oracle APEX interview preparation platform.</p>
+    </div>
+    <div class="footer-col"><h4>Practice</h4><ul>
+      <li><a href="oracle-sql.html">Oracle SQL</a></li>
+      <li><a href="plsql.html">PL/SQL</a></li>
+      <li><a href="oracle-apex.html">Oracle APEX</a></li>
+      <li><a href="oracle-apex-quiz.html">Quiz</a></li>
+    </ul></div>
+    <div class="footer-col"><h4>Frontend</h4><ul>
+      <li><a href="html-questions.html">HTML</a></li>
+      <li><a href="css-questions.html">CSS</a></li>
+      <li><a href="javascript-questions.html">JavaScript</a></li>
+      <li><a href="jquery-questions.html">jQuery</a></li>
+    </ul></div>
+    <div class="footer-col"><h4>Resources</h4><ul>
+      <li><a href="pdf-resources.html">PDF Downloads</a></li>
+      <li><a href="index.html">Home</a></li>
+    </ul></div>
+  </div>
+  <div class="footer-bottom">
+    <span class="footer-copy">&copy; 2025 Oracle APEX Interview Mastery</span>
+    <span class="footer-copy">Built for developers by developers</span>
+  </div>
+</footer>
+<script>
+var QUESTIONS = [{"q": "What does APEX stand for?", "opts": ["Application Programming Express", "Application Express", "Advanced Programming Extension", "Apex Platform EXpression"], "ans": 1, "exp": "APEX stands for Application Express \u2014 Oracle's low-code web application development platform built on Oracle Database."}, {"q": "Which package is used to add errors on APEX page items?", "opts": ["APEX_UTIL", "APEX_ERROR", "APEX_DEBUG", "APEX_PAGE"], "ans": 1, "exp": "APEX_ERROR.ADD_ERROR() is used to add validation errors linked to specific page items or displayed in the notification area."}, {"q": "What is the APEX substitution string for the logged-in user?", "opts": ["&APP_ID.", "&SESSION.", "&APP_USER.", "&USER_NAME."], "ans": 2, "exp": "&APP_USER. (or V('APP_USER') in PL/SQL) contains the username of the currently authenticated user."}, {"q": "Which SQL clause is NOT valid in an Interactive Report query?", "opts": ["WHERE", "GROUP BY", "ORDER BY", "COMMIT"], "ans": 3, "exp": "COMMIT is a DML transaction statement, not a SELECT clause. IR queries must be pure SELECT statements."}, {"q": "What does the V() function do in APEX?", "opts": ["Validates an item", "Returns session state value as VARCHAR2", "Creates a view", "Runs a validation process"], "ans": 1, "exp": "V('ITEM_NAME') returns the session state value of a page item as VARCHAR2. NV() returns it as NUMBER."}, {"q": "Which APEX process type automatically handles INSERT/UPDATE/DELETE for a form?", "opts": ["Execute Code", "Close Dialog", "Form - Automatic Row Processing (DML)", "Refresh Region"], "ans": 2, "exp": "'Form - Automatic Row Processing (DML)' is the built-in process that handles INSERT/UPDATE/DELETE based on the primary key value."}, {"q": "What is the correct f?p URL position for setting page items?", "opts": ["Position 4 and 5", "Position 5 and 6", "Position 7 and 8", "Position 3 and 4"], "ans": 2, "exp": "f?p=APP:PAGE:SESSION:REQUEST:DEBUG:CLEAR_CACHE:ITEMS:VALUES \u2014 ITEMS is position 7, VALUES is position 8."}, {"q": "Which collection view is used to query APEX collections?", "opts": ["APEX_COLLECTION_DATA", "APEX_COLLECTIONS", "USER_COLLECTIONS", "APEX_SESSION_COLLECTIONS"], "ans": 1, "exp": "APEX_COLLECTIONS is the view that stores collection data \u2014 query it with WHERE collection_name = 'YOUR_COLLECTION'."}, {"q": "What does apex_error.c_inline_with_field mean?", "opts": ["Error shown on error page", "Error shown in notification area", "Error shown next to the specific item", "Error written to debug log"], "ans": 2, "exp": "c_inline_with_field displays the error message directly next to the page item that caused the error, providing clear visual feedback."}, {"q": "Which APEX package is used to call external REST APIs?", "opts": ["APEX_REST", "APEX_WEB_SERVICE", "APEX_HTTP", "APEX_JSON_CLIENT"], "ans": 1, "exp": "APEX_WEB_SERVICE.MAKE_REST_REQUEST() is used to call external REST APIs, returning the response as CLOB."}, {"q": "What triggers a Dynamic Action by default?", "opts": ["Page Load only", "Any DOM event like Click, Change, Keyup", "Only button clicks", "Only AJAX callbacks"], "ans": 1, "exp": "Dynamic Actions can be triggered by any DOM event (Click, Change, Keyup, Focus, Blur, etc.) as well as APEX-specific events like After Refresh."}, {"q": "What is the purpose of APEX_DEBUG.MESSAGE()?", "opts": ["Send email notifications", "Write messages to debug log", "Display alert dialogs", "Log to Oracle Database alert log"], "ans": 1, "exp": "APEX_DEBUG.MESSAGE() writes messages to the APEX debug log, visible when debug mode is enabled (?p_debug=YES)."}, {"q": "Which is the correct way to read an APEX item value in SQL?", "opts": ["GET('P1_ITEM')", "#P1_ITEM", "V('P1_ITEM') or :P1_ITEM", "ITEM('P1_ITEM')"], "ans": 2, "exp": "Use :P1_ITEM as bind variable in SQL queries, or V('P1_ITEM') in PL/SQL expressions. Both read from session state."}, {"q": "What is a Shared Component in APEX?", "opts": ["A page that is shared between apps", "Reusable elements like LOVs, templates, and nav menus", "A database table shared by multiple users", "A plugin installed globally"], "ans": 1, "exp": "Shared Components are reusable elements defined once and used across all pages in an application \u2014 LOVs, templates, navigation menus, authentication schemes, etc."}, {"q": "How do you reset an Interactive Report programmatically?", "opts": ["apex_ir.clear_report()", "apex_ir.reset_report()", "apex_report.reset()", "DBMS_APEX.RESET_IR()"], "ans": 1, "exp": "APEX_IR.RESET_REPORT() resets all user customisations (filters, sorts, highlights) on an Interactive Report back to its default state."}, {"q": "What does ORDS stand for?", "opts": ["Oracle REST Data Services", "Oracle Report Data Service", "Oracle Relational Data System", "Oracle REST Development Studio"], "ans": 0, "exp": "ORDS stands for Oracle REST Data Services \u2014 it enables exposing Oracle Database objects and APEX applications as RESTful web services."}, {"q": "Which CSS class system does APEX Universal Theme use?", "opts": ["Bootstrap", "Tailwind CSS", "Oracle CSS Framework", "Universal Theme CSS with custom properties"], "ans": 3, "exp": "APEX Universal Theme uses its own CSS framework built with CSS custom properties (variables), not Bootstrap or Tailwind."}, {"q": "What happens if an APEX Validation fails?", "opts": ["The page redirects to an error page", "Processing stops and errors are shown to the user", "The process still runs but logs the error", "The session is terminated"], "ans": 1, "exp": "If any validation fails, APEX stops all further processing (no processes or branches execute) and displays the error message(s) to the user."}, {"q": "What is the purpose of APEX Collections?", "opts": ["Store files permanently in the database", "Temporarily store multi-row data for the session duration", "Cache SQL query results for performance", "Store application configuration settings"], "ans": 1, "exp": "APEX Collections are session-level temporary stores for multi-row data \u2014 perfect for wizards, shopping carts, and data that hasn't been committed yet."}, {"q": "Which JavaScript namespace should you use in APEX to avoid conflicts?", "opts": ["jQuery", "$", "apex.jQuery or apex.util", "window.oracle"], "ans": 2, "exp": "Use apex.jQuery (not bare $) to safely use jQuery in APEX, and apex.util for APEX utility functions, avoiding conflicts with other libraries."}];
+var current = 0, score = 0, answered = false;
+
+function renderQuestion() {
+  var q    = QUESTIONS[current];
+  var pct  = ((current) / QUESTIONS.length * 100).toFixed(0);
+
+  document.getElementById('progressFill').style.width = pct + '%';
+  document.getElementById('quizCounter').textContent  = 'Question ' + (current+1) + ' of ' + QUESTIONS.length;
+  document.getElementById('quizScore').textContent    = 'Score: ' + score;
+  document.getElementById('qNum').textContent         = 'Question ' + (current+1);
+  document.getElementById('qText').textContent        = q.q;
+  document.getElementById('qExp').className           = 'quiz-explanation';
+  document.getElementById('qExp').innerHTML           = '';
+  document.getElementById('nextBtn').className        = 'quiz-btn';
+  answered = false;
+
+  var optsEl = document.getElementById('qOpts');
+  optsEl.innerHTML = '';
+  var letters = ['A','B','C','D'];
+  q.opts.forEach(function(opt, i) {
+    var btn = document.createElement('button');
+    btn.className = 'quiz-opt';
+    btn.innerHTML = '<span class="quiz-opt-letter">' + letters[i] + '</span>' + opt;
+    btn.onclick   = function() { selectAnswer(i, btn); };
+    optsEl.appendChild(btn);
+  });
+}
+
+function selectAnswer(idx, btn) {
+  if (answered) return;
+  answered = true;
+  var q    = QUESTIONS[current];
+  var opts = document.querySelectorAll('.quiz-opt');
+
+  opts.forEach(function(b) { b.classList.add('disabled'); });
+
+  if (idx === q.ans) {
+    btn.classList.add('correct');
+    score++;
+    document.getElementById('quizScore').textContent = 'Score: ' + score;
+  } else {
+    btn.classList.add('wrong');
+    opts[q.ans].classList.add('correct');
+  }
+
+  var expEl = document.getElementById('qExp');
+  expEl.innerHTML = '<strong><i class="fas fa-lightbulb"></i> Explanation:</strong> ' + q.exp;
+  expEl.classList.add('show');
+
+  var nextBtn = document.getElementById('nextBtn');
+  nextBtn.classList.add('show');
+  nextBtn.textContent = (current + 1 < QUESTIONS.length) ? '' : '';
+  nextBtn.innerHTML   = (current + 1 < QUESTIONS.length)
+    ? 'Next <i class="fas fa-arrow-right"></i>'
+    : 'See Results <i class="fas fa-trophy"></i>';
+}
+
+function nextQuestion() {
+  current++;
+  if (current < QUESTIONS.length) {
+    renderQuestion();
+  } else {
+    showResult();
+  }
+}
+
+function showResult() {
+  document.getElementById('quizCard').style.display   = 'none';
+  document.getElementById('quizResult').classList.add('show');
+  document.getElementById('progressFill').style.width = '100%';
+  document.getElementById('quizCounter').textContent  = 'Quiz Complete!';
+  document.getElementById('resultScore').textContent  = score;
+
+  var pct = Math.round(score / QUESTIONS.length * 100);
+  var msg, sub;
+  if      (pct >= 90) { msg = '🏆 Excellent!'; sub = 'You are an APEX expert!'; }
+  else if (pct >= 70) { msg = '👍 Great job!'; sub = 'Strong APEX knowledge — keep it up!'; }
+  else if (pct >= 50) { msg = '📚 Good effort!'; sub = 'Review the questions and try again!'; }
+  else                { msg = '💪 Keep learning!'; sub = 'Study the APEX questions section and retry!'; }
+
+  document.getElementById('resultMsg').textContent = msg;
+  document.getElementById('resultSub').textContent = sub + ' (' + pct + '%)';
+}
+
+function restartQuiz() {
+  current  = 0;
+  score    = 0;
+  answered = false;
+  document.getElementById('quizCard').style.display = 'block';
+  document.getElementById('quizResult').classList.remove('show');
+  renderQuestion();
+}
+
+renderQuestion();
+</script>
+</body>
+</html>
