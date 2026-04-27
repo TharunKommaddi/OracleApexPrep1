@@ -707,18 +707,18 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg-primary);color:var(--t
 </head>
 <body>
 
-<nav class="nav" id="mainNav">
-  <div class="nav-logo" onclick="navigate('home')">
+<nav class="nav">
+  <a href="index.html" class="nav-logo">
     <div class="nav-logo-mark">A</div>
     <span class="nav-logo-text">APEX Mastery</span>
-  </div>
-  <ul class="nav-links" id="navLinks">
-    <li><a onclick="navigate('home')" data-page="home"><i class="fas fa-home"></i> Home</a></li>
-    <li><a href="oracle-sql.html"><i class="fas fa-database"></i> Oracle SQL</a></li>
+  </a>
+  <ul class="nav-links">
+    <li><a href="index.html"><i class="fas fa-home"></i> Home</a></li>
+    <li><a href="oracle-sql.html" class="active"><i class="fas fa-database"></i> Oracle SQL</a></li>
     <li><a href="plsql.html"><i class="fas fa-code"></i> PL/SQL</a></li>
     <li><a href="oracle-apex.html"><i class="fas fa-layer-group"></i> APEX</a></li>
     <li class="nav-dropdown">
-      <a><i class="fas fa-paint-brush"></i> Frontend <i class="fas fa-chevron-down" style="font-size:11px;margin-left:2px"></i></a>
+      <a><i class="fas fa-paint-brush"></i> Frontend <i class="fas fa-chevron-down" style="font-size:10px;margin-left:2px"></i></a>
       <ul class="nav-dropdown-menu">
         <li><a href="html-questions.html"><i class="fab fa-html5"></i> HTML</a></li>
         <li><a href="css-questions.html"><i class="fab fa-css3-alt"></i> CSS</a></li>
@@ -728,12 +728,7 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg-primary);color:var(--t
     </li>
     <li><a href="oracle-apex-quiz.html" class="active"><i class="fas fa-circle-question"></i> Quiz</a></li>
     <li><a href="pdf-resources.html"><i class="fas fa-file-pdf"></i> PDFs</a></li>
-    <li><a onclick="navigate('about')" data-page="about"><i class="fas fa-info-circle"></i> About</a></li>
-    <li><a onclick="navigate('contact')" data-page="contact"><i class="fas fa-envelope"></i> Contact</a></li>
   </ul>
-  <div class="nav-actions" id="navActions">
-    <!-- Injected by JS based on auth state -->
-  </div>
 </nav>
 
 <div class="page-header">
