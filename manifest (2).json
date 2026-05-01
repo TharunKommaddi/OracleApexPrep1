@@ -1,0 +1,66 @@
+{
+  "name": "Oracle APEX Interview Prep",
+  "short_name": "APEX Prep",
+  "description": "Complete Oracle APEX interview preparation — SQL, PL/SQL, APEX, HTML, CSS, JavaScript, jQuery with quizzes and PDF viewer.",
+  "start_url": "/OracleAPEXPrep1/index.html",
+  "scope": "/OracleAPEXPrep1/",
+  "display": "standalone",
+  "orientation": "portrait-primary",
+  "background_color": "#ffffff",
+  "theme_color": "#F80000",
+  "lang": "en-US",
+  "dir": "ltr",
+  "categories": ["education", "productivity"],
+  "icons": [
+    {
+      "src": "https://tharunkommaddi.github.io/OracleAPEXPrep1/icons/icon-192x192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "https://tharunkommaddi.github.io/OracleAPEXPrep1/icons/icon-192x192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "maskable"
+    },
+    {
+      "src": "https://tharunkommaddi.github.io/OracleAPEXPrep1/icons/icon-512x512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "https://tharunkommaddi.github.io/OracleAPEXPrep1/icons/icon-512x512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable"
+    }
+  ],
+  "shortcuts": [
+    {
+      "name": "SQL Questions",
+      "short_name": "SQL",
+      "description": "Oracle SQL interview questions",
+      "url": "/OracleAPEXPrep1/index.html#sql"
+    },
+    {
+      "name": "PL/SQL Questions",
+      "short_name": "PL/SQL",
+      "description": "PL/SQL interview questions",
+      "url": "/OracleAPEXPrep1/index.html#plsql"
+    },
+    {
+      "name": "APEX Questions",
+      "short_name": "APEX",
+      "description": "Oracle APEX interview questions",
+      "url": "/OracleAPEXPrep1/index.html#apex"
+    },
+    {
+      "name": "Quiz Hub",
+      "short_name": "Quiz",
+      "description": "Test your knowledge with quizzes",
+      "url": "/OracleAPEXPrep1/index.html#quiz"
+    }
+  ]
+}
