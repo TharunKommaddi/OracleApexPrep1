@@ -1,1 +1,11 @@
 
+[
+  {
+    "email": "tharunkommaddi@gmail.com",
+    "fullName": "Tharun Kommaddi",
+    "accessType": "admin",
+    "password": "Admin@2025!",
+    "approvedAt": "2026-01-01T00:00:00.000Z",
+    "requestId": "ADMIN-001"
+  }
+]
