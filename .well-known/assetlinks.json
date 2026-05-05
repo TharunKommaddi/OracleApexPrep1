@@ -1,8 +1,0 @@
-[{
-      "relation": ["delegate_permission/common.handle_all_urls"],
-      "target": {
-        "namespace": "android_app",
-        "package_name": "io.github.tharunkommaddi.twa",
-        "sha256_cert_fingerprints": ["F6:66:9D:F2:E7:0A:4D:C0:DE:B1:17:66:2C:36:FA:99:F1:D1:BC:67:B6:25:5C:71:EA:DE:A0:19:E1:2A:72:0E"]
-      }
-    }]
